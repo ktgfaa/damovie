@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+ <configuration>
+	<typeAliases>
+  		<typeAlias type="com.movie.damovie.member.vo.MemberVO" alias="memberVO"/>
+  		<typeAlias type="com.movie.damovie.book.bookForm.VO.MovieTimeVO" alias="movieTimeVO"/>
+  		<typeAlias type="com.movie.damovie.book.order.VO.OrderVO" alias="orderVO"/>
+	</typeAliases>
+</configuration>

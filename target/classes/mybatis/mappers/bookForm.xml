@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mapper.bookForm">
+ 
+  	<resultMap id="timeResult" type="movieTimeVO">
+		<result property="time1" column="time1"></result>
+		<result property="time2" column="time2"></result>
+		<result property="time3" column="time3"></result>
+		<result property="time4" column="time4"></result>
+		<result property="time5" column="time5"></result>
+		<result property="time6" column="time6"></result>
+		<result property="time7" column="time7"></result>
+		<result property="time8" column="time8"></result>
+		<result property="time9" column="time9"></result>
+		<result property="time10" column="time10"></result>
+	</resultMap>
+	
+ 	<select id="selectTheaterName" resultType="String" parameterType="String">
+		<![CDATA[
+			select DISTINCT theater_name from movie_company where company=#{company}
+		]]>
+	</select>
+	
+	 <select id="selectTheaterNum" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select THEATER_NUM from movie_company where theater_name=#{theaterName} and movie_name=#{movieName}
+		]]>
+	</select>
+	
+	 <select id="selectMovieName" resultType="String">
+		<![CDATA[
+			select movie_name from movie_info order by putdate desc
+		]]>
+	</select>
+	
+	<select id="selectImageName" resultType="String">
+		<![CDATA[
+			select image_name from movie_info order by putdate desc
+		]]>
+	</select>
+	
+		<select id="selectMovieTime" resultMap="timeResult" parameterType="java.util.Map">
+		<![CDATA[
+			select time1,time2,time3,time4,time5,time6,time7,time8,time9,time10 from theater_time where theater_name=#{theaterName} and theater_num=#{theaterNum} and movie_date=#{date}
+		]]>
+	</select>
+	
+	</mapper>

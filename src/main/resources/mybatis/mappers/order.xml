@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.order">
+	<resultMap id="orderResult" type="orderVO">
+		<result property="id" column="id"></result>
+		<result property="movie_name" column="movie_name"></result>
+		<result property="company" column="company"></result>
+		<result property="theater_name" column="theater_name"></result>
+		<result property="theater_num" column="theater_num"></result>
+		<result property="time" column="time"></result>
+		<result property="seatrow" column="seatrow"></result>
+		<result property="seatcol" column="seatcol"></result>
+		<result property="price" column="price"></result>
+		<result property="adult" column="adult"></result>
+		<result property="student" column="student"></result>
+		<result property="bmimage" column="bmimage"></result>
+		<result property="movie_date" column="movie_date"></result>
+	</resultMap>
+
+
+	<insert id="insertBook" parameterType="orderVO">
+		<![CDATA[
+			insert into book(id,movie_name,company,theater_name,theater_num,time,seatrow,seatcol,price,adult,bmimage,movie_date,student) values(#{id},#{movie_name},#{company},#{theater_name},#{theater_num},#{time},#{seatrow},#{seatcol},#{price},#{adult},#{bmimage},#{movie_date},#{student})
+		]]>
+	</insert>
+	
+	<select id="selectMemberByPwd" resultMap="orderResult"
+		parameterType="orderVO">
+		<![CDATA[
+			select * from member where id=#{id}
+		]]>
+	</select>
+	
+	<select id="selectSeatRow" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select seatrow from theater_seat where company=#{company} and theater_name=#{theater_Name} and theater_num=#{theater_Num} order by datasolt asc
+		]]>
+	</select>
+	
+	<select id="selectSeatRow_distinct" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select DISTINCT seatrow from theater_seat where company=#{company} and theater_name=#{theater_Name} and theater_num=#{theater_Num} order by seatrow asc
+		]]>
+	</select>
+	
+	<select id="selectSeatCol" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select seatcol from theater_seat where company=#{company} and theater_name=#{theater_Name} and theater_num=#{theater_Num} order by datasolt asc
+		]]>
+	</select>
+	
+	<select id="selectSeatState" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select seat_state from theater_seat where company=#{company} and theater_name=#{theater_Name} and theater_num=#{theater_Num} order by datasolt asc
+		]]>
+	</select>
+	
+	<select id="selectResSeatRow" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select seatrow from book where movie_name=#{movie_name} and company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} 
+			and time=#{time} and movie_date=#{movie_date} order by book_date desc
+		]]>
+	</select>
+	
+	<select id="selectResSeatCol" resultType="String"
+		parameterType="java.util.Map">
+		<![CDATA[
+			select seatcol from book where movie_name=#{movie_name} and company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} 
+			and time=#{time} and movie_date=#{movie_date} order by book_date desc
+		]]>
+	</select>
+
+<!-- 	<update id="updateMember" parameterType="memberVO">
+		<![CDATA[
+			update t_member set pwd=#{pwd}, name=#{name}, email=#{email} where id=#{id}
+		]]>
+	</update>
+
+	<delete id="deleteMember" parameterType="String">
+		<![CDATA[
+			delete from t_member where id=#{id}
+		]]>
+	</delete> -->
+
+
+</mapper>

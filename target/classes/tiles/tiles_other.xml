@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="otherLayout" template="/WEB-INF/views/common/other_layout.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/common/header_other.jsp"></put-attribute>
+		<put-attribute name="l_side" value="/WEB-INF/views/common/l_side.jsp"></put-attribute>
+		<put-attribute name="r_side" value="/WEB-INF/views/common/r_side.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+	</definition>
+	
+	<definition	name="servicecenter" extends="otherLayout">
+		<put-attribute name="title" value="고객센터"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/main/servicecenter.jsp"></put-attribute>
+	</definition>
+	
+	<definition	name="/book/bookForm" extends="otherLayout">
+		<put-attribute name="title" value="예약페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/book/bookForm.jsp"></put-attribute>
+	</definition>
+	
+	<definition	name="/book/seat" extends="otherLayout">
+		<put-attribute name="title" value="좌석선택"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/book/seat.jsp"></put-attribute>
+	</definition>
+	
+	<definition	name="/order/ordercomplete" extends="otherLayout">
+		<put-attribute name="title" value="예약완료"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/book/ordercomplete.jsp"></put-attribute>
+	</definition>	
+
+</tiles-definitions>
+
+
+
+
+
+
+
+

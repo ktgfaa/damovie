@@ -1,6 +1,7 @@
 package com.movie.damovie.member.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -73,6 +74,49 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("mapper.member.updatePwd", map);
 		String Rpwd = sqlSession.selectOne("mapper.member.selectPwd", userid);
 		return Rpwd;
+	}
+	
+	@Override
+	public void memberUpdate(MemberVO vo) throws Exception {
+		//vo에 담긴 파라미터들은 member.xml에 member라는 namespace에
+		//아이디가 memberUpdate인 쿼리에 파라미터 넣기
+		sqlSession.update("mapper.member.memberUpdate",vo);
+	}
+
+	@Override
+	public void memberDelete(MemberVO vo) throws Exception {
+		sqlSession.delete("mapper.member.memberDelete",vo);
+	}
+
+	@Override
+	public List<MemberVO> memberList() {
+		return sqlSession.selectList("mapper.member.memberList");
+	}
+
+	@Override
+	public List<MemberVO> listALL(int start, int end, String searchOption, String keyword) {
+		//검색옵션, 키워드 맵에 저장
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		//BETWEEN #{start}, #{end}에 입력될 값 앱에 넣기
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("mapper.member.listAll",map);
+	}
+	
+	@Override
+	public int countArticle(String searchOption, String keyword) throws Exception {
+		// 검색옵션, 키워드 맵에 저장
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("mapper.member.countArticle", map);
+	}
+
+	@Override
+	public void levelUpdate(MemberVO vo) {
+		sqlSession.update("mapper.member.levelUpdate",vo);
 	}
 
 

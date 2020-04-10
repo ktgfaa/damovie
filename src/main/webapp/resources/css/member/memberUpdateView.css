@@ -1,0 +1,78 @@
+table, td, tr{
+	color: white;
+	border:1px solid white;
+	font-size: 35px;
+	text-align: center;
+	font-family: "Nanum Pen Script", cursive;
+}
+
+/* 사이즈, 위치 조절 */
+.info_table input{
+	border-style: hidden;
+	width:400px;
+	height: 50px;
+	text-align: center;
+}
+.info_box{
+	width: 1332px;
+    margin-left: -230px;
+    padding-top: 25px;
+    margin-top:-30px;
+}
+#main_Form{
+    padding-top: 40px;
+    padding-left: 320px;
+}
+#main_Form > .main_box {
+	height: 590px;
+    width: 910px;
+	background:rgba(0,0,0,0.7);
+	margin-left: 184px;
+}
+.info_table{
+	width: 850px;
+	height: 500px;
+	margin-left: 260px;
+}
+
+
+#id, #name{
+	border: 1px dotted #a0a096;
+    background: rgba(20,20,20,0.9);
+}
+#pwd, #pwd2, #email{
+	border: 1px dotted #a0a096;
+	background: none;
+}
+
+#id, #name, #pwd, #pwd2, #email, #success, #danger{
+	color: white;
+	font-size: 20px;
+}
+#success{
+	width:830px;
+	background-color: green;
+	opacity: 0.9;
+	text-align: center;
+}
+#danger{
+	width:830px;
+	background-color: red;
+	opacity: 0.9;
+	text-align: center;
+}
+
+#reset, #edit, #main{
+	width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+    background: black;
+    margin-left: 100px;
+    margin-top: 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
+#reset{
+	margin-left:356px;
+}

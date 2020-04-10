@@ -1,0 +1,122 @@
+body {
+	font-family: "Nanum Pen Script", cursive;
+	font-size : 23px;
+}
+
+.mainDIV {
+	width: 100%;
+    height: 667px;
+	
+}
+
+caption {
+	margin-bottom : 20px;
+	font-size: 30px;
+}
+
+.theaterTable > tbody > tr  > td{
+	border : 1px solid white;
+	
+}
+
+.infoTable > tbody > tr > td {
+	border : 1px solid white;
+}
+
+.theaterCheckDIV {
+    width: 1200px;
+    height: 600px;
+    float: left;
+    margin-left: 374px;
+    margin-top: 50px;
+    background-color: #00000059;	
+}
+
+.theaterinfo {
+	width: 600px;
+    float: left;
+    height: 600px;	
+	
+}
+
+.info {
+	width: 600px;
+    float: left;
+    height: 600px;
+	 text-align: center;
+}
+
+input , .theater_numcheck {
+	width: 400px;
+    height: 30px;
+	
+}
+
+.theaterTable  {
+	width: 400px;
+    height: 480px;
+    float: left;
+    margin: 100px;
+    margin-bottom: 0;
+	color: white;
+	margin-top: 50px;
+}
+
+.infoTable {
+	margin: 0;
+    width: 600px;
+    margin-top: 50px;
+	color: white;
+	float: left;
+	height: 440px;
+}
+
+.infoTable > tbody > tr > td > button {
+	    width: 150px;
+    height: 50px;
+    border-radius: 10px 10px 10px 10px;
+    background-color: black;
+    color: white;
+    	font-family: "Nanum Pen Script", cursive;
+    	font-size : 23px;
+}
+
+.infoTable > tbody > tr {
+	margin-bottom : 40px;
+}
+
+.infoTable > tbody > tr > td > button:hover {
+	background-color: #00f9ed2b;
+	cursor : pointer;
+}
+
+.selectCompany {
+	height: 40px;
+}
+
+.selectCompany > td {
+	text-align: center;
+}
+
+.selectCompany > td > select {
+	width: 270px;
+    height: 30px;
+}
+
+.selectPoster > td {
+	text-align: center;
+}
+
+.selectPoster > td > img {
+	width: 300px;
+    height: 350px;
+	
+}
+
+.selectMovieName > td {
+	text-align: center;
+    font-size: 25px;
+	
+}
+
+

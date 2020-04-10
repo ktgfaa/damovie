@@ -1,0 +1,70 @@
+#main_box{
+    background: white;
+    width: 1000px;
+    height: 650px;
+    margin-top: 14px;
+    margin-left: 446px;
+    border: 1px dotted black;
+}
+#member_list{
+	width: 800px;
+	max-height: 170px;
+	margin-left: 100px;
+	margin-top: 50px;
+}
+#member_list, tr, th, td{
+	border : 2px solid black;
+}
+#member_list caption{
+	font-size: 35px;
+	margin-bottom: 10px;
+}
+#member_list th{
+	font-size: 20px;
+	height: 30px;
+	font-weight: 600;
+	background-color: beige;
+}
+#member_list th:nth-child(1),th:nth-child(2){
+	width: 110px;
+}
+#member_list th:nth-child(3){
+	width: 100px;
+}
+#member_list th:nth-child(4){
+	width: 170px;
+}
+
+#member_list th:nth-child(5){
+	width: 80px;
+}
+#member_list td:nth-child(6){
+	text-align: center;
+}
+#member_list th:nth-child(7),th:nth-child(8) {
+	width: 43px;
+}
+#member_list td{
+	font-size: 15px;
+	height: 25px;
+}
+#member_list select{
+	width:50px;
+}
+#search_form{
+    margin: 40px 0 -40px 40px;
+
+}
+#search_form select, input:nth-child(3){
+	font-size:17px;
+	width: 62px;
+    height: 30px;
+}
+#search_form input:nth-child(2){
+    width: 200px;
+    height: 20px;
+    padding-top: 6px;
+}
+#list_cnt{
+	   margin: 40px 0 -40px 50px;
+}

@@ -600,8 +600,7 @@ document.addEventListener('DOMContentLoaded', function() {
  		$.ajax({
  			url: "${contextPath}/book/addseat.do",
  			type: "post",
- 			dataType:"text", //전송받을 형식 지정
-/*  			contentType : 'text/html;charset=UTF-8', */
+ 			dataType:"text",
  			data : {
 			      id : id,
  			      movie_name : movieName,
@@ -615,7 +614,7 @@ document.addEventListener('DOMContentLoaded', function() {
  			      movie_date : date,
  			      student : student
  			    },  
- 			success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
+ 			success: function(data){    
 				console.log('성공');
 				location.href="seat.do";
  			},complete: function(data){

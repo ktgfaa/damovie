@@ -31,6 +31,32 @@
 		<put-attribute name="title" value="예약완료"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/book/ordercomplete.jsp"></put-attribute>
 	</definition>	
+	
+		<definition	name="review" extends="otherLayout">
+		<put-attribute name="title" value="리뷰페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/review/review.jsp"></put-attribute>
+	</definition>
+
+
+	<definition	name="mypage" extends="otherLayout">
+		<put-attribute name="title" value="마이페이지"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp"></put-attribute>
+	</definition>
+	
+	<definition	name="memberUpdateView" extends="otherLayout">
+		<put-attribute name="title" value="개인정보수정"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberUpdateView.jsp"></put-attribute>
+	</definition>
+
+	<definition	name="checkMyBook" extends="otherLayout">
+		<put-attribute name="title" value="예매확인"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/member/checkMyBook.jsp"></put-attribute>
+	</definition>
+
+	<definition	name="memberDeleteForm" extends="otherLayout">
+		<put-attribute name="title" value="예매확인"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberDeleteForm.jsp"></put-attribute>
+	</definition>
 
 </tiles-definitions>
 

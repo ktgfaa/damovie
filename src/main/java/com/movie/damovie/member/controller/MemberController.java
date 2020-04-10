@@ -144,7 +144,14 @@ public class MemberController extends MultiActionController {
 			if (action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/main.do");
+				//접속자가 관리자라면 
+				if(memberVO.getUser_level().equals("admin")) {
+					mav.setViewName("redirect:/admin.do");
+				}else if(memberVO.getUser_level().equals("customer")){
+					mav.setViewName("redirect:/customer/customer.do");
+				}else {
+					mav.setViewName("redirect:/main.do");
+				}
 			}
 		} else {
 			rAttr.addAttribute("result", "loginFailed");
@@ -248,6 +255,57 @@ public class MemberController extends MultiActionController {
 		}
 		mav.setViewName("redirect:/member/loginForm.do");
 		return mav;
+	}
+	
+	@RequestMapping(value="/member/memberUpdateView.do", method=RequestMethod.GET)
+	public String memberUpdateView(HttpSession session) throws Exception{
+		String id = (String)session.getAttribute("id");
+		return "memberUpdateView";
+	}
+	@RequestMapping(value="/member/memberUpdate.do",method= RequestMethod.POST)
+	public String memberUpdate(MemberVO vo, HttpSession session,RedirectAttributes rAttr)throws Exception{
+		
+		memberService.memberUpdate(vo);
+		session.removeAttribute("member");
+		session.setAttribute("member", memberVO);
+		
+		//마이페이지로 돌아가기
+		return "redirect:/mypage.do";
+	}
+	
+	
+	@RequestMapping(value= "/member/checkMyBook.do", method=RequestMethod.GET )
+	private String checkMyBook(HttpSession session) throws Exception {
+		String id = (String)session.getAttribute("id");
+		return "checkMyBook";
+	}
+	
+	
+	@RequestMapping(value="/member/memberDeleteForm.do", method=RequestMethod.GET)
+	public String memberDeleteForm(HttpSession session)throws Exception{
+		return "memberDeleteForm";
+	}
+	@RequestMapping(value="/member/memberDelete.do", method=RequestMethod.POST)
+	public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rAttr)throws Exception{
+		
+		//세션의 member가져와 member변수에 넣기
+		MemberVO member = (MemberVO) session.getAttribute("member");
+
+		String sessionPwd = member.getPwd();
+		String voPwd = vo.getPwd();
+		
+		if(!(sessionPwd.equals(voPwd))) {
+			rAttr.addFlashAttribute("msg",false);
+			return "redirect:/member/memberDeleteForm.do";
+		}else {
+		vo.setId(member.getId());
+		memberService.memberDelete(vo);
+		
+		//세션 무효화
+		session.invalidate();
+
+		return "redirect:/main.do";
+		}
 	}
 
 }

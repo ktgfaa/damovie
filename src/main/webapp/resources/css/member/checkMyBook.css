@@ -1,0 +1,84 @@
+.input_box li{
+	color: white;
+	font-family: "Nanum Pen Script", cursive;
+}
+#main_Form{
+    padding-left: 320px;
+}
+#main_Form > .main_box {
+	height: 560px;
+    width: 910px;
+	background:rgba(0,0,0,0.7);
+	margin-left: 184px;
+	margin-top: -65px;
+}
+
+.input_box{
+	width: 850px;
+	height: 500px;
+	margin-left: 260px;
+}
+
+.top_box{
+	width: 740px;
+    height: 90px;
+    text-align: center;
+    margin-left: -170px;
+    border-bottom: 2px dotted white;
+}
+.top_box p {
+	padding-top: 13px;
+	font-size: 55px;
+	font-family: "Nanum Pen Script", cursive;
+	color: white;
+}
+.top_box p span{
+	color:#F5D0A9;
+}
+.middle_box{
+	height: 410px;
+    display: inline-flex;
+    margin-left: -259px;
+}
+.left_box{
+    width: 455px;
+    height: 400px;
+    margin-left: 88px;
+    border-right: 2px dotted white;
+    margin-top: 37px;
+}
+.left_box li:nth-child(1){
+	font-size: 45px;
+}
+.left_box li:nth-child(2), li:nth-child(3), li:nth-child(4){
+	font-size: 45px;
+	padding-top: 47px;
+}
+.right_box{
+	width:330px;
+	text-align: center;
+	margin-top: 85px;
+}
+.right_box p{
+	font-size: 16px;
+	color: white;
+}
+.right_box p:nth-child(2){
+	text-align: center;
+}
+
+.btn_box{
+    margin-top: 30px;
+    margin-left: 17px;
+}
+.button{
+    width: 90px;
+    height: 45px;
+    border-radius: 20px;
+    margin: 20px;
+}
+.btn_box input{
+	font-size: 15px;
+    color: white;
+    background: none;
+}

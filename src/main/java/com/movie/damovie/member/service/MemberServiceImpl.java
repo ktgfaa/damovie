@@ -51,6 +51,38 @@ public class MemberServiceImpl implements MemberService {
 	public String pwdsearch(String useremail, String userid) {
 		return memberDAO.pwdsearch(useremail, userid);
 	}
+	
+	//Controller에서 보내는 파라미터 memeberUpdate(MemberVO vo)로 받고
+		@Override
+		public void memberUpdate(MemberVO vo) throws Exception {
+			//받은 vo를 DAO로 전송한다.
+			memberDAO.memberUpdate(vo);
+		}
+
+		@Override
+		public void memberDelete(MemberVO vo) throws Exception {
+			memberDAO.memberDelete(vo);
+		}
+
+		@Override
+		public List<MemberVO> memberList(){
+			return memberDAO.memberList();
+		}
+
+		@Override
+		public List<MemberVO> listAll(int start, int end, String searchOption, String keyword) {
+			return memberDAO.listALL(start, end, searchOption, keyword);
+		}
+
+		@Override
+		public int countArticle(String searchOption, String keyword) throws Exception {
+			return memberDAO.countArticle(searchOption, keyword);
+		}
+
+		@Override
+		public void levelUpdate(MemberVO vo) {
+			memberDAO.levelUpdate(vo);
+		}
 
 
 	

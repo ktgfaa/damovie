@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.customer">
+	<resultMap id="customerMovieResult" type="customerMovieVO">
+		<result property="id" column="id"></result>
+		<result property="company" column="company"></result>
+		<result property="theater_name" column="theater_name"></result>
+		<result property="theater_num" column="theater_num"></result>
+		<result property="movie_name" column="movie_name"></result>
+	</resultMap>
+
+
+	<insert id="insertCustomerMovie" parameterType="customerMovieVO">
+		<![CDATA[
+			insert into book(id,movie_name,company,theater_name,theater_num,time,seatrow,seatcol,price,adult,bmimage,movie_date,student) values(#{id},#{movie_name},#{company},#{theater_name},#{theater_num},#{time},#{seatrow},#{seatcol},#{price},#{adult},#{bmimage},#{movie_date},#{student})
+		]]>
+	</insert>
+	
+	<insert id="insertMovie" parameterType="customerMovieVO">
+		<![CDATA[
+			insert into movie_company(id,company,theater_name,theater_num,movie_name) values(#{id},#{company},#{theater_name},#{theater_num},#{movie_name})
+		]]>
+	</insert>
+	
+	</mapper>
+	

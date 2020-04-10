@@ -13,11 +13,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .top {
 	position: relative;
@@ -418,7 +415,7 @@ rotateZ
 					style="color: white"><i
 						class="fa fa-angle-left fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
 				<!-- 마이페이지 -->
-				<a class="mypage" href="#"><span style="color: white"><i
+				<a class="mypage" href="/damovie/mypage.do"><span style="color: white"><i
 						class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
 				<!-- 고객센터 버튼 -->
 				<a class="question" href="/damovie/servicecenter.do"><span

@@ -1,0 +1,22 @@
+#header{
+	width:1920px;
+	height:250px;
+	background-color: #ECCEF5;
+}
+#title_logo{
+    margin-left: 808px;
+    padding-top: 30px;
+}
+#info{
+    width: 200px;
+    margin-left: 1720px;
+    margin-top: -15px;
+}
+#info h3{
+	color: red;
+}
+#logout{
+    width: 68px;
+    margin-left: 1852px;
+    margin-top: -245px;
+}

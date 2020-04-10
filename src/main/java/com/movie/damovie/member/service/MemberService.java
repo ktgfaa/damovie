@@ -21,4 +21,17 @@ public interface MemberService {
 	
 	public String pwdsearch(@RequestBody String useremail, @RequestBody String userid);
 	
+	public void memberUpdate(MemberVO vo)throws Exception;
+
+	public void memberDelete(MemberVO vo)throws Exception;
+	
+	public List<MemberVO> memberList();
+
+	public List<MemberVO> listAll(int start, int end, String searchOption, String keyword);
+	
+	//회원 레코드 개수
+	public int countArticle(String searchOption, String keyword) throws Exception;
+
+	public void levelUpdate(MemberVO vo);
+	
 }

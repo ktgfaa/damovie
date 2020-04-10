@@ -1,0 +1,17 @@
+#side_bar{
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background: #F3E2A9;
+}
+#side_bar li:nth-child(1){
+	margin-top:55px;
+}
+#side_bar li{
+    font-size: 20px;
+    list-style: none;
+    margin-top: 25px;
+    margin-left: -44px;
+    text-align: center;
+    cursor: pointer;
+}

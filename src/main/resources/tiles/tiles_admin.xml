@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="adminLayout" template="/WEB-INF/views/admin/empty.jsp">
+		<put-attribute name="title" value=""></put-attribute>
+		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"></put-attribute>
+		<put-attribute name="side" value="/WEB-INF/views/admin/admin_side.jsp"></put-attribute>
+		<put-attribute name="body" value=""></put-attribute>
+	</definition>
+
+
+	<definition name="header" extends="adminLayout">
+		<put-attribute name="title" value="헤더"></put-attribute>
+        <put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"></put-attribute>
+    </definition>
+    
+	<definition name="side" extends="adminLayout">
+		<put-attribute name="title" value="사이드"></put-attribute>
+        <put-attribute name="side" value="/WEB-INF/views/admin/admin_side.jsp"></put-attribute>
+    </definition>
+    
+	<definition name="admin" extends="adminLayout">
+		<put-attribute name="title" value="관리자페이지"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/admin.jsp"></put-attribute>
+    </definition>
+
+
+
+	<definition name="memberManagement" extends="adminLayout">
+		<put-attribute name="title" value="회원관리 페이지"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/admin/memberManagement.jsp"></put-attribute>
+    </definition>
+    
+</tiles-definitions>

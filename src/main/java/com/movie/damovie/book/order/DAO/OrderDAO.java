@@ -23,9 +23,7 @@ public class OrderDAO {
 	}
 	
 	public int addBook(OrderVO order) {
-		System.out.println(order.getId());
 		int bookresult = sqlSession.insert("mapper.order.insertBook", order);
-		System.out.println(bookresult);
 		return bookresult;
 	}
 	

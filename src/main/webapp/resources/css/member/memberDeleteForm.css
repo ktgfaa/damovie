@@ -1,0 +1,63 @@
+#main_Form {
+	padding-top: 100px;
+	padding-left: 320px;
+}
+
+#main_Form>.main_box {
+	height: 400px;
+	width: 910px;
+	background: rgba(0, 0, 0, 0.7);
+	margin-left: 184px;
+	border-radius: 50px;
+}
+
+#delete_box {
+	width: 625px;
+    margin-left: 145px;
+    padding-top: 0px;
+    margin-top: -20px;
+}
+#delete_box td, p, input{
+	font-size: 40px;
+}
+
+#pwd_Box{
+    text-align: center;
+    margin-left: 69px;
+    padding-top: 20px;
+}
+#pwd_Box td{
+	color:white;
+	font-family: "Nanum Pen Script", cursive;
+}
+#pwd_Box tr:nth-child(1){
+    height: 140px;
+
+}
+#pwd_Box input{
+	border: 1px dotted #a0a096;
+	background: none;	
+	color: white;
+}
+#input{
+	margin-top: 30px;
+}
+
+#false{
+	color:white;
+}
+#cancel, #delete{
+	width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    color: white;
+    background: black;
+    margin-left: 100px;
+    margin-top: 40px;
+    font-size: 15px;
+}
+#false p{
+	color: red;
+    font-size: 30px;
+    margin-left: 162px;
+}

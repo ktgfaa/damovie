@@ -1,0 +1,72 @@
+body{
+	margin: 0;
+	width: 100%;
+	height: 100%;
+}
+div{
+	margin:0;
+	padding:0;
+	color: white;
+	text-align: center;
+}
+.main_box p{
+	font-size: 36px;
+	font-family: "Nanum Pen Script", cursive;
+}
+
+#main_Form{
+    padding-top: 40px;
+    padding-left: 320px;
+}
+#main_Form > .main_box {
+    height: 580px;
+    width: 971px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 300px;
+    margin-left: 154px;
+}
+.member_profile{
+    position: absolute;
+    top: 100px;
+    left: 525px;
+    width: 870px;
+    height: 200px;
+}
+.member_profile p{
+	font-size: 45px;
+}
+.member_profile p span{
+	color:#F5D0A9;
+}
+
+.select_menu{
+    position: absolute;
+    top: 232px;
+    left: 620px;
+    width: 700px;
+    height: 160px;
+    display: flex;
+    padding-top: 20px;
+}
+
+
+.select_menu div{
+	width: 300px;
+    cursor: pointer;
+    height: 130px;
+    padding-top: 20px;
+}
+
+.info_box{
+	margin: 0px 105px 0 130px;
+}
+.select_menu .fas {
+	margin-left:35px;  
+ 	} 
+.unsubscribe_box .fas{
+	margin-left:45px;
+}
+
+.fas:hover{
+	 color: #D8CEF6; 
+}

@@ -14,7 +14,8 @@
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 <style>
 .top {
 	position: relative;
@@ -55,7 +56,7 @@ li {
 	font-size: 40px;
 	font-weight: 200;
 	text-align: center;
-	padding: 85px 0 0 0;
+	padding: 100px 0 0 0;
 	font-style: italic;
 	text-decoration: none;
 	color: white;
@@ -108,7 +109,7 @@ li {
 	width: 40px;
 	height: 40px;
 	position: absolute;
-	top: -255px;
+	top: -285px;
 	left: 20px;
 	z-index: 101;
 }
@@ -155,149 +156,59 @@ li {
 }
 
 .bot-reverse {
-	animation: line-bot-rotate-reverse .3s forwards ease-out,
-		line-bot-reverse .5s .3s forwards ease-out;
+  animation:line-bot-rotate-reverse .3s forwards ease-out,
+            line-bot-reverse .5s .3s forwards ease-out;
 }
-
-@
-keyframes line-top { 0% {
-	transform: translateY(0px)
+@keyframes line-top {
+  0% {transform:translateY(0px)}
+  100% {transform:translateY(13px)}
 }
-
-100%
-{
-transform
-:translateY(13px)
+@keyframes line-top-reverse {
+  0% {transform:translateY(13px)}
+  100% {transform:translateY(0px)}
 }
+@keyframes line-top-rotate {
+  0% {transform:translateY(13px) rotateZ(0deg)}
+  100% {transform:translateY(13px) rotateZ(45deg)}
 }
-@
-keyframes line-top-reverse { 0% {
-	transform: translateY(13px)
+@keyframes line-top-rotate-reverse {
+  0% {transform:translateY(13px) rotateZ(45deg)}
+  100% {transform:translateY(13px) rotateZ(0deg)}
 }
-
-100%
-{
-transform
-:translateY(0px)
+@keyframes line-mid {
+  0% {transform:scale(1)}
+  100% {transform:scale(0)}
 }
+@keyframes line-mid-reverse {
+  0% {transform:scale(0)}
+  100% {transform:scale(1)}
 }
-@
-keyframes line-top-rotate { 0% {
-	transform: translateY(13px) rotateZ(0deg)
+@keyframes line-mid-invisible {
+  0% {transform:scale(0)}
+  100% {transform:scale(0)}
 }
-
-100%
-{
-transform
-:translateY(13px)
+@keyframes line-bot {
+  0% {transform:translateY(0px)}
+  100% {transform:translateY(-13px)}
+}
+@keyframes line-bot-reverse {
+  0% {transform:translateY(-13px)}
+  100% {transform:translateY(0px)}
+}
+@keyframes line-bot-rotate {
+  0% {transform:translateY(-13px) rotateZ(0deg)}
+  100% {transform:translateY(-13px) rotateZ(135deg)}
+}
+@keyframes line-bot-rotate-reverse {
+  0% {transform:translateY(-13px) rotateZ(135deg)}
+  100% {transform:translateY(-13px) rotateZ(0deg)}
+}
  
-rotateZ
-(45deg)
-}
-}
-@
-keyframes line-top-rotate-reverse { 0% {
-	transform: translateY(13px) rotateZ(45deg)
-}
 
-100%
-{
-transform
-:translateY(13px)
- 
-rotateZ
-(0deg)
-}
-}
-@
-keyframes line-mid { 0% {
-	transform: scale(1)
-}
-
-100%
-{
-transform
-:scale(0)
-}
-}
-@
-keyframes line-mid-reverse { 0% {
-	transform: scale(0)
-}
-
-100%
-{
-transform
-:scale(1)
-}
-}
-@
-keyframes line-mid-invisible { 0% {
-	transform: scale(0)
-}
-
-100%
-{
-transform
-:scale(0)
-}
-}
-@
-keyframes line-bot { 0% {
-	transform: translateY(0px)
-}
-
-100%
-{
-transform
-:translateY(-13px)
-}
-}
-@
-keyframes line-bot-reverse { 0% {
-	transform: translateY(-13px)
-}
-
-100%
-{
-transform
-:translateY(0px)
-}
-}
-@
-keyframes line-bot-rotate { 0% {
-	transform: translateY(-13px) rotateZ(0deg)
-}
-
-100%
-{
-transform
-:translateY(-13px)
- 
-rotateZ
-(135deg)
-}
-}
-@
-keyframes line-bot-rotate-reverse { 0% {
-	transform: translateY(-13px) rotateZ(135deg)
-}
-
-100%
-{
-transform
-:translateY(-13px)
- 
-rotateZ
-(0deg)
-}
-}
-
-/* 로고 */
-.title_logo {
-	position: absolute;
-	left: 43%;
-	top: 15%;
+	/* 로고 */
+.title_logo{
+    margin-left: 829px;
+    padding-top: 30px;
 }
 
 /* 하단 footer */
@@ -314,7 +225,7 @@ rotateZ
 	opacity: 0.9;
 }
 
-.footer a span {
+.footer p span {
 	margin-left: 24px;
 }
 
@@ -325,9 +236,8 @@ rotateZ
 
 .after_login {
 	width: 40px;
-	position: absolute;
-	top: 38px;
-	right: 5px;
+	margin-left: 1857px;
+    margin-top: -208px;
 }
 
 .after_login i {
@@ -338,9 +248,8 @@ rotateZ
 .before_login {
 	z-index: 99;
 	width: 40px;
-	position: absolute;
-	top: 15px;
-	right: 25px; /*########################### 구현 후 after하고 위치 똑같이 맞추기 */
+	margin-left: 1857px;
+    margin-top: -208px;
 }
 
 .after_login i {
@@ -349,6 +258,9 @@ rotateZ
 
 .before_login i {
 	margin-top: 10px;
+}
+.question i{
+	margin-left:3px;
 }
 </style>
 <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -389,42 +301,39 @@ rotateZ
 			</a>
 		</div>
 
-
-
 		<c:if test="${isLogon eq 'false' || isLogon == null }">
 			<div class=after_login>
 				<!-- 로그인하기 버튼 -->
-				<a class="login" href="/damovie/member/loginForm.do"><span
-					style="color: white"><i class="fa fa-check-circle fa-2x"
-						aria-hidden="true">&nbsp;</i></span></a>
+				<a class="login" href="/damovie/member/loginForm.do" title="로그인">
+					<span style="color: white"><i class="fas fa-lock fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
 				<!-- 회원가입 버튼 -->
-				<a class="join" href="/damovie/member/memberForm.do"><span
-					style="color: white"><i class="fa fa-user-circle fa-2x"
-						aria-hidden="true">&nbsp;</i></span></a>
+				<a class="join" href="/damovie/member/memberForm.do" title="회원가입">
+					<span style="color: white"><i class="fa fa-user-circle fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
 				<!-- 고객센터 버튼 -->
-				<a class="question" href="/damovie/servicecenter.do"><span
-					style="color: white"><i class="fa fa-question fa-2x"
-						aria-hidden="true">&nbsp;</i></span></a>
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
 			</div>
 		</c:if>
 
 		<c:if test="${isLogon eq 'true' || isLogon != null }">
 			<div class=before_login>
 				<!-- 로그아웃 버튼 -->
-				<a class="logout" href="/damovie/member/logout.do"><span
-					style="color: white"><i
-						class="fa fa-angle-left fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
+				<a class="logout" href="/damovie/member/logout.do" title="로그아웃">
+					<span style="color: white"><i class="fas fa-lock-open fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
 				<!-- 마이페이지 -->
-				<a class="mypage" href="/damovie/mypage.do"><span style="color: white"><i
-						class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
+				<a class="mypage" href="/damovie/mypage.do" title="마이페이지">
+					<span style="color: white"><i class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
 				<!-- 고객센터 버튼 -->
-				<a class="question" href="/damovie/servicecenter.do"><span
-					style="color: white"><i
-						class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
 			</div>
 		</c:if>
-
-
 	</div>
 
 	<div class="mainForm">
@@ -446,10 +355,8 @@ rotateZ
 					</script>
 				</c:if>
 				<li class="menu_num">.02.</li>
-				<li><a href="#">영화 정보</a></li>
+				<li><a href="/damovie/review.do">영화 리뷰</a></li>
 				<li class="menu_num">.03.</li>
-				<li><a href="#">영화 리뷰</a></li>
-				<li class="menu_num">.04.</li>
 				<li><a href="/damovie/servicecenter.do">고객센터</a></li>
 			</ul>
 		</div>

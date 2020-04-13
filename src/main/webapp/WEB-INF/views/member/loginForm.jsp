@@ -42,66 +42,66 @@
 <meta charset="UTF-8">
 <title>로그인 창</title>
 <style>
-	
-	.loginForm {
-		height: 100%;
-	}
-	.loginBox {
-		width : 1980px; 
-		height: 100%;
+.loginForm {
+	height: 100%;
 }
 
-		
-	}
-	
-	#leftBox {
-		border-right : none;
-	}
-	
-	.login {
-		height: 100%;
-		padding: 0px;
-	}
-	
-	.login > table {
-		height: 70%;
-		margin-left : 28%;
-		width: 45%;
-		top : 29px;
-		position: absolute;
-	}
-	
-	.loginInput > td > input {
-		width : 50%;
-		height: 50px;
-	}
-	
-	#button > input {
-		width : 20%;
-		float : left;
-		border-radius: 10px;
-	}
-	
-	#lbutton {
-		margin-left: 25%;
-	}
-	
-	#rbutton {
-		margin-left : 10%;	
-	}
-	
-	#searcha {
-		padding-left : 29%;
-	}
-	.searchbox {
-		height: 10px;
-	}
-	#search > a {
-		color : white;
-		float : left;
-		width: 20%;
-   		font-size: 20px;
-	}
+.loginBox {
+	width: 1980px;
+	height: 100%;
+}
+
+}
+#leftBox {
+	border-right: none;
+}
+
+.login {
+	height: 100%;
+	padding: 0px;
+}
+
+.login>table {
+	height: 600px;
+	margin-left: 532px;
+	width: 860px;
+	top: 29px;
+	position: absolute;
+}
+
+.loginInput>td>input {
+	width: 50%;
+	height: 50px;
+}
+
+#button>input {
+	width: 20%;
+	float: left;
+	border-radius: 10px;
+}
+
+#lbutton {
+	margin-left: 25%;
+}
+
+#rbutton {
+	margin-left: 10%;
+}
+
+#searcha {
+	padding-left: 29%;
+}
+
+.searchbox {
+	height: 10px;
+}
+
+#search>a {
+	color: white;
+	float: left;
+	width: 20%;
+	font-size: 20px;
+}
 </style>
 </head>
 <body>

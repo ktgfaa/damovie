@@ -13,12 +13,13 @@ String session_id=(String)session.getAttribute("id");
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 <style>
 .top{
 	position: relative;
 	width:100%;
-	height:300px;
+	height:230px;
 	top:0;
 	left:0;
 	z-index: 100;
@@ -29,7 +30,7 @@ li {
 
 /* 메뉴화면 */
 .mainForm {
-	position: fixed;
+	position:absolute;
 	top:0;
 	bottom:0;
 	right:0;
@@ -37,6 +38,7 @@ li {
 	background-color: black;
 	opacity: 0.95;
 	visibility: hidden;
+	box-shadow: 0px 2px 4px 4px #000000;
 	z-index: 100;
 }
 	/* menuForm 전체화면 내부 설정 */
@@ -52,7 +54,7 @@ li {
 	font-size: 40px;
 	font-weight:200;
 	text-align: center;
-	padding: 85px 0 0 0;
+	padding: 100px 0 0 0;
 	font-style: italic;
 	text-decoration: none;
 	color: white;
@@ -96,13 +98,13 @@ li {
   position:absolute;
 }
 #line-wrapper {
-  cursor:pointer;
-  width:40px;
-  height:40px;
-  position:fixed;
-  top:47px;
-  left:20px;
-   z-index: 101;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: -215px;
+	left: 20px;
+	z-index: 101;
 }
 .init {
   animation:none !important;
@@ -117,7 +119,7 @@ li {
   box-shadow:0 1px 3px rgba(0,0,0,.5);
   position:relative;
   z-index: 103;
-  background-color: red;
+  background-color: white;
 }
 .line-top {
   animation:line-top .5s forwards ease-out,
@@ -190,9 +192,9 @@ li {
 
 	/* 로고 */
 .title_logo{
-	position: absolute;
-	left:43%;
-	top:15%;
+    margin-left: 829px;
+    padding-top: 30px;
+    text-align: -webkit-auto;
 }
 
 	/* 하단 footer */
@@ -208,8 +210,8 @@ li {
 	text-align: center;
 	opacity: 0.9;
 }
-.footer a span{
-	margin-left: 24px;
+.footer p span{
+	margin-left: 20px;
 }
 
 	/* 우측 아이콘  */
@@ -219,9 +221,8 @@ li {
 
 .after_login{
 	width:40px;
-	position: fixed;
-	top : 40px;
-	right: 5px;
+	margin-left: 1857px;
+    margin-top: -208px;
 }
 .after_login i{
 	z-index: 100;
@@ -230,15 +231,17 @@ li {
 .before_login{
 	z-index: 99;
 	width:40px;
-	position: absolute;
-	top : 15px;
-	right: 25px;/*########################### 구현 후 after하고 위치 똑같이 맞추기 */
+	margin-left: 1857px;
+    margin-top: -208px;
 }
 .after_login i{
 	margin-top: 10px;
 }
 .before_login i{
 	margin-top: 10px;
+}
+.question i{
+	margin-left:3px;
 }
 </style>
 <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -280,31 +283,39 @@ li {
 			</a>
 		</div>
 	
-	
-	
-<c:if test="${isLogon eq 'false' || isLogon == null }">
-	<div class = after_login>
-<!-- 로그인하기 버튼 -->
-		<a class="login" href="/damovie/member/loginForm.do"><span style="color: white"><i class="fa fa-check-circle fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 회원가입 버튼 -->
-		<a class="join" href="/damovie/member/memberForm.do"><span style="color: white"><i class="fa fa-user-circle fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 고객센터 버튼 -->
-		<a class="question" href="/damovie/servicecenter.do"><span style="color: white"><i class="fa fa-question fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-	</div>
-</c:if>
+		<c:if test="${isLogon eq 'false' || isLogon == null }">
+			<div class=after_login>
+				<!-- 로그인하기 버튼 -->
+				<a class="login" href="/damovie/member/loginForm.do" title="로그인">
+					<span style="color: white"><i class="fas fa-lock fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 회원가입 버튼 -->
+				<a class="join" href="/damovie/member/memberForm.do" title="회원가입">
+					<span style="color: white"><i class="fa fa-user-circle fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 고객센터 버튼 -->
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+			</div>
+		</c:if>
 
-<c:if test="${isLogon eq 'true' || isLogon != null }">
-	<div class = before_login >
-<!-- 로그아웃 버튼 -->
-		<a class="logout" href="/damovie/member/logout.do"><span style="color: white"><i class="fa fa-angle-left fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 마이페이지 -->	
-		<a class="mypage" href="#"><span style="color: white"><i class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 고객센터 버튼 -->
-		<a class="question" href="/damovie/servicecenter.do"><span style="color: white"><i class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-	</div>
-</c:if>
-	
-		
+		<c:if test="${isLogon eq 'true' || isLogon != null }">
+			<div class=before_login>
+				<!-- 로그아웃 버튼 -->
+				<a class="logout" href="/damovie/member/logout.do" title="로그아웃">
+					<span style="color: white"><i class="fas fa-lock-open fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 마이페이지 -->
+				<a class="mypage" href="/damovie/mypage.do" title="마이페이지">
+					<span style="color: white"><i class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 고객센터 버튼 -->
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+			</div>
+		</c:if>
 	</div>
 	
 		<div class="mainForm">
@@ -326,10 +337,8 @@ li {
 					</script>
 				</c:if>
 				<li class="menu_num">.02.</li>
-				<li><a href="#">영화 정보</a></li>
+				<li><a href="/damovie/review.do">영화 리뷰</a></li>
 				<li class="menu_num">.03.</li>
-				<li><a href="#">영화 리뷰</a></li>
-				<li class="menu_num">.04.</li>
 				<li><a href="/damovie/servicecenter.do">고객센터</a></li>
 			</ul>
 		</div>
@@ -340,8 +349,8 @@ li {
 					책임을 질 수 있습니다.</p>
 				<p>
 					<span>사업자등록번호 : 555-5555555</span> 
-					<span> 통신판매업 신고번호 : 서울종로 제 2020 - 555호</span><br> 
-					<span>대표이사 : 금영석사업자등록정보 확인</span> 
+					<span>통신판매업 신고번호 : 서울종로 제 2020 - 555호</span><br> 
+					<span>대표이사 : 케이지   사업자등록정보 확인</span> 
 					<span>주소 : 서울시 종로구 종로3가 단성사</span> 
 					<span>대표전화 : 5555-5555</span>
 			</div>

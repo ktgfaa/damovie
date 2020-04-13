@@ -13,56 +13,59 @@ String session_id=(String)session.getAttribute("id");
 <html>
 <head>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 <style>
-.top{
+.top {
 	position: relative;
-	width:100%;
-	height:230px;
-	top:0;
-	left:0;
+	width: 100%;
+	height: 300px;
+	top: 0;
+	left: 0;
 	z-index: 100;
 }
+
 li {
 	list-style: none;
 }
 
 /* 메뉴화면 */
 .mainForm {
-	position:absolute;
-	top:0;
-	bottom:0;
-	right:0;
-	left:0;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 	background-color: black;
 	opacity: 0.95;
 	visibility: hidden;
 	box-shadow: 0px 2px 4px 4px #000000;
 	z-index: 100;
 }
-	/* menuForm 전체화면 내부 설정 */
-.menu_toggle{
-	position:absolute;
-	top:40%;
-	left:50%;
-	transform:translate(-50%, -50%);
-	}
-	
-.menu_num{/* 메뉴 숫자 */
+/* menuForm 전체화면 내부 설정 */
+.menu_toggle {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.menu_num { /* 메뉴 숫자 */
 	display: block;
 	font-size: 40px;
-	font-weight:200;
+	font-weight: 200;
 	text-align: center;
-	padding: 85px 0 0 0;
+	padding: 100px 0 0 0;
 	font-style: italic;
 	text-decoration: none;
 	color: white;
 	font-family: "Nanum Pen Script", cursive;
 }
-.menu_toggle li a {/* 글씨 */
+
+.menu_toggle li a { /* 글씨 */
 	display: block;
 	font-size: 60px;
-	font-weight:200;
+	font-weight: 200;
 	text-align: center;
 	margin-top: -10px;
 	font-style: italic;
@@ -70,75 +73,87 @@ li {
 	color: white;
 	font-family: "Nanum Pen Script", cursive;
 }
-.menu_toggle li:nth-child(4) ,li:nth-child(6) {
+
+.menu_toggle li:nth-child(4), li:nth-child(6) {
 	margin-right: 15px;
 }
+
 .menu_toggle li a:link {
 	text-decoration: none;
 	color: white;
 }
+
 .menu_toggle li a:visited {
 	text-decoration: none;
 	color: white;
 }
+
 .menu_toggle li a:hover {
 	text-decoration: none;
 	color: light gray;
 }
+
 .menu_toggle li a:active {
 	text-decoration: none;
 	color: yellow;
 }
 
- 
-
-	/* 햄버거 버튼  */
+/* 햄버거 버튼  */
 #wrapper {
-  position:absolute;
+	position: absolute;
 }
+
 #line-wrapper {
-  cursor:pointer;
-  width:40px;
-  height:40px;
-  position:absolute;
-  top:-191px;
-  left:20px;
-   z-index: 101;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: -285px;
+	left: 20px;
+	z-index: 101;
 }
+
 .init {
-  animation:none !important;
+	animation: none !important;
 }
+
 .line {
-  background:#ffffff;
-  margin-top:10px;
-  margin-bottom:0;
-  width:40px;
-  height:3px; 
-  border-radius:2px;
-  box-shadow:0 1px 3px rgba(0,0,0,.5);
-  position:relative;
-  z-index: 103;
-  background-color: red;
+	background: #ffffff;
+	margin-top: 10px;
+	margin-bottom: 0;
+	width: 40px;
+	height: 3px;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+	position: relative;
+	z-index: 103;
+	background-color: white;
 }
+
 .line-top {
-  animation:line-top .5s forwards ease-out,
-            line-top-rotate .3s .5s forwards ease-out;
+	animation: line-top .5s forwards ease-out, line-top-rotate .3s .5s
+		forwards ease-out;
 }
+
 .top-reverse {
-  animation:line-top-rotate-reverse .3s forwards ease-out,
-            line-top-reverse .5s .3s forwards ease-out;
+	animation: line-top-rotate-reverse .3s forwards ease-out,
+		line-top-reverse .5s .3s forwards ease-out;
 }
+
 .line-mid {
-  animation:line-mid .5s forwards ease-out;
+	animation: line-mid .5s forwards ease-out;
 }
+
 .mid-reverse {
-  animation:line-mid-invisible .3s forwards ease-out, 
-            line-mid-reverse .5s .3s forwards ease-out;
+	animation: line-mid-invisible .3s forwards ease-out, line-mid-reverse
+		.5s .3s forwards ease-out;
 }
+
 .line-bot {
-  animation:line-bot .5s forwards ease-out,
-            line-bot-rotate .3s .5s forwards ease-out;
+	animation: line-bot .5s forwards ease-out, line-bot-rotate .3s .5s
+		forwards ease-out;
 }
+
 .bot-reverse {
   animation:line-bot-rotate-reverse .3s forwards ease-out,
             line-bot-reverse .5s .3s forwards ease-out;
@@ -191,55 +206,60 @@ li {
 
 	/* 로고 */
 .title_logo{
-	position: absolute;
-	left:43%;
-	top:15%;
+    margin-left: 829px;
+    padding-top: 30px;
 }
 
-	/* 하단 footer */
+/* 하단 footer */
 .footer {
-	position:fixed;
-	left:0;
-	bottom:0; 
-	width:100%;
-	height:100px;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
 	font-size: 12px;
 	font-style: italic;
 	color: #FFF;
 	text-align: center;
 	opacity: 0.9;
 }
-.footer a span{
+
+.footer p span {
 	margin-left: 24px;
 }
 
-	/* 우측 아이콘  */
+/* 우측 아이콘  */
 .fa {
- 	vertical-align:middle;
- 	} 
-
-.after_login{
-	width:40px;
-	position: absolute;
-	top : 30px;
-	right: 5px;
+	vertical-align: middle;
 }
-.after_login i{
+
+.after_login {
+	width: 40px;
+	margin-left: 1857px;
+    margin-top: -208px;
+}
+
+.after_login i {
 	z-index: 100;
 	margin-top: 10px;
 }
-.before_login{
+
+.before_login {
 	z-index: 99;
-	width:40px;
-	position: absolute;
-	top : 15px;
-	right: 25px;/*########################### 구현 후 after하고 위치 똑같이 맞추기 */
+	width: 40px;
+	margin-left: 1857px;
+    margin-top: -208px;
 }
-.after_login i{
+
+.after_login i {
 	margin-top: 10px;
 }
-.before_login i{
+
+.before_login i {
 	margin-top: 10px;
+}
+.question i{
+	margin-left:3px;
 }
 </style>
 <script src="http://code.jquery.com/jquery-2.2.1.min.js"></script>
@@ -280,32 +300,40 @@ li {
 				<img src="/damovie/resources/images/damovilogo3.png"  alt="Home"/>
 			</a>
 		</div>
-	
-	
-	
-<c:if test="${isLogon eq 'false' || isLogon == null }">
-	<div class = after_login>
-<!-- 로그인하기 버튼 -->
-		<a class="login" href="/damovie/member/loginForm.do"><span style="color: white"><i class="fa fa-check-circle fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 회원가입 버튼 -->
-		<a class="join" href="/damovie/member/memberForm.do"><span style="color: white"><i class="fa fa-user-circle fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 고객센터 버튼 -->
-		<a class="question" href="/damovie/servicecenter.do"><span style="color: white"><i class="fa fa-question fa-2x" aria-hidden="true">&nbsp;</i></span></a>
-	</div>
-</c:if>
-
-<c:if test="${isLogon eq 'true' || isLogon != null }">
-	<div class = before_login >
-<!-- 로그아웃 버튼 -->
-		<a class="logout" href="/damovie/member/logout.do"><span style="color: white"><i class="fa fa-angle-left fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 마이페이지 -->	
-		<a class="mypage" href="#"><span style="color: white"><i class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-<!-- 고객센터 버튼 -->
-		<a class="question" href="/damovie/servicecenter.do"><span style="color: white"><i class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span></a>
-	</div>
-</c:if>
-	
 		
+		<c:if test="${isLogon eq 'false' || isLogon == null }">
+			<div class=after_login>
+				<!-- 로그인하기 버튼 -->
+				<a class="login" href="/damovie/member/loginForm.do" title="로그인">
+					<span style="color: white"><i class="fas fa-lock fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 회원가입 버튼 -->
+				<a class="join" href="/damovie/member/memberForm.do" title="회원가입">
+					<span style="color: white"><i class="fa fa-user-circle fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 고객센터 버튼 -->
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x" aria-hidden="true">&nbsp;</i></span>
+				</a>
+			</div>
+		</c:if>
+
+		<c:if test="${isLogon eq 'true' || isLogon != null }">
+			<div class=before_login>
+				<!-- 로그아웃 버튼 -->
+				<a class="logout" href="/damovie/member/logout.do" title="로그아웃">
+					<span style="color: white"><i class="fas fa-lock-open fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 마이페이지 -->
+				<a class="mypage" href="/damovie/mypage.do" title="마이페이지">
+					<span style="color: white"><i class="fa fa-user fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+				<!-- 고객센터 버튼 -->
+				<a class="question" href="/damovie/servicecenter.do" title="고객센터">
+					<span style="color: white"><i class="fa fa-question fa-2x fa-pull-left" aria-hidden="true">&nbsp;</i></span>
+				</a>
+			</div>
+		</c:if>
 	</div>
 	
 		<div class="mainForm">
@@ -327,10 +355,8 @@ li {
 					</script>
 				</c:if>
 				<li class="menu_num">.02.</li>
-				<li><a href="#">영화 정보</a></li>
+				<li><a href="/damovie/review.do">영화 리뷰</a></li>
 				<li class="menu_num">.03.</li>
-				<li><a href="#">영화 리뷰</a></li>
-				<li class="menu_num">.04.</li>
 				<li><a href="/damovie/servicecenter.do">고객센터</a></li>
 			</ul>
 		</div>

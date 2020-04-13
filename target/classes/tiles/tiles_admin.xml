@@ -7,7 +7,7 @@
 	<definition name="adminLayout" template="/WEB-INF/views/admin/empty.jsp">
 		<put-attribute name="title" value=""></put-attribute>
 		<put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"></put-attribute>
-		<put-attribute name="side" value="/WEB-INF/views/admin/admin_side.jsp"></put-attribute>
+		<put-attribute name="side" value=""></put-attribute>
 		<put-attribute name="body" value=""></put-attribute>
 	</definition>
 
@@ -17,21 +17,10 @@
         <put-attribute name="header" value="/WEB-INF/views/admin/admin_header.jsp"></put-attribute>
     </definition>
     
-	<definition name="side" extends="adminLayout">
-		<put-attribute name="title" value="사이드"></put-attribute>
-        <put-attribute name="side" value="/WEB-INF/views/admin/admin_side.jsp"></put-attribute>
-    </definition>
     
 	<definition name="admin" extends="adminLayout">
 		<put-attribute name="title" value="관리자페이지"></put-attribute>
-        <put-attribute name="body" value="/WEB-INF/views/admin/admin.jsp"></put-attribute>
-    </definition>
-
-
-
-	<definition name="memberManagement" extends="adminLayout">
-		<put-attribute name="title" value="회원관리 페이지"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/admin/memberManagement.jsp"></put-attribute>
     </definition>
-    
+
 </tiles-definitions>

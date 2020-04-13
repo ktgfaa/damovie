@@ -16,7 +16,7 @@
 <script type="text/javascript">
 // 원하는 페이지로 이동시 검색조건, 키워드 값 유지
 	function list(page){
-		location.href="${contextPath}/admin/memberManagement.do?curPage="+page+"&searchOption-${map.searchOption}"+"keyword=${map.keyword}";
+		location.href="${contextPath}/admin.do?curPage="+page+"&searchOption-${map.searchOption}"+"keyword=${map.keyword}";
 	}
  	function del_member(id){
 		var form = document.createElement("form");
@@ -61,7 +61,7 @@
 <body>
 <div id="main_box">
 	
-	<form name="search_form" id="search_form" method="post" action="${contextPath }/admin/memberManagement.do"><!--  -->
+	<form name="search_form" id="search_form" method="post" action="${contextPath }/admin.do">
 		<select name="searchOption">
 			<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}" />>전체</option>
 			<option value="id" <c:out value="${map.searchOption == 'id'?'selected':''}" />>아이디</option>

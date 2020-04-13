@@ -24,5 +24,40 @@
 		]]>
 	</insert>
 	
+	<insert id="insertTime" parameterType="customerTheaterVO">
+		<![CDATA[
+			insert into theater_time (company,theater_name,theater_num,movie_DATE,time1,time2,time3,time4,time5,time6,time7,time8,time9,time10)
+			 values(#{company},#{theater_name},#{theater_num},#{movie_date},
+			 #{time1 , jdbcType=VARCHAR},
+			 #{time2 ,jdbcType=VARCHAR},
+			 #{time3 ,jdbcType=VARCHAR},
+			 #{time4 ,jdbcType=VARCHAR},
+			 #{time5 ,jdbcType=VARCHAR},
+			 #{time6 ,jdbcType=VARCHAR},
+			 #{time7 ,jdbcType=VARCHAR},
+			 #{time8 ,jdbcType=VARCHAR},
+			 #{time9 ,jdbcType=VARCHAR},
+			 #{time10 ,jdbcType=VARCHAR})
+		]]>
+	</insert>
+	
+	 <select id="selectCompanyName_sub" resultType="String" parameterType="String">
+		<![CDATA[
+			select DISTINCT company from movie_company where id=#{id}
+		]]>
+	</select>
+	
+	 <select id="selectTheaterName_sub" resultType="String" parameterType="String">
+		<![CDATA[
+			select DISTINCT theater_name from movie_company where id=#{id}
+		]]>
+	</select>
+	
+	<select id="selectTheaterNum_sub" resultType="String" parameterType="String">
+		<![CDATA[
+			select DISTINCT theater_num from movie_company where id=#{id}
+		]]>
+	</select>
+	
 	</mapper>
 	

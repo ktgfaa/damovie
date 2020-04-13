@@ -26,8 +26,16 @@ public class BookDAO {
 //	극장이름 꺼내기
 	public List<String> selectTheaterName(String company) throws DataAccessException {
 		List<String> TheaterName = sqlSession.selectList("mapper.bookForm.selectTheaterName", company);
-
+		
 		return TheaterName;
+	}
+	
+	// 회사 이름 꺼내기
+	
+	public List<String> selectCompany() throws DataAccessException {
+		List<String> company = sqlSession.selectList("mapper.bookForm.selectCompany");
+
+		return company;
 	}
 //  영화관 꺼내기
 	public List<String> selectTheaterNum(String theaterName , String movieName) throws DataAccessException {
@@ -55,7 +63,7 @@ public class BookDAO {
 		Theaterinfo.put("date", date);
 		
 		MovieTimeVO movieTime = (MovieTimeVO)sqlSession.selectOne("mapper.bookForm.selectMovieTime", Theaterinfo);
-		System.out.println(movieTime.getTime1());
+		
 		return movieTime;
 	}
 // 극장 날짜 꺼내기

@@ -52,11 +52,14 @@ public class BookController extends MultiActionController {
 		List<String> imageList = null;
 		List<String> theaterList = null;
 		List<String> theaterNum = null;
+		List<String> companyList = null;
 		MovieTimeVO movieTime = new MovieTimeVO();
 		movieList = bookDAO.selectMovieName();
 		mav.addObject("movieList", movieList);
 		imageList = bookDAO.selectImageName();
 	  	mav.addObject("imageList", imageList);
+	  	companyList = bookDAO.selectCompany();
+	  	mav.addObject("companyList", companyList);
 	  	
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
@@ -76,7 +79,6 @@ public class BookController extends MultiActionController {
 		 if(company != null && company != "") { 
 			 System.out.println("company 실행");
 				theaterList = bookDAO.selectTheaterName(company);
-				
 				mav.addObject("theaterList", theaterList);
 				mav.addObject("company", company);
 				mav.addObject("movieName", movieName);
@@ -90,8 +92,13 @@ public class BookController extends MultiActionController {
 		 if(theater != null && movieName != null && theater != "" && movieName != "" && date != "" && date != null ) {
 			System.out.println("movieNum 실행");
 	  		theaterNum = bookDAO.selectTheaterNum(theater, movieName);
+	  		try {
+	  			mav.addObject("theaterNum", theaterNum.get(0));
+		 } catch(IndexOutOfBoundsException e) {
+			 mav.addObject("theaterNum", "");
+		 }
 	  		
-			mav.addObject("theaterNum", theaterNum.get(0));
+			
 			mav.addObject("company", company);
 			mav.addObject("movieName", movieName);
 			mav.addObject("bmImage", bmImage);
@@ -104,7 +111,12 @@ public class BookController extends MultiActionController {
 		 /*--------------------------영화관에 따른 시간 불러오기---------------------------------------*/
 		 	if(theaterNum != null && theater != null && theater != "" ) {
 			System.out.println("moiveTime 실행");
-	  		movieTime = movieTimeService.selectMovieTime(theater, theaterNum.get(0),date);
+			
+	  		try {
+	  			movieTime = movieTimeService.selectMovieTime(theater, theaterNum.get(0),date);
+		 } catch(IndexOutOfBoundsException e) {
+			 movieTime = movieTimeService.selectMovieTime(theater, "",date);
+		 }
 	  		
 			mav.addObject("movieTime", movieTime);
 			mav.addObject("company", company);

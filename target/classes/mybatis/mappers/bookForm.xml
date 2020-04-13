@@ -23,6 +23,12 @@
 		]]>
 	</select>
 	
+	 <select id="selectCompany" resultType="String">
+		<![CDATA[
+			select DISTINCT company from movie_company
+		]]>
+	</select>
+	
 	 <select id="selectTheaterNum" resultType="String" parameterType="java.util.Map">
 		<![CDATA[
 			select THEATER_NUM from movie_company where theater_name=#{theaterName} and movie_name=#{movieName}

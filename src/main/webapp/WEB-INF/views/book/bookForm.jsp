@@ -362,12 +362,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			<div class="theaterSel">
 				<div class="companyList">
 					<ul class="List_ul">
-						<li><h1
-								style="color: white; margin: 0px; margin-bottom: 20px;">2
-								회사 선택</h1></li>
-						<li><button id="롯데시네마" style="color: #ff9191;" onclick="clickCompanyEvent()" class="btnhover">LOTTE CINEMA</button></li>
-						<li><button id="메가박스" style="color: #ff08ff;"	onclick="clickCompanyEvent()" class="btnhover">MEGABOX</button></li>
-						<li><button id="CGV" style="color: red;" onclick="clickCompanyEvent()" class="btnhover">CGV</button></li>
+						<li><h1 style="color: white; margin: 0px; margin-bottom: 20px;">2 회사 선택</h1></li>
+						<c:forEach var="company" items="${companyList }">
+						<li><button id="${company }" style="color: #ff9191;" onclick="clickCompanyEvent()" class="btnhover">${company }</button></li>
+						</c:forEach>
 					</ul>
 				</div>
 				<div class="theaterList">
@@ -375,15 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<li><h1 style="color: white; margin: 0px; margin-bottom: 20px;">3 극장 선택</h1></li>
 
 							<c:forEach var="Theater" items="${theaterList }">
-							<c:if test="${company eq '롯데시네마' }">
 								<li><button id="theater" onclick="clickTheaterEvent()" style="color: #ff9191;" class="btnhover">${Theater }</button></li>
-							</c:if>
-							<c:if test="${company eq '메가박스' }">
-								<li><button id="theater" onclick="clickTheaterEvent()" style="color: #ff08ff;" class="btnhover">${Theater }</button></li>
-							</c:if>
-							<c:if test="${company eq 'CGV' }">
-								<li><button id="theater" onclick="clickTheaterEvent()" style="color: red;" class="btnhover">${Theater }</button></li>
-							</c:if>
 							</c:forEach>
 
 					</ul>

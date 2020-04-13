@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
 
 @Service("customerService")
@@ -17,8 +18,12 @@ public class CustomerService {
 	@Autowired
 	CustomerDAO CustomerDAO;
 
-	public int addMovie(CustomerMovieVO CustomerMovieVO) throws DataAccessException {
-		return CustomerDAO.addMovie(CustomerMovieVO);
+	public int addMovie(CustomerMovieVO customerMovieVO) throws DataAccessException {
+		return CustomerDAO.addMovie(customerMovieVO);
+	}
+	
+	public int addTheater(CustomerTheaterVO customerTheaterVO) throws DataAccessException {
+		return CustomerDAO.addTheater(customerTheaterVO);
 	}
 
 }

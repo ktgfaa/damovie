@@ -137,13 +137,14 @@ public class MemberController extends MultiActionController {
 		ModelAndView mav = new ModelAndView();
 
 		memberVO = memberService.login(member);
-
+		
 		orderVO = memberService.order(order);
+		
 
 		if (memberVO != null) {
 
 			HttpSession session = request.getSession();
-
+			
 			session.setAttribute("member", memberVO);
 
 			session.setAttribute("order", orderVO);

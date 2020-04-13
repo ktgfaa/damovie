@@ -49,8 +49,8 @@ caption {
 input , .theater_numcheck {
 	width: 400px;
     height: 30px;
-	
 }
+
 
 .theaterTable  {
 	width: 400px;
@@ -79,6 +79,12 @@ input , .theater_numcheck {
     color: white;
     	font-family: "Nanum Pen Script", cursive;
     	font-size : 23px;
+}
+
+.infoTable > tbody > tr > td > select {
+	width : 400px;
+	height : 35px;
+	
 }
 
 .infoTable > tbody > tr {

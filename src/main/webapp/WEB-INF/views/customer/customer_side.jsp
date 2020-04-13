@@ -43,7 +43,7 @@ String session_id=(String)session.getAttribute("id");
 <body>
 	<div id="side_bar">
 		<ul>
-			<li><a href="#">확 인</a></li>
+			<li><a href="${contextPath }/customer/customerConfirm.do">확 인</a></li>
 			<li><a href="#">수 정</a></li>
 			<li><a href="#">삭 제</a></li>
 		</ul>

@@ -22,8 +22,7 @@
 <meta charset="UTF-8">
 <title></title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<link href="${contextPath }/resources/css/customer/customerTime.css"
-	rel="stylesheet" type="text/css">
+<link href="${contextPath }/resources/css/customer/customerTime.css" rel="stylesheet" type="text/css">
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean"
 	rel="stylesheet">

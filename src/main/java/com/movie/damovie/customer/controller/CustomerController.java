@@ -2,6 +2,7 @@ package com.movie.damovie.customer.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -153,6 +154,48 @@ public class CustomerController {
 
 			mav.addObject("member",memberVO);
 			mav.setViewName(viewName);
+			} else if(memberVO.getUser_level().equals("admin")) {
+				mav = new ModelAndView("redirect:/admin.do");
+			} else {
+			mav = new ModelAndView("redirect:/main.do");
+			} } catch(NullPointerException e) {
+			mav = new ModelAndView("redirect:/main.do");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/customer/customerSeat.do" , method = RequestMethod.GET)
+	private ModelAndView customerSeat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		List<String> Alphabet = new ArrayList<String>(Arrays.asList(
+				"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
+		
+		
+		/* ------------ 접근 처리 ------------ */
+		try {
+		if(memberVO.getUser_level().equals("customer")) {
+			mav.addObject("member",memberVO);
+			try {
+				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+				List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
+				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+				mav.addObject("company",company);
+				mav.addObject("theater_name", theater_name);
+				mav.addObject("theater_num", theater_num);
+				mav.addObject("Alphabet", Alphabet);
+				
+		} catch (NullPointerException e) {
+					mav.addObject("company","null");
+					mav.addObject("theater_name", "null");
+					mav.addObject("theater_num", "null");
+				}
+			mav.setViewName(viewName);
+			
 			} else if(memberVO.getUser_level().equals("admin")) {
 				mav = new ModelAndView("redirect:/admin.do");
 			} else {

@@ -36,5 +36,10 @@
 		<put-attribute name="title" value="서브시간업데이트"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/customer/customerTime.jsp"></put-attribute>
     </definition>
+    
+    <definition name="/customer/customerSeat" extends="customerLayout">
+		<put-attribute name="title" value="서브시간업데이트"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/customer/customerSeat.jsp"></put-attribute>
+    </definition>
 
 </tiles-definitions>

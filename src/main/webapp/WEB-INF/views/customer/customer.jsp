@@ -17,6 +17,11 @@ String session_id=(String)session.getAttribute("id");
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
 <style type="text/css">
 
+body {
+	font-family: "Nanum Pen Script", cursive;
+	font-size : 23px;
+}
+
 #main_Form{
     padding-top: 40px;
     padding-left: 320px;
@@ -37,7 +42,7 @@ String session_id=(String)session.getAttribute("id");
 .select_menu{
     position: absolute;
     top: 447px;
-    left: 571px;
+    left: 500px;
     width: 700px;
     height: 160px;
     display: flex;
@@ -85,7 +90,7 @@ String session_id=(String)session.getAttribute("id");
 		});
 		
 		$(".seat_box").click(function(){
-			location.href="#";
+			location.href="${contextPath}/customer/customerSeat.do";
 		});
 
 	}); 

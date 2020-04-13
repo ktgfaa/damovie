@@ -612,7 +612,7 @@ $(document).ready(function(){
 					    	<img src="/damovie/resources/images/star-filled.png" />
 					    	<strong>${total } </strong>
 					    </strong>
-        				<button><a href="#">예매하기</a></button>
+        				<button><a href="/damovie/book/bookForm.do">예매하기</a></button>
 					</div>
 					<div class="title">
 						<ul>

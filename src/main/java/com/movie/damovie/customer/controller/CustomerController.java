@@ -33,7 +33,7 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
-	
+	   
 	@Autowired
 	private CustomerDAO customerDAO;
 	
@@ -44,6 +44,7 @@ public class CustomerController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
 		
 		/* ------------ 접근 처리 ------------ */
 		try {

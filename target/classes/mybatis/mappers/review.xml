@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mapper.review">
+ 	<resultMap type="reviewVO" id="movieResult">
+		<result column="movie_name" property="movie_name"/>
+		<result column="actor" property="actor"/>
+		<result column="director" property="director"/>
+		<result column="image_name" property="image_name"/>
+		<result column="runtime" property="runtime"/>
+		<result column="jenre" property="jenre"/>
+		<result column="opening_Date" property="opening_Date"/>
+	</resultMap>
+	
+	<resultMap type="writeVO" id="reviewResult">
+		<result column="user_id" property="user_id"/>
+		<result column="des" property="des"/>
+		<result column="score" property="score"/>
+		<result column="review_date" property="review_date"/>
+		<result column="movie_name" property="movie_name"/>
+	</resultMap>
+	
+	<select id="countArticle" resultType="int">
+		SELECT COUNT(*) 
+		FROM 
+			review
+	</select>
+ 	
+ 	<select id="listAll" resultType="WriteVO">
+ 		<include refid="pagingHeader"></include>
+ 			<![CDATA[
+ 				SELECT 
+ 					user_id AS user_id,
+ 					des AS des,
+ 					score AS score,
+ 					 review_date AS review_date,
+ 					 movie_name AS movie_name
+ 				From review
+ 					where movie_name=movie_name order by review_date desc
+ 			]]>
+ 		<include refid="pagingFooter"></include>
+ 	</select>
+ 	<sql id="pagingHeader">
+ 		SELECT * FROM (
+ 				SELECT ROWNUM RN, A.*FROM(
+ 	</sql>
+ 	<sql id="pagingFooter">
+ 						)A
+ 					) WHERE RN BETWEEN #{start} AND #{end}
+ 	</sql>
+ 	
+ 	<select id="movieList" resultMap="movieResult">
+		<![CDATA[
+			SELECT movie_name, actor, director, image_name, runtime, jenre, opening_Date
+			from MOVIE_INFO
+			order by opening_date desc
+		]]>
+	</select>
+	
+	 	<select id="movieInfo" resultMap="movieResult" parameterType="String">
+		<![CDATA[
+			SELECT * from MOVIE_INFO where image_name=#{imageName}
+		]]>
+	</select>
+	
+	<select id="reviewInfo" resultMap="reviewResult" parameterType="String">
+		<![CDATA[
+			SELECT * from REVIEW where user_id=#{user_id}
+		]]>
+	</select>
+ 	<select id="reviewList" resultMap="reviewResult" parameterType="String">
+		<![CDATA[
+			SELECT *
+			from REVIEW
+			where movie_name=#{movieName} order by review_date desc
+		]]>
+	</select>
+	<select id="totalList" resultType="int" parameterType="String">
+		<![CDATA[
+			SELECT DECODE(sum(score),null,0,sum(score)) from REVIEW where movie_name=#{movieName}
+		]]>
+	</select>
+	
+ 	<insert id="reviewWrite"  parameterType="writeVO">
+ 		<![CDATA[
+			INSERT into review(user_id,des,score,movie_name) values(#{user_id},#{des},#{score},#{movie_name})
+		]]>
+ 	</insert>
+ 	
+ 	<update id="modReview" parameterType="writeVO">
+ 		<![CDATA[
+			UPDATE review set des = #{des}, score = #{score}, review_date = sysdate where user_id = #{user_id}
+		]]>
+ 	</update>
+ 	
+ 	<delete id="delReview" parameterType="writeVO">
+		<![CDATA[
+			delete from review where user_id=#{user_id}
+		]]>
+	</delete>
+ </mapper>

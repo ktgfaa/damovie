@@ -127,7 +127,7 @@ li {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
 	position: relative;
 	z-index: 103;
-	background-color: red;
+	background-color: white;
 }
 
 .line-top {

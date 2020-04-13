@@ -244,10 +244,10 @@ $(document).ready(function(){
 	    margin-left: 207px;
 	    overflow: hidden;
 	    width: 920px;
-	    height: 250px;
+	    height: 260px;
 	}
 	.all_poster {
-		width: 1980px;
+		width: 4000px;
 	    height: 250px;
 	    
 	}

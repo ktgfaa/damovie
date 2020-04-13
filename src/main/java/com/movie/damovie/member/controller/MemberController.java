@@ -291,8 +291,19 @@ public class MemberController extends MultiActionController {
 	@RequestMapping(value="/member/memberUpdateView.do", method=RequestMethod.GET)
 	public String memberUpdateView(HttpSession session) throws Exception{
 		String id = (String)session.getAttribute("id");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		/* ------------ 접근 처리 ------------ */
+		try {
+			if(memberVO == null) {
+				return "redirect:/main.do";
+			} 
+		} catch(NullPointerException e) {
+			return "redirect:/main.do";
+
+		}
 		return "memberUpdateView";
 	}
+	
 	@RequestMapping(value="/member/memberUpdate.do",method= RequestMethod.POST)
 	public String memberUpdate(MemberVO vo, HttpSession session,RedirectAttributes rAttr)throws Exception{
 		
@@ -304,18 +315,38 @@ public class MemberController extends MultiActionController {
 		return "redirect:/mypage.do";
 	}
 	
-	
 	@RequestMapping(value= "/member/checkMyBook.do", method=RequestMethod.GET )
 	private String checkMyBook(HttpSession session) throws Exception {
 		String id = (String)session.getAttribute("id");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		/* ------------ 접근 처리 ------------ */
+		try {
+			if(memberVO == null) {
+				return "redirect:/main.do";
+			} 
+		} catch(NullPointerException e) {
+			return "redirect:/main.do";
+
+		}
 		return "checkMyBook";
 	}
 	
 	
 	@RequestMapping(value="/member/memberDeleteForm.do", method=RequestMethod.GET)
 	public String memberDeleteForm(HttpSession session)throws Exception{
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		/* ------------ 접근 처리 ------------ */
+		try {
+			if(memberVO == null) {
+				return "redirect:/main.do";
+			} 
+		} catch(NullPointerException e) {
+			return "redirect:/main.do";
+
+		}
 		return "memberDeleteForm";
 	}
+	
 	@RequestMapping(value="/member/memberDelete.do", method=RequestMethod.POST)
 	public String memberDelete(MemberVO vo, HttpSession session, RedirectAttributes rAttr)throws Exception{
 		
@@ -338,5 +369,4 @@ public class MemberController extends MultiActionController {
 		return "redirect:/main.do";
 		}
 	}
-
 }

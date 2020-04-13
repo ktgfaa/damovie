@@ -302,6 +302,7 @@ public class MemberController extends MultiActionController {
 
 		}
 		return "memberUpdateView";
+		
 	}
 	
 	@RequestMapping(value="/member/memberUpdate.do",method= RequestMethod.POST)

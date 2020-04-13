@@ -287,7 +287,7 @@ public class MemberController extends MultiActionController {
 		mav.setViewName("redirect:/member/loginForm.do");
 		return mav;
 	}
-	
+	   
 	@RequestMapping(value="/member/memberUpdateView.do", method=RequestMethod.GET)
 	public String memberUpdateView(HttpSession session) throws Exception{
 		String id = (String)session.getAttribute("id");

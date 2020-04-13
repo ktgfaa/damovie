@@ -32,7 +32,7 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
-	
+	   
 	@Autowired
 	private CustomerDAO customerDAO;
 	

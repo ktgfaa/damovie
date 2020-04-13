@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.movie.damovie.book.order.VO.OrderVO;
 import com.movie.damovie.member.dao.MemberDAO;
 import com.movie.damovie.member.vo.MemberVO;
 
@@ -82,6 +83,11 @@ public class MemberServiceImpl implements MemberService {
 		@Override
 		public void levelUpdate(MemberVO vo) {
 			memberDAO.levelUpdate(vo);
+		}
+
+		@Override
+		public OrderVO order(OrderVO order) {
+			return memberDAO.order(order);
 		}
 
 

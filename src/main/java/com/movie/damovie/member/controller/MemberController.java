@@ -1,9 +1,6 @@
 package com.movie.damovie.member.controller;
 
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,15 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.movie.damovie.book.order.VO.OrderVO;
 import com.movie.damovie.member.mailService.MailService;
 import com.movie.damovie.member.service.MemberService;
 import com.movie.damovie.member.vo.MemberVO;
@@ -37,6 +33,8 @@ public class MemberController extends MultiActionController {
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	private OrderVO	orderVO;
 
 	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
@@ -131,33 +129,65 @@ public class MemberController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
+
+	public ModelAndView login(@ModelAttribute("member") MemberVO member,@ModelAttribute("order") OrderVO order, RedirectAttributes rAttr,
+
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ModelAndView mav = new ModelAndView();
+
 		memberVO = memberService.login(member);
+
+		orderVO = memberService.order(order);
+
 		if (memberVO != null) {
+
 			HttpSession session = request.getSession();
+
 			session.setAttribute("member", memberVO);
+
+			session.setAttribute("order", orderVO);
+
 			session.setAttribute("isLogon", true);
+
 			String action = (String) session.getAttribute("action");
+
 			session.removeAttribute("action");
+
 			if (action != null) {
+
 				mav.setViewName("redirect:" + action);
+
 			} else {
+
 				//접속자가 관리자라면 
+
 				if(memberVO.getUser_level().equals("admin")) {
+
 					mav.setViewName("redirect:/admin.do");
+
 				}else if(memberVO.getUser_level().equals("customer")){
+
 					mav.setViewName("redirect:/customer/customer.do");
+
 				}else {
+
 					mav.setViewName("redirect:/main.do");
+
 				}
+
 			}
+
 		} else {
+
 			rAttr.addAttribute("result", "loginFailed");
+
 			mav.setViewName("redirect:/member/loginForm.do");
+
 		}
+
 		return mav;
+
 	}
 
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)

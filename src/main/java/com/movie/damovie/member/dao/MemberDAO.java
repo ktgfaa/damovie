@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.movie.damovie.book.order.VO.OrderVO;
 import com.movie.damovie.member.vo.MemberVO;
 
 
@@ -33,5 +34,7 @@ public interface MemberDAO {
 	public int countArticle(String searchOption, String keyword) throws Exception;
 
 	public void levelUpdate(MemberVO vo);
+
+	public OrderVO order(OrderVO order);
 
 }

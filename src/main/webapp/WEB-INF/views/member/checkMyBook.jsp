@@ -51,10 +51,10 @@ $(function(){
 				<div class="middle_box">
 					<div class="left_box">
 						<ul>
-							<li>cgv   상암 월드컵경기장</li>
-							<li>알라딘</li><!-- 영화 제목은 중앙배열 ㄱㄱ -->
-							<li>14:40분 ~ 17:00분</li><!-- 끝나는시간은 영화 정보 페이지에서 running타임 빼와서 쓰기 -->
-							<li>3관 A1,A2</li>
+							<li>${order.company}  ${order.theater_name}</li>
+							<li>${order.movie_name}</li><!-- 영화 제목은 중앙배열 ㄱㄱ -->
+							<li>${order.time}</li><!-- 끝나는시간은 영화 정보 페이지에서 running타임 빼와서 쓰기 -->
+							<li>${order.theater_num} ${order.seatrow}${order.seatcol}</li>
 						</ul>
 					</div>
 				

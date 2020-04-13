@@ -64,67 +64,47 @@
 
 			<div class="info">
 				<table class="infoTable">
-					<caption style="margin-bottom: 60px;">시간 선택</caption>
+					<caption style="margin-bottom: 60px;">시간 쓰기</caption>
 					<tbody>
 						<tr>
-							<td style="width: 150px;">회사 이름</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간1</td>
+							<td><input type="text" placeholder="08:00 꼭 이렇게 적어주세요"/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">극장 이름</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간2</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간3</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간4</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간5</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간6</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간7</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간8</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간9</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 						<tr>
-							<td style="width: 150px;">날짜</td>
-							<td><select name="theater_num" class="theater_numcheck">
-									<option value="1" selected="selected">1</option>
-							</select></td>
+							<td style="width: 150px;">시간10</td>
+							<td><input type="text" placeholder=""/></td>
 						</tr>
 					</tbody>
 				</table>

@@ -204,9 +204,23 @@
 		SELECT * FROM (
 			SELECT ROWNUM RN, A.* FROM (
 	</sql>
+	
+	
 	<sql id="pagingFooter">
 			) A
 		) WHERE RN BETWEEN #{start} AND#{end}
 	</sql>
+	
+		<select id="order" resultType="orderVO"
+
+		parameterType="orderVO">
+
+		<![CDATA[
+
+			select * from book where id = #{id}
+
+		]]>
+
+	</select>
 
 </mapper>

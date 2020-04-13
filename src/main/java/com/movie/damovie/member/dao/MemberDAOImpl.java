@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.movie.damovie.book.order.VO.OrderVO;
 import com.movie.damovie.member.vo.MemberVO;
 
 
@@ -117,6 +118,14 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void levelUpdate(MemberVO vo) {
 		sqlSession.update("mapper.member.levelUpdate",vo);
+	}
+
+
+
+	@Override
+	public OrderVO order(OrderVO order) {
+		OrderVO vo = sqlSession.selectOne("mapper.member.order", order);
+		return vo;
 	}
 
 

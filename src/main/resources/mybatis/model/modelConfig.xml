@@ -10,5 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   		<typeAlias type="com.movie.damovie.book.order.VO.OrderVO" alias="orderVO"/>
   		<typeAlias type="com.movie.damovie.customer.vo.CustomerMovieVO" alias="customerMovieVO"/>
   		<typeAlias type="com.movie.damovie.customer.vo.CustomerTheaterVO" alias="customerTheaterVO"/>
+  		<typeAlias alias="reviewVO" type="com.movie.damovie.review.reviewForm.vo.ReviewVO"/>
+  		<typeAlias alias="writeVO" type="com.movie.damovie.review.reviewForm.vo.WriteVO"/>
 	</typeAliases>
 </configuration>

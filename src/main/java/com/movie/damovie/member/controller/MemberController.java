@@ -129,66 +129,36 @@ public class MemberController extends MultiActionController {
 	}
 
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,@ModelAttribute("order") OrderVO order, RedirectAttributes rAttr,
-
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-
 		ModelAndView mav = new ModelAndView();
-
 		memberVO = memberService.login(member);
-		
 		orderVO = memberService.order(order);
 		
-
 		if (memberVO != null) {
-
 			HttpSession session = request.getSession();
-			
 			session.setAttribute("member", memberVO);
-
 			session.setAttribute("order", orderVO);
-
 			session.setAttribute("isLogon", true);
-
 			String action = (String) session.getAttribute("action");
-
 			session.removeAttribute("action");
-
 			if (action != null) {
-
 				mav.setViewName("redirect:" + action);
-
 			} else {
-
 				//접속자가 관리자라면 
-
 				if(memberVO.getUser_level().equals("admin")) {
-
 					mav.setViewName("redirect:/admin.do");
-
 				}else if(memberVO.getUser_level().equals("customer")){
-
 					mav.setViewName("redirect:/customer/customer.do");
-
 				}else {
-
 					mav.setViewName("redirect:/main.do");
-
 				}
-
 			}
-
 		} else {
-
 			rAttr.addAttribute("result", "loginFailed");
-
 			mav.setViewName("redirect:/member/loginForm.do");
-
 		}
-
 		return mav;
-
 	}
 
 	@RequestMapping(value = "/member/logout.do", method = RequestMethod.GET)
@@ -317,9 +287,14 @@ public class MemberController extends MultiActionController {
 	}
 	
 	@RequestMapping(value= "/member/checkMyBook.do", method=RequestMethod.GET )
-	private String checkMyBook(HttpSession session) throws Exception {
+	private String checkMyBook(HttpSession session, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html; charset=utf-8");
+		
 		String id = (String)session.getAttribute("id");
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		OrderVO orderVO = (OrderVO)session.getAttribute("order");
+	
 		/* ------------ 접근 처리 ------------ */
 		try {
 			if(memberVO == null) {
@@ -327,12 +302,17 @@ public class MemberController extends MultiActionController {
 			} 
 		} catch(NullPointerException e) {
 			return "redirect:/main.do";
-
+		}
+		if(orderVO == null) {
+			out.println("<script language='javascript'>");
+			out.println("alert('예매 내역이 없습니다.');history.go(-1);");
+			out.println("</script>");
+			out.flush(); 
 		}
 		return "checkMyBook";
 	}
 	
-	
+	 
 	@RequestMapping(value="/member/memberDeleteForm.do", method=RequestMethod.GET)
 	public String memberDeleteForm(HttpSession session)throws Exception{
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");

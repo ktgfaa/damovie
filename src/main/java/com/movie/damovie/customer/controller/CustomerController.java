@@ -1,5 +1,6 @@
 package com.movie.damovie.customer.controller;
 
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,13 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.movie.damovie.book.bookForm.DAO.BookDAO;
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
-import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 import com.movie.damovie.member.vo.MemberVO;
 
@@ -37,9 +38,6 @@ public class CustomerController {
 	   
 	@Autowired
 	private CustomerDAO customerDAO;
-	
-	private List<String> Alphabet = new ArrayList<String>(Arrays.asList(
-			"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 	
 	@RequestMapping(value = "/customer/customer.do" , method = RequestMethod.GET)
 	private ModelAndView customerMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -145,15 +143,10 @@ public class CustomerController {
 					String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 					List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
 					List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
-
-					if(company != null) {
-						mav.addObject("company",company);
-						mav.addObject("theater_name", theater_name);
-						mav.addObject("theater_num", theater_num);
-						mav.addObject("datatime", datatime);
-					} else {
-						mav.addObject("company","no");
-					}
+					mav.addObject("company",company);
+					mav.addObject("theater_name", theater_name);
+					mav.addObject("theater_num", theater_num);
+					mav.addObject("datatime", datatime);
 					
 			} catch (NullPointerException e) {
 						mav.addObject("company","null");
@@ -174,16 +167,16 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/customer/customerSeat.do" , method = {RequestMethod.GET,RequestMethod.POST})
-	private ModelAndView customerSeat(
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/customer/customerSeat.do" , method = RequestMethod.GET)
+	private ModelAndView customerSeat(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
-
+		List<String> Alphabet = new ArrayList<String>(Arrays.asList(
+				"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 		
 		
 		/* ------------ 접근 처리 ------------ */
@@ -194,22 +187,15 @@ public class CustomerController {
 				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 				List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
 				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
-				
-				if(company != null) {
-					
-					mav.addObject("company",company);
-					mav.addObject("theater_name", theater_name);
-					mav.addObject("theater_num", theater_num);
-					mav.addObject("Alphabet", Alphabet);
-				} else {
-					mav.addObject("company","no");
-				}
+				mav.addObject("company",company);
+				mav.addObject("theater_name", theater_name);
+				mav.addObject("theater_num", theater_num);
+				mav.addObject("Alphabet", Alphabet);
 				
 		} catch (NullPointerException e) {
-					mav.addObject("company","no");
-					mav.addObject("theater_name", "no");
-					mav.addObject("theater_num", "no");
-					mav.addObject("seatValue", "no");
+					mav.addObject("company","null");
+					mav.addObject("theater_name", "null");
+					mav.addObject("theater_num", "null");
 				}
 			mav.setViewName(viewName);
 			
@@ -232,7 +218,7 @@ public class CustomerController {
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
 		
-		/* ------------ 접근 처리 ------------- */
+		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
 			mav.addObject("member",memberVO);
@@ -247,20 +233,44 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/customer/customerSeatValue.do" , method = RequestMethod.POST)
-	private ModelAndView customerSeatValue(
-			@ModelAttribute("seatValue") CustomerSeatValueVO customerSeatValue,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+	@RequestMapping(value="/customer/check_customerMovie.do", method = RequestMethod.GET)
+	private ModelAndView checkCustomerMovie(HttpServletRequest request)throws Exception{
 		ModelAndView mav = new ModelAndView();
-		int seatRow = Alphabet.indexOf(customerSeatValue.getSeatRow()) + 1;
-		HttpSession session = request.getSession();
-		session.setAttribute("seatAlphabet", customerSeatValue.getSeatRow());
-		session.setAttribute("seatRow", seatRow);
-		session.setAttribute("seatCol", customerSeatValue.getSeatCol());
+		String viewName = (String) request.getAttribute("viewName");
 		
-		mav.setViewName("redirect:customerSeat.do");
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		mav.addObject("member",memberVO);
+		String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+		mav.addObject("company",company);
+		
+		//리스트 불러오기
+		List<CustomerMovieVO> list = customerService.movieList();
+		
+		/* ------------ 접근 처리 ------------ */
+		try {
+		if(memberVO.getUser_level().equals("customer")) {
+			mav.addObject("member",memberVO);
+			mav.addObject("movieList",list);
+			mav.setViewName(viewName);
+			} else if(memberVO.getUser_level().equals("admin")) {
+				mav = new ModelAndView("redirect:/admin.do");
+			} else {
+			mav = new ModelAndView("redirect:/main.do");
+			} } catch(NullPointerException e) {
+			mav = new ModelAndView("redirect:/main.do");
+		}
+		
 		return mav;
+	}
+	
+	@RequestMapping(value="/customer/movieDelete.do", method=RequestMethod.POST)
+	public String memberDelete(CustomerMovieVO vo,
+							@RequestParam("del_movie") String movie)throws Exception{
+			vo.setMovie_name(movie);
+			customerService.movieDelete(vo);
+			return "redirect:/customer/check_customerMovie.do";
 	}
 	
 }

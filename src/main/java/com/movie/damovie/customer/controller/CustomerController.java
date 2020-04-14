@@ -231,4 +231,32 @@ public class CustomerController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/customer/customerConfirmTime.do", method = {RequestMethod.GET , RequestMethod.POST})
+	private ModelAndView customerConfirmTime(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		String viewName = (String) request.getAttribute("viewName");
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		/* ------------ 접근 처리 ------------ */
+		try {
+		if(memberVO.getUser_level().equals("customer")) {
+			
+			
+			mav.addObject("member",memberVO);
+			
+			mav.setViewName(viewName);
+			} else if(memberVO.getUser_level().equals("admin")) {
+				mav = new ModelAndView("redirect:/admin.do");
+			} else {
+			mav = new ModelAndView("redirect:/main.do");
+			} } catch(NullPointerException e) {
+			mav = new ModelAndView("redirect:/main.do");
+		}
+		
+
+		return mav;
+		
+	}
+	
 }

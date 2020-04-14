@@ -47,7 +47,12 @@
 					<tbody>
 				        <tr>
 				          <td style="width: 150px;">회사 이름</td>
+				          <c:if test="${company eq 'no' }">
 				          <td><input type="text" id="company_input" Placeholder="예: 롯데시네마"/></td>
+				          </c:if>
+				          <c:if test="${company ne 'no' }">
+				          <td><input type="button" id="company_input" value="${company }"/></td>
+				          </c:if>
 				        </tr>
 				        <tr>
 				          <td style="width: 150px;">극장 이름</td>

@@ -21,9 +21,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="${contextPath }/resources/css/customer/customerSeat.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -124,7 +121,7 @@
 		</div>
 	</div>
 	<script>
-		// 불러오기 클릭시 좌석 배치 구현
+ 		// 불러오기 클릭시 좌석 배치 구현
 		$("#call_SEAT").click(function(){
 			const seatRow = $(".seatRow_check option:checked").val();
 			const seatCol = $(".seatCol_check option:checked").val();
@@ -146,9 +143,9 @@
 	 			  
 	 			}
 	 		});
-		});
+		}); 
 		
-		// 좌석 클릭시 X표시 , 다시 클릭시 원상태로 복귀!!!
+ 		// 좌석 클릭시 X표시 , 다시 클릭시 원상태로 복귀!!!
 		$(".seatCol_BTN").click(function(){ // 원상복귀
 			
 			if($(event.target).text() == "X") {
@@ -172,6 +169,32 @@
 				
 			}
 		});
+ 		
+ 		
+ 		// 저장하기
+		$("#save_SEAT").click(function(){
+			const seatRow = $(".seatRow_check option:checked").val();
+			const seatCol = $(".seatCol_check option:checked").val();
+
+			$.ajax({
+	 			url: "${contextPath}/customer/addSeat.do",
+	 			type: "post",
+	 			dataType:"text",
+	 			data : {
+						seatRow : seatRow,
+						seatCol : seatCol
+	 			    },  
+	 			success: function(data){     
+	 				alert("저장 성공");
+	 				location.href="/damovie/customer/customer.do"; 
+	 			},complete: function(data){
+	 			},error: function (request, status, error) {
+	 			   alert("다시 시도해주세요!");
+	 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	 			  
+	 			}
+	 		});
+		}); 
 	</script>
 </body>
 </html>

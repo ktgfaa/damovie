@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
 
@@ -33,6 +34,12 @@ public class CustomerDAO {
 		return theaterResult;
 	}
 	
+	public int addSeat(CustomerSeatVO customerSeatVO) {
+		int seatResult = sqlSession.insert("mapper.customer.insertSeat", customerSeatVO);
+		System.out.println(seatResult);
+		return seatResult;
+	}
+	
 	public String selectCompanyName_sub(String id) throws DataAccessException {
 		String company = sqlSession.selectOne("mapper.customer.selectCompanyName_sub", id);
 
@@ -50,6 +57,8 @@ public class CustomerDAO {
 
 		return TheaterNum;
 	}
+
+
 
 
 

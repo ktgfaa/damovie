@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
 
@@ -24,6 +25,10 @@ public class CustomerService {
 	
 	public int addTheater(CustomerTheaterVO customerTheaterVO) throws DataAccessException {
 		return CustomerDAO.addTheater(customerTheaterVO);
+	}
+	
+	public int addSeat(CustomerSeatVO customerSeatVO) throws DataAccessException {
+		return CustomerDAO.addSeat(customerSeatVO);
 	}
 
 }

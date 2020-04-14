@@ -22,6 +22,7 @@ import com.movie.damovie.book.bookForm.DAO.BookDAO;
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 import com.movie.damovie.member.vo.MemberVO;
@@ -75,6 +76,8 @@ public class CustomerController {
 		List<String> movieList = null;
 		List<String> imageList = null;
 		
+		String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+		
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
@@ -85,6 +88,12 @@ public class CustomerController {
 			
 			mav.addObject("movieList", movieList);
 		  	mav.addObject("imageList", imageList);
+		  	
+		  	if(company != null) {
+		  		mav.addObject("company", company);
+		  	} else {
+		  		mav.addObject("company", "no");
+		  	}
 			
 			mav.setViewName(viewName);
 			} else if(memberVO.getUser_level().equals("admin")) {
@@ -116,6 +125,17 @@ public class CustomerController {
 		System.out.println(customerTheaterVO.getTime1());
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
 		customerService.addTheater(customerTheaterVO);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value ="/customer/addseat.do", method = RequestMethod.POST)
+	private ModelAndView addseat(
+			@ModelAttribute("theater_seat") CustomerSeatVO customerSeatVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(customerSeatVO.getSeat_state());
+		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
+		customerService.addSeat(customerSeatVO);
 		
 		return mav;
 	}

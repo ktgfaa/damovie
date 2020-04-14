@@ -65,5 +65,24 @@
 		]]>
 	</select>
 	
+	<select id="movieList" resultType="customerMovieVO">
+		<![CDATA[
+			SELECT
+				id AS id,
+				company AS company,
+				theater_name AS theater_name,
+				theater_num AS theater_num,
+				movie_name AS movie_name
+			FROM movie_company
+			ORDER BY movie_name, theater_num
+		]]>
+	</select>
+	
+	<delete id="movieDelete">
+		<![CDATA[
+			delete from movie_company where movie_name=#{movie_name}
+		]]>
+	</delete>
+	
 	</mapper>
 	

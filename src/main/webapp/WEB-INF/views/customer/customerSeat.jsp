@@ -21,6 +21,9 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="${contextPath }/resources/css/customer/customerSeat.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
+<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
+<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
+<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

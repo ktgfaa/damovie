@@ -141,10 +141,15 @@ public class CustomerController {
 					String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 					List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
 					List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
-					mav.addObject("company",company);
-					mav.addObject("theater_name", theater_name);
-					mav.addObject("theater_num", theater_num);
-					mav.addObject("datatime", datatime);
+
+					if(company != null) {
+						mav.addObject("company",company);
+						mav.addObject("theater_name", theater_name);
+						mav.addObject("theater_num", theater_num);
+						mav.addObject("datatime", datatime);
+					} else {
+						mav.addObject("company","no");
+					}
 					
 			} catch (NullPointerException e) {
 						mav.addObject("company","null");
@@ -185,10 +190,16 @@ public class CustomerController {
 				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 				List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
 				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
-				mav.addObject("company",company);
-				mav.addObject("theater_name", theater_name);
-				mav.addObject("theater_num", theater_num);
-				mav.addObject("Alphabet", Alphabet);
+				
+				if(company != null) {
+					
+					mav.addObject("company",company);
+					mav.addObject("theater_name", theater_name);
+					mav.addObject("theater_num", theater_num);
+					mav.addObject("Alphabet", Alphabet);
+				} else {
+					mav.addObject("company","no");
+				}
 				
 		} catch (NullPointerException e) {
 					mav.addObject("company","null");

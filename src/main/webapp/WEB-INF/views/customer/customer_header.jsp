@@ -14,7 +14,15 @@ String session_id=(String)session.getAttribute("id");
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://kit.fontawesome.com/61cd314508.js" crossorigin="anonymous"></script>
+<link
+	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean"
+	rel="stylesheet">
 <style type="text/css">
+
+body {
+	font-family: "Nanum Pen Script", cursive;
+	font-size : 23px;
+}
 
 #header{
 	width:1920px;

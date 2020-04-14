@@ -232,7 +232,7 @@ public class CustomerController {
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
 		
-		/* ------------ 접근 처리 ------------ */
+		/* ------------ 접근 처리 ------------- */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
 			mav.addObject("member",memberVO);

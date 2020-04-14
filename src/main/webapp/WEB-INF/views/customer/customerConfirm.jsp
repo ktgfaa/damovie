@@ -82,7 +82,7 @@ body {
 <script>
  	$(function(){
 		$(".movie_box").click(function(){
-			location.href="#";
+			location.href="${contextPath}/customer/check_customerMovie.do";
 		});
 		
 		$(".theater_box").click(function(){

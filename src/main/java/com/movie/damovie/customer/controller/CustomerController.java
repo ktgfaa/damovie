@@ -22,6 +22,7 @@ import com.movie.damovie.book.bookForm.DAO.BookDAO;
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 import com.movie.damovie.member.vo.MemberVO;
 
@@ -36,6 +37,9 @@ public class CustomerController {
 	   
 	@Autowired
 	private CustomerDAO customerDAO;
+	
+	private List<String> Alphabet = new ArrayList<String>(Arrays.asList(
+			"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
 	
 	@RequestMapping(value = "/customer/customer.do" , method = RequestMethod.GET)
 	private ModelAndView customerMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -170,16 +174,16 @@ public class CustomerController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/customer/customerSeat.do" , method = RequestMethod.GET)
-	private ModelAndView customerSeat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/customer/customerSeat.do" , method = {RequestMethod.GET,RequestMethod.POST})
+	private ModelAndView customerSeat(
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
-		List<String> Alphabet = new ArrayList<String>(Arrays.asList(
-				"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
+
 		
 		
 		/* ------------ 접근 처리 ------------ */
@@ -202,9 +206,10 @@ public class CustomerController {
 				}
 				
 		} catch (NullPointerException e) {
-					mav.addObject("company","null");
-					mav.addObject("theater_name", "null");
-					mav.addObject("theater_num", "null");
+					mav.addObject("company","no");
+					mav.addObject("theater_name", "no");
+					mav.addObject("theater_num", "no");
+					mav.addObject("seatValue", "no");
 				}
 			mav.setViewName(viewName);
 			
@@ -239,6 +244,22 @@ public class CustomerController {
 			} } catch(NullPointerException e) {
 			mav = new ModelAndView("redirect:/main.do");
 		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/customer/customerSeatValue.do" , method = RequestMethod.POST)
+	private ModelAndView customerSeatValue(
+			@ModelAttribute("seatValue") CustomerSeatValueVO customerSeatValue,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		int seatRow = Alphabet.indexOf(customerSeatValue.getSeatRow()) + 1;
+		HttpSession session = request.getSession();
+		session.setAttribute("seatAlphabet", customerSeatValue.getSeatRow());
+		session.setAttribute("seatRow", seatRow);
+		session.setAttribute("seatCol", customerSeatValue.getSeatCol());
+		
+		mav.setViewName("redirect:customerSeat.do");
 		return mav;
 	}
 	

@@ -43,7 +43,7 @@
 	
 	<insert id="insertSeat" parameterType="customerSeatVO">
 		<![CDATA[
-			insert into theater_seat(id,company,theater_name,theater_num,movie_name) values(#{id},#{company},#{theater_name},#{theater_num},#{movie_name})
+			insert into theater_seat(company,theater_name,theater_num,seatrow,seatcol,seat_state,datasolt) values(#{company},#{theater_name},#{theater_num},#{seatrow},#{seatcol},#{seat_state},#{datasolt})
 		]]>
 	</insert>
 	

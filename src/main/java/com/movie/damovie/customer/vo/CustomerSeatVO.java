@@ -1,5 +1,8 @@
 package com.movie.damovie.customer.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 @Component("customerSeatVO")
@@ -7,10 +10,10 @@ public class CustomerSeatVO {
 	private String company;
 	private String theater_name;
 	private String theater_num;
-	private String seatrow;
+	private List seatrow = new ArrayList();
 	private String seatcol;
 	private String seat_state;
-	private int datasolt;
+	private String datasolt;
 	
 	public String getCompany() {
 		return company;
@@ -30,10 +33,10 @@ public class CustomerSeatVO {
 	public void setTheater_num(String theater_num) {
 		this.theater_num = theater_num;
 	}
-	public String getSeatrow() {
+	public List getSeatrow() {
 		return seatrow;
 	}
-	public void setSeatrow(String seatrow) {
+	public void setSeatrow(List seatrow) {
 		this.seatrow = seatrow;
 	}
 	public String getSeatcol() {
@@ -48,10 +51,10 @@ public class CustomerSeatVO {
 	public void setSeat_state(String seat_state) {
 		this.seat_state = seat_state;
 	}
-	public int getDatasolt() {
+	public String getDatasolt() {
 		return datasolt;
 	}
-	public void setDatasolt(int datasolt) {
+	public void setDatasolt(String datasolt) {
 		this.datasolt = datasolt;
 	}
 	

@@ -98,7 +98,7 @@
 				</c:if>
 				<c:if test="${seatRow > 0 }">
 					<c:forEach var="Alphabet" begin="0" end="${seatRow-1 }" items="${Alphabet }">
-						<li><p>${Alphabet }</p></li>
+						<li class="Alphabet"><p>${Alphabet }</p></li>
 					</c:forEach>
 				</c:if>
 				</ul>
@@ -173,16 +173,36 @@
  		
  		// 저장하기
 		$("#save_SEAT").click(function(){
-			const seatRow = $(".seatRow_check option:checked").val();
-			const seatCol = $(".seatCol_check option:checked").val();
+			var alphabet = new Array("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+			const company = $(".companycheck option:checked").val();
+			const theater_name = $(".theater_namecheck option:checked").val();
+			const theater_num = $(".theater_numcheck option:checked").val();
+			const seat_state = "";
+			const datasolt = "";
+			
+			// seatrow 구하기
+			var seatrow = new Array();
+			var size = $( '.Alphabet').length;
+			for(var i =0;i<size;i++){
+				seatrow.push(alphabet[i]);
+			}
+			
+			const seatcol = "";
+			
+			jQuery.ajaxSettings.traditional = true; // list를 ajax로 보내기 위해 필요한 셋팅
 
-			$.ajax({
-	 			url: "${contextPath}/customer/addSeat.do",
+  			$.ajax({
+	 			url: "${contextPath}/customer/addseat.do",
 	 			type: "post",
 	 			dataType:"text",
 	 			data : {
-						seatRow : seatRow,
-						seatCol : seatCol
+	 					company : company,
+	 					theater_name : theater_name,
+	 					theater_num : theater_num,
+						seatrow : seatrow,
+						seatcol : seatcol,
+						seat_state : seat_state,
+						datasolt : datasolt
 	 			    },  
 	 			success: function(data){     
 	 				alert("저장 성공");
@@ -193,7 +213,7 @@
 	 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	 			  
 	 			}
-	 		});
+	 		}); 
 		}); 
 	</script>
 </body>

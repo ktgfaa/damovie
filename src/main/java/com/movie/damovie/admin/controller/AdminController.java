@@ -61,7 +61,7 @@ public class AdminController {
 
 		//데이터를 맵에 저장하기
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("list", list);		//회원 리스트
+		map.put("list", list);		//회원 리스트 
 		map.put("count", count);	//회원 수
 		map.put("searchOption", searchOption);	//검색 옵션
 		map.put("keyword", keyword);	//검색 키워드
@@ -78,9 +78,9 @@ public class AdminController {
 		if(!id.equals("admin")) {//혹시 관리자가 자기꺼 삭제 못하게 설정해놓기
 			vo.setId(id);
 			memberService.memberDelete(vo);
-			return "redirect:/admin/memberManagement.do";
+			return "redirect:/admin.do";
 		}else {
-			return "redirect:/admin/memberManagement.do";
+			return "redirect:/admin.do";
 		}
 	}
 	@RequestMapping(value="/admin/memberLevel.do", method=RequestMethod.POST)
@@ -90,7 +90,7 @@ public class AdminController {
 		vo.setId(id);
 		vo.setUser_level(user_level);
 		memberService.levelUpdate(vo);
-		return "redirect:/admin/memberManagement.do";
+		return "redirect:/admin.do";
 	}
 	
 }

@@ -33,12 +33,25 @@ public class CustomerService {
 	public int addSeat(CustomerSeatVO customerSeatVO) throws DataAccessException {
 		return CustomerDAO.addSeat(customerSeatVO);
 	}
+	
+	public List<CustomerMovieVO> movieList(String id, int start, int end, String searchOption, String keyword) {
+		return CustomerDAO.listALL(id, start, end, searchOption, keyword);
+	}
 
-	public List<CustomerMovieVO> movieList() {
-		return CustomerDAO.movieList();
+	public int countArticle(String id,String searchOption, String keyword) {
+		return CustomerDAO.countArticle(id, searchOption, keyword);
 	}
 
 	public void movieDelete(CustomerMovieVO vo) {
 		CustomerDAO.movieDelete(vo);
+	}
+	
+	public List<String> movieList(String id){
+		return CustomerDAO.movieList(id);
+	}
+
+	public void movieUpdate(CustomerMovieVO vo) {
+		CustomerDAO.movieUpdate(vo);
+		
 	}
 }

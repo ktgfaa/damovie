@@ -106,7 +106,7 @@
 					<c:forEach var="i" begin="1" end="${seatRow }">
 						<li>
 						<c:forEach var="j" begin="1" end="${seatCol }">
-							<button class="seatCol_BTN" value="${j }">${j }</button>
+							<button class="seatCol_BTN" value="${j }" id="yes">${j }</button>
 						</c:forEach>
 					</c:forEach>
 				</ul>
@@ -134,7 +134,7 @@
 						seatRow : seatRow,
 						seatCol : seatCol
 	 			    },  
-	 			success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
+	 			success: function(data){ 
 	 				location.href="/damovie/customer/customerSeat.do"; 
 	 			},complete: function(data){
 	 			},error: function (request, status, error) {
@@ -150,6 +150,7 @@
 			
 			if($(event.target).text() == "X") {
 				$(event.target).html($(event.target).val());
+				$(event.target).attr("id","yes");
 				$(event.target).css("background","");
 				$(event.target).css("color","");
 			} else { // X 표시
@@ -163,6 +164,7 @@
 				}
 			
 				$(event.target).html("X");
+				$(event.target).attr("id","no");
 				$(event.target).css("background","red");
 				$(event.target).css("color","white");
 				$(event.target).css("border","none");
@@ -177,8 +179,6 @@
 			const company = $(".companycheck option:checked").val();
 			const theater_name = $(".theater_namecheck option:checked").val();
 			const theater_num = $(".theater_numcheck option:checked").val();
-			const seat_state = "";
-			const datasolt = "";
 			
 			// seatrow 구하기
 			var seatrow = new Array();
@@ -186,8 +186,19 @@
 			for(var i =0;i<size;i++){
 				seatrow.push(alphabet[i]);
 			}
+			//seatcol 구하기
+			const seatcol = $('.seatCol_BTN').length / size;
 			
-			const seatcol = "";
+			//seat_state 전부 List에 저장하기
+			var seat_state = new Array();
+			for(var i =0;i<seatcol * size;i++){
+				
+			}
+			const datasolt = "";
+			
+
+			
+			
 			
 			jQuery.ajaxSettings.traditional = true; // list를 ajax로 보내기 위해 필요한 셋팅
 
@@ -206,7 +217,7 @@
 	 			    },  
 	 			success: function(data){     
 	 				alert("저장 성공");
-	 				location.href="/damovie/customer/customer.do"; 
+	 				/* location.href="/damovie/customer/customer.do";  */
 	 			},complete: function(data){
 	 			},error: function (request, status, error) {
 	 			   alert("다시 시도해주세요!");

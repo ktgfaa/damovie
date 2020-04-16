@@ -296,13 +296,7 @@ public class CustomerController {
 		mav.addObject("member",memberVO);
 		String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 		mav.addObject("company",company);
-		List<String> movieList_beforeCheck = customerService.movieList(memberVO.getId());
-		List<String> movieList = new ArrayList<String>();
-		for(int i=0; i<movieList_beforeCheck.size(); i++) {
-			if(!movieList.contains(movieList_beforeCheck.get(i))) {
-				movieList.add(movieList_beforeCheck.get(i));
-			}
-		}
+		List<String> movieList = bookDAO.selectMovieName();
 
 		//레코드 개수 계산
 		int count = customerService.countArticle(memberVO.getId(), searchOption, keyword);

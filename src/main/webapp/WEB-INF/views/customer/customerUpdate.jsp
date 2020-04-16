@@ -12,8 +12,8 @@ String session_id=(String)session.getAttribute("id");
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://kit.fontawesome.com/61cd314508.js" crossorigin="anonymous"></script> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/61cd314508.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
 <style type="text/css">
 
@@ -42,10 +42,11 @@ body {
 .select_menu{
     position: absolute;
     top: 447px;
-    left: 667px;
+    left: 500px;
     width: 700px;
     height: 160px;
     display: flex;
+    padding-top: 20px;
 }
 .select_menu div{
 	width: 300px;
@@ -73,50 +74,24 @@ body {
 .select_menu .fas {
 	margin-left:35px;  
  	} 
-
-.movie > img {
-	width : 200px;
-	height: 200px;
+.fas:hover{
+	 color: #FFFF99; 
 }
-
-.theater > img {
-	width : 200px;
-	height : 200px;
-}
-
-.movie > img {
-	background-image: url('/damovie/resources/images/customer_icon/wrench1.png');
-	background-size: cover;
-}
-
-.theater > img {
-	background-image: url('/damovie/resources/images/customer_icon/save.png');
-	background-size: cover;
-}
-
-.movie > img:hover {
-	background-image: url('/damovie/resources/images/customer_icon/wrench2.png');
-	background-size: cover;
-}
-
-.theater > img:hover {
-	background-image: url('/damovie/resources/images/customer_icon/save2.png');
-	background-size: cover;
-}
-
-
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
  	$(function(){
 		$(".movie_box").click(function(){
-			location.href="${contextPath}/customer/customerConfirm.do";
+			location.href="${contextPath}/customer/customerMovie.do";
 		});
 		
 		$(".theater_box").click(function(){
-			location.href="${contextPath}/customer/customerUpdate.do";
+			location.href="${contextPath}/customer/customerTime.do";
 		});
 		
+		$(".seat_box").click(function(){
+			location.href="${contextPath}/customer/customerSeat.do";
+		});
 
 	}); 
 </script>
@@ -128,17 +103,18 @@ body {
 		<div class="main_box">
 			<div class="select_menu">
 				<div class="movie_box">
-					<span style="color: white"  class="movie">
-						<img />
-					</span>
-					<p>관리 페이지</p>
+					<span style="color: white"  class="movie"><i class="fas fa-photo-video fa-6x" aria-hidden="true">&nbsp;</i></span>
+					<p>영화 업데이트</p>
 				</div>
 			
 				<div class="theater_box">
-					<span style="color: white" class="theater" >
-						<img />
-					</span>
-					<p>업데이트 페이지</p>
+					<span style="color: white" class="theater" ><i class="fas fa-building fa-6x" aria-hidden="true">&nbsp;</i></span>
+					<p>상영관 업데이트</p>
+				</div>
+
+				<div class="seat_box">
+					<span style="color: white" class="seat" ><i class="fas fa-couch fa-6x" aria-hidden="true">&nbsp;</i></span>
+					<p>좌석 업데이트</p>
 				</div>
 			</div>
 		</div>

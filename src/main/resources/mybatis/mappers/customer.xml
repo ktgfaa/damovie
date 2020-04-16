@@ -41,7 +41,7 @@
 		]]>
 	</insert>
 	
-	<insert id="insertSeat" parameterType="customerSeatVO">
+	<insert id="insertSeat" parameterType="java.util.Map">
 		<![CDATA[
 			insert into theater_seat(company,theater_name,theater_num,seatrow,seatcol,seat_state,datasolt) values(#{company},#{theater_name},#{theater_num},#{seatrow},#{seatcol},#{seat_state},#{datasolt})
 		]]>

@@ -30,8 +30,8 @@ public class CustomerService {
 		return CustomerDAO.addTheater(customerTheaterVO);
 	}
 	
-	public int addSeat(CustomerSeatVO customerSeatVO) throws DataAccessException {
-		return CustomerDAO.addSeat(customerSeatVO);
+	public int addSeat(String company,String theater_name,String theater_num,String seatrow,String seatcol, String seat_state,String datasolt) throws DataAccessException {
+		return CustomerDAO.addSeat(company,theater_name,theater_num,seatrow,seatcol,seat_state,datasolt);
 	}
 	
 	public List<CustomerMovieVO> movieList(String id, int start, int end, String searchOption, String keyword) {

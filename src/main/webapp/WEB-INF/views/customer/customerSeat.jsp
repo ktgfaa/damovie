@@ -192,15 +192,13 @@
 			//seat_state 전부 List에 저장하기
 			var seat_state = new Array();
 			for(var i =0;i<seatcol * size;i++){
-				
+				seat_state.push($('.seatCol_BTN').eq( i ).attr("id"))
 			}
-			const datasolt = "";
+			//datasolt 저장하기
+			const datasolt = size * seatcol;
 			
-
-			
-			
-			
-			jQuery.ajaxSettings.traditional = true; // list를 ajax로 보내기 위해 필요한 셋팅
+			// list를 ajax로 보내기 위해 필요한 셋팅
+			jQuery.ajaxSettings.traditional = true; 
 
   			$.ajax({
 	 			url: "${contextPath}/customer/addseat.do",
@@ -217,7 +215,7 @@
 	 			    },  
 	 			success: function(data){     
 	 				alert("저장 성공");
-	 				/* location.href="/damovie/customer/customer.do";  */
+	 				location.href="/damovie/customer/customer.do";
 	 			},complete: function(data){
 	 			},error: function (request, status, error) {
 	 			   alert("다시 시도해주세요!");

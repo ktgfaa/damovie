@@ -43,9 +43,9 @@ String session_id=(String)session.getAttribute("id");
 <body>
 	<div id="side_bar">
 		<ul>
-			<li><a href="${contextPath }/customer/customerConfirm.do">확 인</a></li>
-			<li><a href="#">수 정</a></li>
-			<li><a href="#">삭 제</a></li>
+			<li><a href="${contextPath }/customer/customer.do">메 인</a></li>
+			<li><a href="${contextPath }/customer/customerUpdate.do">업데이트</a></li>
+			<li><a href="${contextPath }/customer/customerConfirm.do">관리</a></li>
 		</ul>
 	</div>
 </body>

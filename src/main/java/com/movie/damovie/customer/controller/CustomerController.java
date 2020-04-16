@@ -70,6 +70,30 @@ public class CustomerController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/customer/customerUpdate.do" , method = RequestMethod.GET)
+	private ModelAndView customerUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		
+		/* ------------ 접근 처리 ------------ */
+		try {
+		if(memberVO.getUser_level().equals("customer")) {
+			mav.addObject("member",memberVO);
+			mav.setViewName(viewName);
+			} else if(memberVO.getUser_level().equals("admin")) {
+				mav = new ModelAndView("redirect:/admin.do");
+			} else {
+			mav = new ModelAndView("redirect:/main.do");
+			} } catch(NullPointerException e) {
+			mav = new ModelAndView("redirect:/main.do");
+		}
+		return mav;
+	}
+	
 	@RequestMapping(value = "/customer/customerMovie.do" , method = {RequestMethod.GET , RequestMethod.POST})
 	private ModelAndView customerMovie(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -137,10 +161,31 @@ public class CustomerController {
 	private ModelAndView addseat(
 			@ModelAttribute("theater_seat") CustomerSeatVO customerSeatVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(customerSeatVO.getSeatrow());
 		System.out.println(customerSeatVO.getCompany());
+		System.out.println(customerSeatVO.getTheater_name());
+		System.out.println(customerSeatVO.getTheater_num());
+		System.out.println(customerSeatVO.getSeatrow());
+		System.out.println(customerSeatVO.getSeatcol());
+		System.out.println(customerSeatVO.getSeat_state());
+		System.out.println(customerSeatVO.getDatasolt());
+		int num = 0;
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
-		/* customerService.addSeat(customerSeatVO); */
+		
+		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
+			for(int j=0;j<Integer.parseInt(customerSeatVO.getSeatcol());j++) {
+				num += 1;
+				customerService.addSeat(
+						customerSeatVO.getCompany(),
+						customerSeatVO.getTheater_name(),
+						customerSeatVO.getTheater_num(),
+						customerSeatVO.getSeatrow().get(i),
+						Integer.toString(j),
+						customerSeatVO.getSeat_state().get(j),
+						Integer.toString(num)
+						);
+			}
+		}
+		
 		
 		return mav;
 	}

@@ -10,10 +10,10 @@ public class CustomerSeatVO {
 	private String company;
 	private String theater_name;
 	private String theater_num;
-	private List seatrow = new ArrayList();
+	private List<String> seatrow = new ArrayList<String>();
 	private String seatcol;
-	private String seat_state;
-	private String datasolt;
+	private List<String> seat_state = new ArrayList<String>();
+	private int datasolt;
 	
 	public String getCompany() {
 		return company;
@@ -33,10 +33,10 @@ public class CustomerSeatVO {
 	public void setTheater_num(String theater_num) {
 		this.theater_num = theater_num;
 	}
-	public List getSeatrow() {
+	public List<String> getSeatrow() {
 		return seatrow;
 	}
-	public void setSeatrow(List seatrow) {
+	public void setSeatrow(List<String> seatrow) {
 		this.seatrow = seatrow;
 	}
 	public String getSeatcol() {
@@ -45,16 +45,16 @@ public class CustomerSeatVO {
 	public void setSeatcol(String seatcol) {
 		this.seatcol = seatcol;
 	}
-	public String getSeat_state() {
+	public List<String> getSeat_state() {
 		return seat_state;
 	}
-	public void setSeat_state(String seat_state) {
+	public void setSeat_state(List<String> seat_state) {
 		this.seat_state = seat_state;
 	}
-	public String getDatasolt() {
+	public int getDatasolt() {
 		return datasolt;
 	}
-	public void setDatasolt(String datasolt) {
+	public void setDatasolt(int datasolt) {
 		this.datasolt = datasolt;
 	}
 	

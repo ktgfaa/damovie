@@ -36,8 +36,17 @@ public class CustomerDAO {
 		return theaterResult;
 	}
 	
-	public int addSeat(CustomerSeatVO customerSeatVO) {
-		int seatResult = sqlSession.insert("mapper.customer.insertSeat", customerSeatVO);
+	public int addSeat(String company,String theater_name,String theater_num,String seatrow,String seatcol, String seat_state,String datasolt) {
+		Map<String,String> seatData = new HashMap<String,String>();
+		seatData.put("company", company);
+		seatData.put("theater_name", theater_name);
+		seatData.put("theater_num", theater_num);
+		seatData.put("seatrow", seatrow);
+		seatData.put("seatcol", seatcol);
+		seatData.put("seat_state", seat_state);
+		seatData.put("datasolt", datasolt);
+		
+		int seatResult = sqlSession.insert("mapper.customer.insertSeat", seatData);
 		System.out.println(seatResult);
 		return seatResult;
 	}

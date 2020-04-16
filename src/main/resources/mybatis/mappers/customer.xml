@@ -59,6 +59,24 @@
 		]]>
 	</select>
 	
+	<select id="selectseatRow_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select DISTINCT seatrow from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} order by seatrow asc
+		]]>
+	</select>
+
+	<select id="selectseatCol_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select DISTINCT seatcol from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num}
+		]]>
+	</select>
+	
+	<select id="selectseat_State_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select seat_state from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} order by datasolt asc
+		]]>
+	</select>
+	
 	<select id="selectTheaterNum_sub" resultType="String" parameterType="String">
 		<![CDATA[
 			select DISTINCT theater_num from movie_company where id=#{id}

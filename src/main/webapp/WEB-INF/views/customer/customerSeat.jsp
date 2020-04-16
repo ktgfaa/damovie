@@ -45,12 +45,23 @@
 									</select></td>
 								<td><select name="theater_name" class="theater_namecheck">
 									<c:forEach var="theater" items="${theater_name }">
+										<c:if test="${theater_name_Update eq theater }">
+											<option value="${theater }"  selected="selected">${theater }</option>
+										</c:if>
+										<c:if test="${theater_name_Update ne theater }">
 											<option value="${theater }" >${theater }</option>
+										</c:if>
 									</c:forEach>
 								</select></td>
 								<td><select name="theater_num" class="theater_numcheck">
 										<c:forEach var="theaterNum" items="${theater_num }">
-											<option value="${theaterNum }">${theaterNum }</option>
+											<c:if test="${theater_num_Update eq theaterNum }">
+												<option value="${theaterNum }" selected="selected">${theaterNum }</option>
+											</c:if>
+											<c:if test="${theater_num_Update ne theaterNum }">
+												<option value="${theaterNum }">${theaterNum }</option>
+											</c:if>
+											
 										</c:forEach>
 								</select></td>
 							</tr>
@@ -125,12 +136,16 @@
 		$("#call_SEAT").click(function(){
 			const seatRow = $(".seatRow_check option:checked").val();
 			const seatCol = $(".seatCol_check option:checked").val();
+			const theater_name = $(".theater_namecheck option:checked").val();
+			const theater_num = $(".theater_numcheck option:checked").val();
 
 			$.ajax({
 	 			url: "${contextPath}/customer/customerSeatValue.do",
 	 			type: "post",
 	 			dataType:"text",
 	 			data : {
+	 					theater_name : theater_name,
+	 					theater_num : theater_num,
 						seatRow : seatRow,
 						seatCol : seatCol
 	 			    },  

@@ -26,6 +26,7 @@ import com.movie.damovie.book.bookForm.DAO.BookDAO;
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatInfoVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
@@ -54,6 +55,10 @@ public class CustomerController {
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
@@ -104,15 +109,17 @@ public class CustomerController {
 		List<String> movieList = null;
 		List<String> imageList = null;
 		
-		String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+		
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
-
+			String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 			/* ---------------영화 포스터,이름 불러오기 ------------------*/
 			movieList = bookDAO.selectMovieName();
 			imageList = bookDAO.selectImageName();
+			
+			System.out.println(imageList);
 			
 			mav.addObject("movieList", movieList);
 		  	mav.addObject("imageList", imageList);
@@ -172,7 +179,7 @@ public class CustomerController {
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
 		
 		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
-			for(int j=0;j<Integer.parseInt(customerSeatVO.getSeatcol());j++) {
+			for(int j=1;j<Integer.parseInt(customerSeatVO.getSeatcol())+1;j++) {
 				num += 1;
 				customerService.addSeat(
 						customerSeatVO.getCompany(),
@@ -289,7 +296,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value ="/customer/customerSeatValue.do", method = RequestMethod.POST)
-	private ModelAndView addseat(
+	private ModelAndView customerSeatValue(
 			@ModelAttribute("customerSeatValue") CustomerSeatValueVO customerSeatValueVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/customer/customerSeat.do");
@@ -299,6 +306,9 @@ public class CustomerController {
 		session.setAttribute("seatAlphabet", customerSeatValueVO.getSeatRow());
 		session.setAttribute("seatRow", seatRow);
 		session.setAttribute("seatCol", customerSeatValueVO.getSeatCol());
+		session.setAttribute("theater_name_Update", customerSeatValueVO.getTheater_name());
+		session.setAttribute("theater_num_Update", customerSeatValueVO.getTheater_num());
+		
 		
 		return mav;
 	}
@@ -310,8 +320,10 @@ public class CustomerController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
-		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
@@ -416,6 +428,7 @@ public class CustomerController {
 					String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 					List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
 					List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+					/*--------------- 회사 등록을 안했다면 오류 처리 -----------------*/
 							if(company != null) {
 								mav.addObject("company",company);
 								mav.addObject("theater_name", theater_name);
@@ -440,4 +453,46 @@ public class CustomerController {
 			}
 			return mav;
 		}
+	
+	@RequestMapping(value ="/customer/customerSeatInfo.do", method = RequestMethod.POST)
+	private ModelAndView customerSeatInfo(
+			@ModelAttribute("customerSeatInfo") CustomerSeatInfoVO customerSeatInfoVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("redirect:/customer/check_customerSeat.do");
+		HttpSession session = request.getSession();
+		//seatrow 불러오기
+		List<String> seatRow = customerDAO.selectSeatRow_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		//seatcol 불러오기
+		List<String> seatCol = customerDAO.selectSeatCol_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		//seat_state 불러오기
+		List<String> seat_state = customerDAO.selectSeat_State_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		try {
+			if(seatRow.get(0) != null) {
+			session.setAttribute("seatRow_confirm", seatRow);
+			session.setAttribute("seatRowSize", Integer.toString(seatRow.size()));
+			session.setAttribute("seatCol_confirm", Integer.toString(seatCol.size()));
+			session.setAttribute("seat_state_confirm", seat_state);
+			session.setAttribute("theater_name_confirm", customerSeatInfoVO.getTheater_name());
+			session.setAttribute("theater_num_confirm", customerSeatInfoVO.getTheater_num());
+			}
+		} catch(IndexOutOfBoundsException e) {
+			session.setAttribute("seatRow_confirm", "no");
+			session.setAttribute("seatCol_confirm", "no");
+			session.setAttribute("seat_state_confirm", "no");
+		}
+		
+
+		
+		
+		return mav;
+	}
 }

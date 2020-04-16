@@ -1,56 +1,99 @@
 .checkSeatMain_div {
 	width: 100%;
-    height: 667px;
+	height: 667px;
+	margin-top: 30px;
 }
 
 .checkSeatsub_div {
 	width: 1300px;
-    height: 667px;
-    float: left;
-    margin-left: 335px;
+	height: 667px;
+	float: left;
+	margin-left: 335px;
 }
 
 .select_seatDIV {
 	width: 100%;
-    height: 100px;
+	height: 100px;
 }
 
-.select_seatDIV > table {
-	color : white;
+.select_seatDIV>table {
+	color: white;
 	text-align: center;
 	float: left;
-    width: 1300px;
+	width: 1300px;
 }
 
-.select_seatDIV > table >tbody > tr > td {
-	border-right : 1px solid white;
+.select_seatDIV>table>tbody>tr>td {
+	border-right: 1px solid white;
 }
 
-.select_seatDIV > table >tbody > tr > td > select {
-    width: 153px;
-    height: 29px;
+.select_seatDIV>table>tbody>tr>td>select {
+	width: 153px;
+	height: 29px;
 }
 
-.select_seatDIV > table >tbody > tr > td > button {
-    width: 130px;
-    height: 40px;
-    background-color: black;
-    color: white;
-    font-size: 30px;
-    border-radius: 10px 10px 10px 10px;
-    font-family: "Nanum Pen Script", cursive;
+.select_seatDIV>table>tbody>tr>td>button {
+	width: 130px;
+	height: 40px;
+	background-color: black;
+	color: white;
+	font-size: 30px;
+	border-radius: 10px 10px 10px 10px;
+	font-family: "Nanum Pen Script", cursive;
 }
 
-.select_seatDIV > table >tbody > tr > td > button:hover {
+.select_seatDIV>table>tbody>tr>td>button:hover {
 	background-color: #0adce640;
 }
 
 caption {
-	    border: 1px solid;
-    border-bottom: none;
+	border: 1px solid;
+	border-bottom: none;
 }
 
 .seat_ConfirmDIV {
-	    width: 100%;
-    height: 567px;
+	width: 100%;
+	height: 100%;
+	border: 1px solid white;
+	border-top: none;
+}
+
+.seatRowDIV {
+	width: 100px;
+	height: 100%;
+	float: left;
+}
+
+.seatColDIV {
+	width: 1200px;
+	height: 100%;
+	float: right;
+}
+
+.seatAlphabet {
+	color: white;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.seatNum {
+	list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-top: 45px;
+}
+
+.seatNum > li {
+	height: 26px;
+    margin-bottom: 23px;
+}
+
+.seatNum > li > button {
+	height: 26px;
+	width: 30.83px;
+	height: 21px;
 }

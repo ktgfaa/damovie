@@ -57,6 +57,36 @@ public class CustomerDAO {
 		return company;
 	}
 	
+	public List<String> selectSeatRow_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seatRow = sqlSession.selectList("mapper.customer.selectseatRow_sub", seatInfo);
+
+		return seatRow;
+	}
+	
+	public List<String> selectSeatCol_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seatCol = sqlSession.selectList("mapper.customer.selectseatCol_sub", seatInfo);
+
+		return seatCol;
+	}
+	
+	public List<String> selectSeat_State_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seat_state = sqlSession.selectList("mapper.customer.selectseat_State_sub", seatInfo);
+
+		return seat_state;
+	}
+	
 	public List<String> selectTheaterName_sub(String id) throws DataAccessException {
 		List<String> TheaterName = sqlSession.selectList("mapper.customer.selectTheaterName_sub", id);
 

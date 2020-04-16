@@ -56,7 +56,13 @@ th{
 }
 table{
 	margin-left: 114px;
-    margin-top: 60px;
+    margin-top: 40px;
+}
+#list_box select{
+	width: 250px;
+    height: 24px;
+    background: beige;
+    margin-bottom: 4px;
 }
 caption{
     font-size: 50px;
@@ -147,7 +153,7 @@ function list(page){
 		<input type="submit" value="조회">
 	</form>
 
-	<table>
+	<table id="list_box">
 		<caption>${company }  영화 리스트</caption>
 		<tr>
 			<th>극장</th>

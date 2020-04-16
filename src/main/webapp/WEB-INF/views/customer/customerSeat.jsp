@@ -21,9 +21,6 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link href="${contextPath }/resources/css/customer/customerSeat.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -101,7 +98,7 @@
 				</c:if>
 				<c:if test="${seatRow > 0 }">
 					<c:forEach var="Alphabet" begin="0" end="${seatRow-1 }" items="${Alphabet }">
-						<li><p>${Alphabet }</p></li>
+						<li class="Alphabet"><p>${Alphabet }</p></li>
 					</c:forEach>
 				</c:if>
 				</ul>
@@ -109,7 +106,7 @@
 					<c:forEach var="i" begin="1" end="${seatRow }">
 						<li>
 						<c:forEach var="j" begin="1" end="${seatCol }">
-							<button class="seatCol_BTN" value="${j }">${j }</button>
+							<button class="seatCol_BTN" value="${j }" id="yes">${j }</button>
 						</c:forEach>
 					</c:forEach>
 				</ul>
@@ -124,7 +121,7 @@
 		</div>
 	</div>
 	<script>
-		// 불러오기 클릭시 좌석 배치 구현
+ 		// 불러오기 클릭시 좌석 배치 구현
 		$("#call_SEAT").click(function(){
 			const seatRow = $(".seatRow_check option:checked").val();
 			const seatCol = $(".seatCol_check option:checked").val();
@@ -137,7 +134,7 @@
 						seatRow : seatRow,
 						seatCol : seatCol
 	 			    },  
-	 			success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
+	 			success: function(data){ 
 	 				location.href="/damovie/customer/customerSeat.do"; 
 	 			},complete: function(data){
 	 			},error: function (request, status, error) {
@@ -146,13 +143,14 @@
 	 			  
 	 			}
 	 		});
-		});
+		}); 
 		
-		// 좌석 클릭시 X표시 , 다시 클릭시 원상태로 복귀!!!
+ 		// 좌석 클릭시 X표시 , 다시 클릭시 원상태로 복귀!!!
 		$(".seatCol_BTN").click(function(){ // 원상복귀
 			
 			if($(event.target).text() == "X") {
 				$(event.target).html($(event.target).val());
+				$(event.target).attr("id","yes");
 				$(event.target).css("background","");
 				$(event.target).css("color","");
 			} else { // X 표시
@@ -166,12 +164,68 @@
 				}
 			
 				$(event.target).html("X");
+				$(event.target).attr("id","no");
 				$(event.target).css("background","red");
 				$(event.target).css("color","white");
 				$(event.target).css("border","none");
 				
 			}
 		});
+ 		
+ 		
+ 		// 저장하기
+		$("#save_SEAT").click(function(){
+			var alphabet = new Array("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+			const company = $(".companycheck option:checked").val();
+			const theater_name = $(".theater_namecheck option:checked").val();
+			const theater_num = $(".theater_numcheck option:checked").val();
+			
+			// seatrow 구하기
+			var seatrow = new Array();
+			var size = $( '.Alphabet').length;
+			for(var i =0;i<size;i++){
+				seatrow.push(alphabet[i]);
+			}
+			//seatcol 구하기
+			const seatcol = $('.seatCol_BTN').length / size;
+			
+			//seat_state 전부 List에 저장하기
+			var seat_state = new Array();
+			for(var i =0;i<seatcol * size;i++){
+				
+			}
+			const datasolt = "";
+			
+
+			
+			
+			
+			jQuery.ajaxSettings.traditional = true; // list를 ajax로 보내기 위해 필요한 셋팅
+
+  			$.ajax({
+	 			url: "${contextPath}/customer/addseat.do",
+	 			type: "post",
+	 			dataType:"text",
+	 			data : {
+	 					company : company,
+	 					theater_name : theater_name,
+	 					theater_num : theater_num,
+						seatrow : seatrow,
+						seatcol : seatcol,
+						seat_state : seat_state,
+						datasolt : datasolt
+	 			    },  
+	 			success: function(data){     
+	 				alert("저장 성공");
+	 				/* location.href="/damovie/customer/customer.do";  */
+	 			},complete: function(data){
+	 			},error: function (request, status, error) {
+	 			   alert("다시 시도해주세요!");
+	 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	 			  
+	 			}
+	 		}); 
+		}); 
 	</script>
 </body>
 </html>

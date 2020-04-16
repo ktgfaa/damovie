@@ -149,7 +149,7 @@
 		 time10 : time10
 		 },  
 		 success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
-		 alert(data);
+		 alert("저장 성공!!");
 		 location.href="${contextPath}/customer/customer.do";
 		 },complete: function(data){
 		 },error: function (request, status, error) {

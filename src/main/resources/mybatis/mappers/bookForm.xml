@@ -37,7 +37,7 @@
 	
 	 <select id="selectMovieName" resultType="String">
 		<![CDATA[
-			select movie_name from movie_info order by putdate desc
+			select movie_name from movie_info order by movie_name asc
 		]]>
 	</select>
 	

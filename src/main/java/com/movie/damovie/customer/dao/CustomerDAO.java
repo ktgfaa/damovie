@@ -1,6 +1,8 @@
 package com.movie.damovie.customer.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
 
@@ -33,6 +36,12 @@ public class CustomerDAO {
 		return theaterResult;
 	}
 	
+	public int addSeat(CustomerSeatVO customerSeatVO) {
+		int seatResult = sqlSession.insert("mapper.customer.insertSeat", customerSeatVO);
+		System.out.println(seatResult);
+		return seatResult;
+	}
+	
 	public String selectCompanyName_sub(String id) throws DataAccessException {
 		String company = sqlSession.selectOne("mapper.customer.selectCompanyName_sub", id);
 
@@ -50,12 +59,44 @@ public class CustomerDAO {
 
 		return TheaterNum;
 	}
+
 	
 	public List<CustomerTheaterVO> selectTheaterList(String theaterName) throws DataAccessException {
 		List<CustomerTheaterVO> theaterList = sqlSession.selectList("mapper.customer.selectTheaterList", theaterName);
 		
 		return theaterList;
 	}
+	public List<CustomerMovieVO> listALL(String id, int start, int end, String searchOption, String keyword) {
+		//검색옵션, 키워드 맵에 저장
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		//BETWEEN #{start}, #{end}에 입력될 값 앱에 넣기
+		map.put("start", start);
+		map.put("end", end);
+		return sqlSession.selectList("mapper.customer.listAll",map);
+	}
 
+	public int countArticle(String id, String searchOption, String keyword) {
+		// 검색옵션, 키워드 맵에 저장
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("mapper.customer.countArticle", map);
 
+	}
+
+	public void movieDelete(CustomerMovieVO vo) {
+		sqlSession.delete("mapper.customer.movieDelete",vo);
+	}
+
+	public List<String> movieList(String id) {
+		return sqlSession.selectList("mapper.customer.movieList",id);
+	}
+
+	public void movieUpdate(CustomerMovieVO vo) {
+		sqlSession.update("mapper.customer.movieUpdate",vo);
+	}
 }

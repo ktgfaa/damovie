@@ -97,13 +97,13 @@
 				<c:if test="${seatRow < 1 }">
 				</c:if>
 				<c:if test="${seatRow > 0 }">
-					<c:forEach var="Alphabet" begin="0" end="${seatRow-1 }" items="${Alphabet }">
+					<c:forEach var="Alphabet" begin="0" end="${seatRow }" items="${Alphabet }">
 						<li class="Alphabet"><p>${Alphabet }</p></li>
 					</c:forEach>
 				</c:if>
 				</ul>
 				<ul class="seatNum">
-					<c:forEach var="i" begin="1" end="${seatRow }">
+					<c:forEach var="i" begin="1" end="${seatRow+1 }">
 						<li>
 						<c:forEach var="j" begin="1" end="${seatCol }">
 							<button class="seatCol_BTN" value="${j }" id="yes">${j }</button>

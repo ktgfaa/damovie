@@ -10,13 +10,11 @@
 <head>
 <meta charset="UTF-8">
 <title>예약 페이지</title>
-<link href='${path}/damovie/resources/css/core_main.css'
-	rel='stylesheet' />
-<link href='${path}/damovie/resources/css/daygrid_main.css'
-	rel='stylesheet' />
-<script src='${path}/damovie/resources/js/coremain.js'></script>
-<script src='${path}/damovie/resources/js/interaction_main.js'></script>
-<script src='${path}/damovie/resources/js/daygrid_main.js'></script>
+<link href='${path}/damovie/resources/css/fullcalendar/core_main.css' rel='stylesheet' />
+<link href='${path}/damovie/resources/css/fullcalendar/daygrid_main.css' rel='stylesheet' />
+<script src='${path}/damovie/resources/js/fullcalendar/coremain.js'></script>
+<script src='${path}/damovie/resources/js/fullcalendar/interaction_main.js'></script>
+<script src='${path}/damovie/resources/js/fullcalendar/daygrid_main.js'></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

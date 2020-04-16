@@ -42,7 +42,7 @@
         <put-attribute name="body" value="/WEB-INF/views/customer/customerSeat.jsp"></put-attribute>
     </definition>
     
-        <definition name="/customer/customerConfirm" extends="customerLayout">
+    <definition name="/customer/customerConfirm" extends="customerLayout">
 		<put-attribute name="title" value="확인"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/customer/customerConfirm.jsp"></put-attribute>
     </definition>
@@ -50,6 +50,11 @@
     <definition name="/customer/customerConfirmTime" extends="customerLayout">
     	<put-attribute name="title" value="서브시간확인"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/customer/customerConfirmTime.jsp"></put-attribute>
+    </definition>
+
+    <definition name="/customer/check_customerMovie" extends="customerLayout">
+		<put-attribute name="title" value="영화확인"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/customer/check_customerMovie.jsp"></put-attribute>
     </definition>
 
 </tiles-definitions>

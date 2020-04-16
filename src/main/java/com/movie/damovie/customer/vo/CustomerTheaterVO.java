@@ -1,5 +1,7 @@
 package com.movie.damovie.customer.vo;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component("customerTheaterVO")
@@ -19,6 +21,7 @@ public class CustomerTheaterVO {
 	private String time8;
 	private String time9;
 	private String time10;
+	private Date putdate;
 	
 	
 	public String getId() {
@@ -110,6 +113,12 @@ public class CustomerTheaterVO {
 	}
 	public void setTime10(String time10) {
 		this.time10 = time10;
+	}
+	public Date getPutdate() {
+		return putdate;
+	}
+	public void setPutDate(Date putdate) {
+		this.putdate = putdate;
 	}
 	
 

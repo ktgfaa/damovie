@@ -50,7 +50,12 @@ public class CustomerDAO {
 
 		return TheaterNum;
 	}
-
+	
+	public List<CustomerTheaterVO> selectTheaterList(String theaterName) throws DataAccessException {
+		List<CustomerTheaterVO> theaterList = sqlSession.selectList("mapper.customer.selectTheaterList", theaterName);
+		
+		return theaterList;
+	}
 
 
 }

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -9,16 +10,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:choose>
-	<c:when test="${company == 'null' || theater_name == 'null' || theater_num == 'null'} ">
+	<c:if test="${company eq 'no'}">
 		<script>
 			window.onload=function() {
 				alert("먼저 영화부터 등록후 선택해주세요!!!");
 				location.href="customer.do";
 			}
 		</script>
-	</c:when>
-</c:choose>
+	</c:if>
 <meta charset="UTF-8">
 <title></title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>

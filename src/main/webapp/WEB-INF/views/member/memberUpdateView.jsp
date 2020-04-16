@@ -51,12 +51,15 @@ $(function(){
 	
 });
 //유효성 검사
-function sendIt() {
+function sendIt(tag) {
 	var ck_pwd = $("#pwd").val();
 	var ck_email = $("#email").val();
+	var e;
+	var regexPwd =/^.*(?=^.{4,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+	var pwd_check = regexPwd.test(ck_pwd);
+	
+	try{
 
-		var regexPwd =/^.*(?=^.{4,12}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-		var pwd_check = regexPwd.test(ck_pwd);
 		if(pwd_check == false){
 			alert("비밀번호는 4~12자 영문,숫자,특수문자 조합으로 이루어져야 합니다.");
 			document.input.pwd.focus();
@@ -78,8 +81,12 @@ function sendIt() {
 			document.input.email.focus();
 			return false;
 		}
-	
-	alert('회원정보가 수정되었습니다.');
+		alert('회원정보가 수정되었습니다.');
+		return true;
+	}catch(e){
+		return false;
+	}
+
 	document.input.submit();
 }
 </script>
@@ -91,7 +98,7 @@ function sendIt() {
 	<div id="main_Form">
 		<div class="main_box">
 			<div class="info_box">
-				<form id="input" name="input" method="post" action="${contextPath }/member/memberUpdate.do" onsubmit="return sendIt();">
+				<form id="input" name="input" method="post" action="${contextPath }/member/memberUpdate.do" onsubmit="return sendIt(this);">
 				<table class="info_table">
 					<tr>
 						<td>아이디</td>

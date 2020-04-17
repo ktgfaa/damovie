@@ -70,6 +70,16 @@ public class CustomerDAO {
 		return seatResult;
 	}
 	
+	public List<String> theater_Seat_distinct(String company,String theater_name) throws DataAccessException {
+		Map<String,String> theater_Seat_distinct = new HashMap<String,String>();
+		theater_Seat_distinct.put("company", company);
+		theater_Seat_distinct.put("theater_name", theater_name);
+		
+		List<String> distinct = sqlSession.selectList("mapper.customer.selectTheaterSeat_Already", theater_Seat_distinct);
+
+		return distinct;
+	}
+	
 	public String selectCompanyName_sub(String id) throws DataAccessException {
 		String company = sqlSession.selectOne("mapper.customer.selectCompanyName_sub", id);
 
@@ -192,6 +202,15 @@ public class CustomerDAO {
 		
 		
 		sqlSession.update("mapper.customer.seatUpdate",updateSeatInfo);
+	}
+	
+	public void seatDelete(String company , String theater_name, String theater_num) {
+		Map<String,String> theater_Seat_distinct = new HashMap<String,String>();
+		theater_Seat_distinct.put("company", company);
+		theater_Seat_distinct.put("theater_name", theater_name);
+		theater_Seat_distinct.put("theater_num", theater_num);
+		
+		sqlSession.delete("mapper.customer.seatDelete",theater_Seat_distinct);
 	}
 
 }

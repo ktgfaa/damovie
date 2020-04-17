@@ -87,7 +87,10 @@ public class CustomerController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
@@ -183,6 +186,14 @@ public class CustomerController {
 		int num = 0;
 		int num2 = 0;
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
+		
+		List<String> distinct = customerDAO.theater_Seat_distinct(customerSeatVO.getCompany(), customerSeatVO.getTheater_name());
+		
+		for(int k =0; k< distinct.size();k++) {
+			if(distinct.get(k) != null && distinct.get(k).equals(customerSeatVO.getTheater_num())) {
+						customerDAO.seatDelete(customerSeatVO.getCompany(), customerSeatVO.getTheater_name(), customerSeatVO.getTheater_num());
+					} 
+			}
 		
 		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
 			for(int j=1;j<Integer.parseInt(customerSeatVO.getSeatcol())+1;j++) {
@@ -651,7 +662,7 @@ public class CustomerController {
 		session.setAttribute("seat_state_confirm", "no");
 		
 		
-		return "redirect:/customer/check_customerSeat.do";
+		return "redirect:/customer/customerConfirm.do";
 	}
 }
 

@@ -131,6 +131,13 @@
 		]]>
 	</select>
 	
+	<select id="selectTheaterSeat_Already" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			  SELECT DISTINCT theater_num 
+			  FROM theater_seat where company=#{company} and theater_name=#{theater_name}
+		]]>
+	</select>
+	
 
 
 	<select id="selectTheaterList" resultMap="customerTheaterResult" parameterType="String">
@@ -234,6 +241,12 @@
 	<delete id="movieDelete">
 		<![CDATA[
 			delete from movie_company where movie_name=#{movie_name}
+		]]>
+	</delete>
+	
+	<delete id="seatDelete" parameterType="java.util.Map">
+		<![CDATA[
+			delete from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num}
 		]]>
 	</delete>
 	

@@ -103,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .bookForm {
 	height: 637px;
-	margin-top: 40px;
 }
 
 .firstBook {
@@ -113,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	border: 1px solid;
 	border-color: white;
 	position: absolute;
+		margin-top: 40px;
 }
 
 .movieSel {

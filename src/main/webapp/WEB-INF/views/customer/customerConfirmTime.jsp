@@ -43,7 +43,7 @@ function theaterCh(){
 }
 
 function fn_mod() {
-	if($('#time1').val()=="" || $('#time1').val()==null || $('#time2').val()=="" || $('#time2').val()==null || $('#time3').val()=="" || $('#time3').val()==null || $('#time4').val()=="" || $('#time4').val()==null || $('#time5').val()=="" || $('#time5').val()==null || $('#time6').val()=="" || $('#time6').val()==null || $('#time7').val()=="" || $('#time7').val()==null || $('#time8').val()=="" || $('#time8').val()==null || $('#time9').val()=="" || $('#time9').val()==null || $('#time10').val()=="" || $('#time10').val()==null ){
+	if($('#time1').val()=="" && $('#time1').val()==null && $('#time2').val()=="" && $('#time2').val()==null && $('#time3').val()=="" && $('#time3').val()==null && $('#time4').val()=="" && $('#time4').val()==null && $('#time5').val()=="" && $('#time5').val()==null && $('#time6').val()=="" && $('#time6').val()==null && $('#time7').val()=="" && $('#time7').val()==null && $('#time8').val()=="" && $('#time8').val()==null && $('#time9').val()=="" && $('#time9').val()==null && $('#time10').val()=="" && $('#time10').val()==null ){
 		alert("시간을 입력해 주세요");
 		return;
 	}
@@ -208,7 +208,6 @@ function fn_del() {
 	background: rgba(0, 0, 0, 0);
 	color: aqua;
 	cursor: pointer;
-	text-decoration: underline;
 }    
 .delBtn {
 	padding: 0;
@@ -217,7 +216,6 @@ function fn_del() {
 	border: none;
 	background-color: #0000009c;
 	color: red;
-	text-decoration: underline;
 	cursor: pointer;
 }
 #movieDate {

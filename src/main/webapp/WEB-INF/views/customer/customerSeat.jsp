@@ -208,6 +208,7 @@
 			var seat_state = new Array();
 			for(var i =0;i<seatcol * size;i++){
 				seat_state.push($('.seatCol_BTN').eq( i ).attr("id"))
+				console.log(seat_state);
 			}
 			//datasolt 저장하기
 			const datasolt = size * seatcol;
@@ -230,7 +231,7 @@
 	 			    },  
 	 			success: function(data){     
 	 				alert("저장 성공");
-	 				location.href="/damovie/customer/customer.do";
+	 			location.href="/damovie/customer/customer.do";
 	 			},complete: function(data){
 	 			},error: function (request, status, error) {
 	 			   alert("다시 시도해주세요!");

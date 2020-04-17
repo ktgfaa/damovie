@@ -27,6 +27,7 @@ import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
 import com.movie.damovie.customer.vo.CustomerSeatInfoVO;
+import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
@@ -176,6 +177,7 @@ public class CustomerController {
 		System.out.println(customerSeatVO.getSeat_state());
 		System.out.println(customerSeatVO.getDatasolt());
 		int num = 0;
+		int num2 = 0;
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
 		
 		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
@@ -187,9 +189,10 @@ public class CustomerController {
 						customerSeatVO.getTheater_num(),
 						customerSeatVO.getSeatrow().get(i),
 						Integer.toString(j),
-						customerSeatVO.getSeat_state().get(j),
+						customerSeatVO.getSeat_state().get(num2),
 						Integer.toString(num)
 						);
+				num2 += 1;
 			}
 		}
 		
@@ -489,10 +492,34 @@ public class CustomerController {
 			session.setAttribute("seatCol_confirm", "no");
 			session.setAttribute("seat_state_confirm", "no");
 		}
-		
-
-		
-		
 		return mav;
+	}
+	
+	@RequestMapping(value="/customer/seatUpdate.do", method=RequestMethod.POST)
+	public String seatUpdate(@ModelAttribute("customerSeatUpdateVO") CustomerSeatUpdateVO vo
+			,HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int num = 0;
+		HttpSession session = request.getSession();
+		
+		for(int i=0; i< vo.getSeatrow().size();i++) {
+			for(int j=0;j<vo.getSeatcol().size();j++) {
+				customerService.seatUpdate(
+						vo.getSeat_state().get(num),
+						vo.getCompany(),
+						vo.getTheater_name(),
+						vo.getTheater_num(),
+						vo.getSeatrow().get(i),
+						vo.getSeatcol().get(j)
+						);
+				num += 1;
+			}
+		}
+		
+		session.setAttribute("seatRow_confirm", "no");
+		session.setAttribute("seatCol_confirm", "no");
+		session.setAttribute("seat_state_confirm", "no");
+		
+		
+		return "redirect:/customer/check_customerSeat.do";
 	}
 }

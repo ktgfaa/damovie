@@ -34,8 +34,8 @@
 								<td style="width: 150px;border-bottom: 1px solid white;">회사 이름</td>
 								<td style="width: 150px;border-bottom: 1px solid white;">극장 이름</td>
 								<td style="width: 150px;border-bottom: 1px solid white;">영화관 번호</td>
-								<td style="width: 150px;" rowspan="2"><button id="call_SEAT">불러오기</button></td>
-								<td style="width:150px;" rowspan="2"><button id="save_SEAT">저장하기</button></td>
+								<td style="width: 150px;" rowspan="2"><button id="call_SEAT" title="좌석 불러오기">불러오기</button></td>
+								<td style="width:150px;" rowspan="2"><button id="save_SEAT" title="변경후 불러오기로 다시 불러와야 변경된 내용이 보입니다.">변경하기</button></td>
 
 							</tr>
 							<tr>
@@ -153,6 +153,62 @@ $(".seatCol_BTN").click(function(){ // 원상복귀
 		
 	}
 });
+	
+	
+	// 저장하기
+$("#save_SEAT").click(function(){
+	var alphabet = new Array("A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+	const company = $(".companycheck option:checked").val();
+	const theater_name = $(".theater_namecheck option:checked").val();
+	const theater_num = $(".theater_numcheck option:checked").val();
+	
+	// seatrow 구하기
+	var seatrow = new Array();
+	var size = $( '.Alphabet').length;
+	for(var i =0;i<size;i++){
+		seatrow.push(alphabet[i]);
+	}
+	//seatcol 구하기
+	const seatcolsize = $('.seatCol_BTN').length / size;
+	var seatcol = new Array();
+	for(var i =0;i<seatcolsize;i++){
+		seatcol.push($('.seatCol_BTN').eq( i ).val());
+	}
+	
+	//seat_state 전부 List에 저장하기
+	var seat_state = new Array();
+	for(var i =0;i<seatcolsize * size;i++){
+		seat_state.push($('.seatCol_BTN').eq( i ).attr("id"));
+	}
+	
+
+	
+	// list를 ajax로 보내기 위해 필요한 셋팅
+ 	jQuery.ajaxSettings.traditional = true; 
+
+		$.ajax({
+			url: "${contextPath}/customer/seatUpdate.do",
+			type: "post",
+			dataType:"text",
+			data : {
+					seat_state : seat_state,
+					company : company,
+					theater_name : theater_name,
+					theater_num : theater_num,
+					seatrow : seatrow,
+					seatcol : seatcol
+			    },  
+			success: function(data){     
+				alert("변경 성공");
+			location.href="/damovie/customer/check_customerSeat.do";
+			},complete: function(data){
+			},error: function (request, status, error) {
+			   alert("다시 시도해주세요!");
+			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			  
+			}
+		}); 
+}); 
 </script>
 </body>
 </html>

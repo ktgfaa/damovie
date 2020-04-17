@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
-import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
-import com.movie.damovie.member.vo.MemberVO;
 
 
 @Service("customerService")
@@ -52,6 +50,11 @@ public class CustomerService {
 
 	public void movieUpdate(CustomerMovieVO vo) {
 		CustomerDAO.movieUpdate(vo);
+		
+	}
+	
+	public void seatUpdate(String seat_state,String company,String theater_name,String theater_num,String seatrow,String seatcol) {
+		CustomerDAO.seatUpdate(seat_state,company,theater_name,theater_num,seatrow,seatcol);
 		
 	}
 }

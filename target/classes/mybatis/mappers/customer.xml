@@ -47,6 +47,17 @@
 		]]>
 	</insert>
 	
+	<update id="seatUpdate" parameterType="java.util.Map">
+		<![CDATA[
+			update theater_seat set seat_state=#{seat_state} 
+			where company=#{company} and 
+			theater_name=#{theater_name} and 
+			theater_num=#{theater_num} and 
+			seatrow=#{seatrow} and 
+			seatcol=#{seatcol}
+		]]>
+	</update>
+	
 	 <select id="selectCompanyName_sub" resultType="String" parameterType="String">
 		<![CDATA[
 			select DISTINCT company from movie_company where id=#{id}

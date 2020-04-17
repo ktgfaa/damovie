@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
@@ -126,8 +127,22 @@ public class CustomerDAO {
 	public List<String> movieList(String id) {
 		return sqlSession.selectList("mapper.customer.movieList",id);
 	}
-
+	// 영화 업데이트
 	public void movieUpdate(CustomerMovieVO vo) {
 		sqlSession.update("mapper.customer.movieUpdate",vo);
+	}
+	
+	// 좌석 업데이트
+	public void seatUpdate(String seat_state,String company,String theater_name,String theater_num,String seatrow,String seatcol) {
+		Map<String,String> updateSeatInfo = new HashMap<String,String>();
+		updateSeatInfo.put("seat_state", seat_state);
+		updateSeatInfo.put("company", company);
+		updateSeatInfo.put("theater_name", theater_name);
+		updateSeatInfo.put("theater_num", theater_num);
+		updateSeatInfo.put("seatrow", seatrow);
+		updateSeatInfo.put("seatcol", seatcol);
+		
+		
+		sqlSession.update("mapper.customer.seatUpdate",updateSeatInfo);
 	}
 }

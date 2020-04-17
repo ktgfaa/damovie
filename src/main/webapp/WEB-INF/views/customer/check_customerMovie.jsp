@@ -86,6 +86,15 @@ table a:link {
 table a:visited { 
 	color: white; text-decoration: none;}{
 }
+#del_btn {
+	padding: 0;
+    width: 45px;
+    height: 33px;
+	border: none;
+	background-color: #0000009c;
+	color: red;
+	cursor: pointer;
+}
 </style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>

@@ -89,20 +89,25 @@ document.addEventListener('DOMContentLoaded', function() {
   background-color: #2d5a56;
   cursor: pointer;
 }
-
+.calendarFont{
+	float: right;
+    width: 400px;
+    text-align: center;
+    padding: 7px;
+}
 #calendar {
 	margin: 0;
 	color: white;
 	width: 400px;
 	/*     position: absolute; */
 	padding-left: 73.1%;
-	padding-top: 33px;
+	padding-top: 86px;
 	/*     right: 183px;
     top : 10px; */
 }
 
 .bookForm {
-	height: 637px;
+	height: 686px;
 }
 
 .firstBook {
@@ -112,13 +117,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	border: 1px solid;
 	border-color: white;
 	position: absolute;
-		margin-top: 40px;
 }
 
 .movieSel {
 	width: 250px;
 	border-right: 1px solid;
-	height: 636px;
+	height: 686px;
 	margin: 0;
 	position: absolute;
 	border-color: white;
@@ -128,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	width: 545px;
 	border-right: 1px solid;
 	border-left: 1px solid;
-	height: 636px;
+	height: 686px;
 	margin: 0;
 	position: absolute;
 	left: 36.6%;
@@ -148,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .movieRes_div>div>ul>li {
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 .bmImage {
@@ -202,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .movieSel_div {
 	width: 300px;
-	height: 636px;
+	height: 675px;
 	margin: 0;
 	position: absolute;
 	left: 16.7%;
@@ -211,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .movieList {
 	width: 280px;
-	height: 617px;
+	height: 651px;
 	padding: 10px;
 	overflow: auto;
 }
@@ -280,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	width: 531px;
     height: 173px;
     padding: 7px;
+    padding-top: 50px;
     text-align: center;
 }
 
@@ -369,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 				<div class="theaterList">
 					<ul class="List_ul">
-						<li><h1 style="color: white; margin: 0px; margin-bottom: 20px;">3 극장 선택</h1></li>
+						<li><h1 style="color: white; margin: 0px; margin-bottom: 20px;">4 극장 선택</h1></li>
 
 							<c:forEach var="Theater" items="${theaterList }">
 								<li><button id="theater" onclick="clickTheaterEvent()" style="color: #ff9191;" class="btnhover">${Theater }</button></li>
@@ -380,7 +385,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="otherList">
 					<div class="movie_time">
 						<ul class="other_ul">
-							<li style="float: none;text-align: left;"><h1 style="color: white; margin: 0px; margin-bottom: 20px;">4 시간</h1></li>
+							<li style="float: none;text-align: left;"><h1 style="color: white; margin: 0px; margin-bottom: 20px;">5 시간</h1></li>
 <%-- 							<c:forEach var="moiveTime" items="${movieTime }"> --%>
 							<c:if test="${movieTime.getTime1() != null }">
 							<li><input class="time" type="button" value="${movieTime.getTime1() }" onclick="movieTime()"/></li>
@@ -417,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 					<div class="person">
 						<ul id="adult_ul" class="other_ul" style="margin-bottom: 20px;">
-							<li style="float: none;text-align: left;"><h2 style="color: white; margin: 0px; margin-bottom: 10px;">5 인원</h1></li>
+							<li style="float: none;text-align: left;"><h2 style="color: white; margin: 0px; margin-bottom: 10px;">6 인원</h1></li>
 							<li><input type="button" style="border: black;background: black;color: white;margin-right: 12px;font-size: 20px;"value="성인"></li>
 							<li><input type="button" class="adult" value="1" onclick="adultEvent()"></li>
 							<li><input type="button" class="adult" value="2" onclick="adultEvent()"></li>
@@ -446,7 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			</div>
 
 			<!-- ------------------------------ 날짜 선택 ------------------------------------------- -->
-
+			<div class="calendarFont">
+				<h1 style="color: white; margin: 0px; margin-bottom: 20px;">3 날짜</h1>
+			</div>
 			<div id='calendar'></div>
 
 
@@ -507,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		if(movieName == "" || movieName == null) {
 			alert('영화를 먼저 선택해주세요!!!');
 		} else if (date == "" || date == null) {
-			alert('시간을 선택 해 주세요!!!');
+			alert('날짜를 선택 해 주세요!!!');
 		} else {
 	 		location.href="bookForm.do?company=" + companyName
 				+"&movieName=" + movieName

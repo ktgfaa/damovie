@@ -23,8 +23,13 @@
     </definition>
     
 	<definition name="/customer/customer" extends="customerLayout">
-		<put-attribute name="title" value="서브관리자페이지"></put-attribute>
+		<put-attribute name="title" value="서브관리자메인페이지"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/customer/customer.jsp"></put-attribute>
+    </definition>
+    
+    <definition name="/customer/customerUpdate" extends="customerLayout">
+		<put-attribute name="title" value="서브업데이트페이지"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/customer/customerUpdate.jsp"></put-attribute>
     </definition>
     
     <definition name="/customer/customerMovie" extends="customerLayout">
@@ -60,6 +65,11 @@
     <definition name="/customer/check_customerMovie" extends="customerLayout">
 		<put-attribute name="title" value="영화확인"></put-attribute>
         <put-attribute name="body" value="/WEB-INF/views/customer/check_customerMovie.jsp"></put-attribute>
+    </definition>
+    
+       <definition name="/customer/check_customerSeat" extends="customerLayout">
+		<put-attribute name="title" value="좌석확인"></put-attribute>
+        <put-attribute name="body" value="/WEB-INF/views/customer/check_customerSeat.jsp"></put-attribute>
     </definition>
 
 </tiles-definitions>

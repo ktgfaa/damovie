@@ -90,7 +90,7 @@ body {
 		});
 		
 		$(".seat_box").click(function(){
-			location.href="#";
+			location.href="${contextPath}/customer/check_customerSeat.do";
 		});
 
 	}); 

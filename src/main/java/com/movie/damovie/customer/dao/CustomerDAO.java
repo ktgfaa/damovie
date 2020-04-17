@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
@@ -36,8 +37,17 @@ public class CustomerDAO {
 		return theaterResult;
 	}
 	
-	public int addSeat(CustomerSeatVO customerSeatVO) {
-		int seatResult = sqlSession.insert("mapper.customer.insertSeat", customerSeatVO);
+	public int addSeat(String company,String theater_name,String theater_num,String seatrow,String seatcol, String seat_state,String datasolt) {
+		Map<String,String> seatData = new HashMap<String,String>();
+		seatData.put("company", company);
+		seatData.put("theater_name", theater_name);
+		seatData.put("theater_num", theater_num);
+		seatData.put("seatrow", seatrow);
+		seatData.put("seatcol", seatcol);
+		seatData.put("seat_state", seat_state);
+		seatData.put("datasolt", datasolt);
+		
+		int seatResult = sqlSession.insert("mapper.customer.insertSeat", seatData);
 		System.out.println(seatResult);
 		return seatResult;
 	}
@@ -46,6 +56,36 @@ public class CustomerDAO {
 		String company = sqlSession.selectOne("mapper.customer.selectCompanyName_sub", id);
 
 		return company;
+	}
+	
+	public List<String> selectSeatRow_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seatRow = sqlSession.selectList("mapper.customer.selectseatRow_sub", seatInfo);
+
+		return seatRow;
+	}
+	
+	public List<String> selectSeatCol_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seatCol = sqlSession.selectList("mapper.customer.selectseatCol_sub", seatInfo);
+
+		return seatCol;
+	}
+	
+	public List<String> selectSeat_State_sub(String company,String theater_name,String theater_num) throws DataAccessException {
+		Map<String,String> seatInfo = new HashMap<String,String>();
+		seatInfo.put("company", company);
+		seatInfo.put("theater_name", theater_name);
+		seatInfo.put("theater_num", theater_num);
+		List<String> seat_state = sqlSession.selectList("mapper.customer.selectseat_State_sub", seatInfo);
+
+		return seat_state;
 	}
 	
 	public List<String> selectTheaterName_sub(String id) throws DataAccessException {
@@ -95,16 +135,31 @@ public class CustomerDAO {
 	public List<String> movieList(String id) {
 		return sqlSession.selectList("mapper.customer.movieList",id);
 	}
-
+	// 영화 업데이트
 	public void movieUpdate(CustomerMovieVO vo) {
 		sqlSession.update("mapper.customer.movieUpdate",vo);
 	}
 	
+
 	public int ConfirmTimeMod(CustomerTheaterVO vo) {
 		return sqlSession.update("mapper.customer.ConfirmTimeMod",vo);
 	}
 	public int ConfirmTimeDel(CustomerTheaterVO vo) {
 		
 		return sqlSession.delete("mapper.customer.ConfirmTimeDel",vo);
+	}
+
+	// 좌석 업데이트
+	public void seatUpdate(String seat_state,String company,String theater_name,String theater_num,String seatrow,String seatcol) {
+		Map<String,String> updateSeatInfo = new HashMap<String,String>();
+		updateSeatInfo.put("seat_state", seat_state);
+		updateSeatInfo.put("company", company);
+		updateSeatInfo.put("theater_name", theater_name);
+		updateSeatInfo.put("theater_num", theater_num);
+		updateSeatInfo.put("seatrow", seatrow);
+		updateSeatInfo.put("seatcol", seatcol);
+		
+		
+		sqlSession.update("mapper.customer.seatUpdate",updateSeatInfo);
 	}
 }

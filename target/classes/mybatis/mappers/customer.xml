@@ -60,11 +60,22 @@
 		]]>
 	</insert>
 	
-	<insert id="insertSeat" parameterType="customerSeatVO">
+	<insert id="insertSeat" parameterType="java.util.Map">
 		<![CDATA[
 			insert into theater_seat(company,theater_name,theater_num,seatrow,seatcol,seat_state,datasolt) values(#{company},#{theater_name},#{theater_num},#{seatrow},#{seatcol},#{seat_state},#{datasolt})
 		]]>
 	</insert>
+	
+	<update id="seatUpdate" parameterType="java.util.Map">
+		<![CDATA[
+			update theater_seat set seat_state=#{seat_state} 
+			where company=#{company} and 
+			theater_name=#{theater_name} and 
+			theater_num=#{theater_num} and 
+			seatrow=#{seatrow} and 
+			seatcol=#{seatcol}
+		]]>
+	</update>
 	
 	 <select id="selectCompanyName_sub" resultType="String" parameterType="String">
 		<![CDATA[
@@ -75,6 +86,24 @@
 	 <select id="selectTheaterName_sub" resultType="String" parameterType="String">
 		<![CDATA[
 			select DISTINCT theater_name from movie_company where id=#{id}
+		]]>
+	</select>
+	
+	<select id="selectseatRow_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select DISTINCT seatrow from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} order by seatrow asc
+		]]>
+	</select>
+
+	<select id="selectseatCol_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select DISTINCT seatcol from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num}
+		]]>
+	</select>
+	
+	<select id="selectseat_State_sub" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select seat_state from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num} order by datasolt asc
 		]]>
 	</select>
 	

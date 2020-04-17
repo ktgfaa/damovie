@@ -27,6 +27,8 @@ import com.movie.damovie.book.bookForm.DAO.BookDAO;
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.service.CustomerService;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatInfoVO;
+import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
@@ -51,6 +53,34 @@ public class CustomerController {
 	
 	@RequestMapping(value = "/customer/customer.do" , method = RequestMethod.GET)
 	private ModelAndView customerMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
+		
+		/* ------------ 접근 처리 ------------ */
+		try {
+		if(memberVO.getUser_level().equals("customer")) {
+			mav.addObject("member",memberVO);
+			mav.setViewName(viewName);
+			} else if(memberVO.getUser_level().equals("admin")) {
+				mav = new ModelAndView("redirect:/admin.do");
+			} else {
+			mav = new ModelAndView("redirect:/main.do");
+			} } catch(NullPointerException e) {
+			mav = new ModelAndView("redirect:/main.do");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value = "/customer/customerUpdate.do" , method = RequestMethod.GET)
+	private ModelAndView customerUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
@@ -83,15 +113,17 @@ public class CustomerController {
 		List<String> movieList = null;
 		List<String> imageList = null;
 		
-		String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+		
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
-
+			String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 			/* ---------------영화 포스터,이름 불러오기 ------------------*/
 			movieList = bookDAO.selectMovieName();
 			imageList = bookDAO.selectImageName();
+			
+			System.out.println(imageList);
 			
 			mav.addObject("movieList", movieList);
 		  	mav.addObject("imageList", imageList);
@@ -140,10 +172,33 @@ public class CustomerController {
 	private ModelAndView addseat(
 			@ModelAttribute("theater_seat") CustomerSeatVO customerSeatVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(customerSeatVO.getSeatrow());
 		System.out.println(customerSeatVO.getCompany());
+		System.out.println(customerSeatVO.getTheater_name());
+		System.out.println(customerSeatVO.getTheater_num());
+		System.out.println(customerSeatVO.getSeatrow());
+		System.out.println(customerSeatVO.getSeatcol());
+		System.out.println(customerSeatVO.getSeat_state());
+		System.out.println(customerSeatVO.getDatasolt());
+		int num = 0;
+		int num2 = 0;
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
-		/* customerService.addSeat(customerSeatVO); */
+		
+		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
+			for(int j=1;j<Integer.parseInt(customerSeatVO.getSeatcol())+1;j++) {
+				num += 1;
+				customerService.addSeat(
+						customerSeatVO.getCompany(),
+						customerSeatVO.getTheater_name(),
+						customerSeatVO.getTheater_num(),
+						customerSeatVO.getSeatrow().get(i),
+						Integer.toString(j),
+						customerSeatVO.getSeat_state().get(num2),
+						Integer.toString(num)
+						);
+				num2 += 1;
+			}
+		}
+		
 		
 		return mav;
 	}
@@ -247,7 +302,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value ="/customer/customerSeatValue.do", method = RequestMethod.POST)
-	private ModelAndView addseat(
+	private ModelAndView customerSeatValue(
 			@ModelAttribute("customerSeatValue") CustomerSeatValueVO customerSeatValueVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/customer/customerSeat.do");
@@ -257,6 +312,9 @@ public class CustomerController {
 		session.setAttribute("seatAlphabet", customerSeatValueVO.getSeatRow());
 		session.setAttribute("seatRow", seatRow);
 		session.setAttribute("seatCol", customerSeatValueVO.getSeatCol());
+		session.setAttribute("theater_name_Update", customerSeatValueVO.getTheater_name());
+		session.setAttribute("theater_num_Update", customerSeatValueVO.getTheater_num());
+		
 		
 		return mav;
 	}
@@ -268,8 +326,10 @@ public class CustomerController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
-		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
@@ -344,7 +404,7 @@ public class CustomerController {
 			return "redirect:/customer/check_customerMovie.do";
 	}
 	
-		@RequestMapping(value="/customer/movieUpdate.do", method=RequestMethod.POST)
+	@RequestMapping(value="/customer/movieUpdate.do", method=RequestMethod.POST)
 		public String memberLevel(CustomerMovieVO vo,
 								@RequestParam("movie_name") String movie_name,
 								@RequestParam("theater_name") String theater_name,
@@ -356,6 +416,7 @@ public class CustomerController {
 			customerService.movieUpdate(vo);
 			return "redirect:/customer/check_customerMovie.do";
 		}
+
 	
 		@RequestMapping(value="/customer/customerConfirmTime.do", method = {RequestMethod.GET , RequestMethod.POST})
 		private ModelAndView customerConfirmTime(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -457,5 +518,117 @@ public class CustomerController {
 
 			return "redirect:/customer/customerConfirmTime.do";
 		}
+
+
+
+		
+	@RequestMapping(value = "/customer/check_customerSeat.do" , method = RequestMethod.GET)
+	private ModelAndView Check_customerSeat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			String viewName = (String) request.getAttribute("viewName");
+			
+			HttpSession session = request.getSession();
+			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			
+			
+			/* ------------ 접근 처리 ------------ */
+			try {
+			if(memberVO.getUser_level().equals("customer")) {
+				mav.addObject("member",memberVO);
+				try {
+					String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+					List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
+					List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+					/*--------------- 회사 등록을 안했다면 오류 처리 -----------------*/
+							if(company != null) {
+								mav.addObject("company",company);
+								mav.addObject("theater_name", theater_name);
+								mav.addObject("theater_num", theater_num);
+							} else {
+								mav.addObject("company","no");
+							}
+					
+			} catch (NullPointerException e) {
+						mav.addObject("company","no");
+						mav.addObject("theater_name", "no");
+						mav.addObject("theater_num", "no");
+					}
+				mav.setViewName(viewName);
+				
+				} else if(memberVO.getUser_level().equals("admin")) {
+					mav = new ModelAndView("redirect:/admin.do");
+				} else {
+				mav = new ModelAndView("redirect:/main.do");
+				} } catch(NullPointerException e) {
+				mav = new ModelAndView("redirect:/main.do");
+			}
+			return mav;
+		}
+	
+	@RequestMapping(value ="/customer/customerSeatInfo.do", method = RequestMethod.POST)
+	private ModelAndView customerSeatInfo(
+			@ModelAttribute("customerSeatInfo") CustomerSeatInfoVO customerSeatInfoVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("redirect:/customer/check_customerSeat.do");
+		HttpSession session = request.getSession();
+		//seatrow 불러오기
+		List<String> seatRow = customerDAO.selectSeatRow_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		//seatcol 불러오기
+		List<String> seatCol = customerDAO.selectSeatCol_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		//seat_state 불러오기
+		List<String> seat_state = customerDAO.selectSeat_State_sub(
+				customerSeatInfoVO.getCompany(),
+				customerSeatInfoVO.getTheater_name(), 
+				customerSeatInfoVO.getTheater_num());
+		try {
+			if(seatRow.get(0) != null) {
+			session.setAttribute("seatRow_confirm", seatRow);
+			session.setAttribute("seatRowSize", Integer.toString(seatRow.size()));
+			session.setAttribute("seatCol_confirm", Integer.toString(seatCol.size()));
+			session.setAttribute("seat_state_confirm", seat_state);
+			session.setAttribute("theater_name_confirm", customerSeatInfoVO.getTheater_name());
+			session.setAttribute("theater_num_confirm", customerSeatInfoVO.getTheater_num());
+			}
+		} catch(IndexOutOfBoundsException e) {
+			session.setAttribute("seatRow_confirm", "no");
+			session.setAttribute("seatCol_confirm", "no");
+			session.setAttribute("seat_state_confirm", "no");
+		}
+		return mav;
+	}
+	
+	@RequestMapping(value="/customer/seatUpdate.do", method=RequestMethod.POST)
+	public String seatUpdate(@ModelAttribute("customerSeatUpdateVO") CustomerSeatUpdateVO vo
+			,HttpServletRequest request, HttpServletResponse response)throws Exception{
+		int num = 0;
+		HttpSession session = request.getSession();
+		
+		for(int i=0; i< vo.getSeatrow().size();i++) {
+			for(int j=0;j<vo.getSeatcol().size();j++) {
+				customerService.seatUpdate(
+						vo.getSeat_state().get(num),
+						vo.getCompany(),
+						vo.getTheater_name(),
+						vo.getTheater_num(),
+						vo.getSeatrow().get(i),
+						vo.getSeatcol().get(j)
+						);
+				num += 1;
+			}
+		}
+		
+		session.setAttribute("seatRow_confirm", "no");
+		session.setAttribute("seatCol_confirm", "no");
+		session.setAttribute("seat_state_confirm", "no");
+		
+		
+		return "redirect:/customer/check_customerSeat.do";
+	}
 }
 

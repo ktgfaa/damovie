@@ -90,8 +90,14 @@ public class MemberServiceImpl implements MemberService {
 			return memberDAO.order(order);
 		}
 
+		@Override
+		public String getRunTime(String movie_name) {
+			return memberDAO.getRunTime(movie_name);
+		}
 
-	
-
+		@Override
+		public void bookDelete(MemberVO vo) {
+			memberDAO.bookDelete(vo);
+		}
 
 }

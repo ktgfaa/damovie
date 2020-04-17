@@ -292,7 +292,6 @@ public class MemberController extends MultiActionController {
 	private String checkMyBook(HttpSession session, HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html; charset=utf-8");
-
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		OrderVO orderVO = (OrderVO)session.getAttribute("order");
 
@@ -310,7 +309,7 @@ public class MemberController extends MultiActionController {
 			out.println("alert('예매 내역이 없습니다.');history.go(-1);");
 			out.println("</script>");
 			out.flush(); 
-		}
+		}else {
 
 		String col = orderVO.getSeatcol();
 		String[] colArr = col.split(",");
@@ -339,9 +338,37 @@ public class MemberController extends MultiActionController {
 			}
 		}
 		session.setAttribute("rowCol", rowCol);
+		
+	//런닝타임 계산 (종료시간 구하기
+		//시작시간
+		String onlyNum_orderTime = orderVO.getTime().replaceAll("[^0-9]", "");
+		int timeHour = Integer.parseInt(onlyNum_orderTime.substring(0, 2));
+		int timeMinute = Integer.parseInt(onlyNum_orderTime.substring(2, 4));
+		int time = timeHour*60 + timeMinute;
+		//종료시간까지
+		String runningTime = memberService.getRunTime(orderVO.getMovie_name());
+		String onlyNum_runningTime = runningTime.replaceAll("[^0-9]","");
+		int run = Integer.parseInt(onlyNum_runningTime);
+		//종료시간
+		int endTimeNum = time + run;
+		int endTimeNum_Hour = endTimeNum / 60;
+		int endTimeNum_Minute = endTimeNum % 60;
+		String endTime = Integer.toString(endTimeNum_Hour) + ":" + Integer.toString(endTimeNum_Minute);
+		
+		session.setAttribute("endTime", endTime);
+		}
 		return "checkMyBook";
 	}
 	
+	@RequestMapping(value= "/member/cancelMyBook.do", method=RequestMethod.POST )
+	private String cancelMyBook(MemberVO vo,HttpSession session,HttpServletResponse response) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		vo.setId(member.getId());
+		memberService.bookDelete(vo);
+		session.removeAttribute("order");
+		
+		return "redirect:/mypage.do";
+	}
 	 
 	@RequestMapping(value="/member/memberDeleteForm.do", method=RequestMethod.GET)
 	public String memberDeleteForm(HttpSession session)throws Exception{

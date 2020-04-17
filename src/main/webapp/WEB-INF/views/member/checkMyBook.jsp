@@ -9,32 +9,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="${contextPath }/resources/css/member/checkMyBook.css" rel="stylesheet" type="text/css">
+<link href="${contextPath }/resources/css/member/checkMyBook.css?ver=1" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	
-	$("#cancel").click(function(){
-		var result = confirm('예매를 취소하시겠습니까?');
-		if(result){
-			alert("예매취소 기능 넣기");
-		}else{
-		}
-	});
-	
-	
 	$(".button").hover(function(){
 		$(this).css("background-color","rgba(54,45,68,0.7)");
 	},function(){
 		$(this).css("background","none");
 	});
-	
+});
+$(function() {
 	$("#mypage").click(function(){
 		location.href="/damovie/mypage.do";
 	});
 	
+	$('form').submit(function(){
+		var check_submit=confirm('정말 취소하시겠습니까?');
+
+		return check_submit;
+	});
 });
+
 </script>
 <meta charset="UTF-8">
 <title>예매확인</title>
@@ -42,7 +39,7 @@ $(function(){
 <body>
 <div id="main_Form">
 	<div class="main_box">
-		<form id="input" name="input" method="post" action="${contextPath }/member/myBook.do">
+		<form id="input" name="input" method="post" action="${contextPath }/member/cancelMyBook.do">
 			<div class="input_box">
 				<div class="top_box">
 					<p><span>${member.name }</span>님 예매내역</p>
@@ -52,9 +49,9 @@ $(function(){
 					<div class="left_box">
 						<ul>
 							<li>${order.company}  ${order.theater_name}</li>
-							<li>${order.movie_name}</li><!-- 영화 제목은 중앙배열 ㄱㄱ -->
-							<li>${order.time}</li><!-- 끝나는시간은 영화 정보 페이지에서 running타임 빼와서 쓰기 -->
-							<li>${order.theater_num} ${order.seatrow}${order.seatcol}</li>
+							<li>${order.movie_name}</li>
+							<li>${order.time} ~ ${endTime }</li>
+							<li>${order.theater_num}관 ${rowCol}</li>
 						</ul>
 					</div>
 				
@@ -67,7 +64,7 @@ $(function(){
 						즐거운 영화관람 하시길 바랍니다.<br>
 						</p>
 						<div class="btn_box">
-							<input type="button" value="예매취소" class="button" id="cancel">
+							<input type="submit" value="예매취소" class="button" id="cancel">
 							<input type="button" value="마이페이지" class="button" id="mypage">
 						</div>
 					</div>

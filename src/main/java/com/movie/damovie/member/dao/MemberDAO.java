@@ -37,4 +37,8 @@ public interface MemberDAO {
 
 	public OrderVO order(OrderVO order);
 
+	public String getRunTime(String movie_name);
+
+	public void bookDelete(MemberVO vo);
+
 }

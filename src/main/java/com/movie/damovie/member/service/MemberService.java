@@ -36,5 +36,9 @@ public interface MemberService {
 	public void levelUpdate(MemberVO vo);
 
 	public OrderVO order(OrderVO order);
+
+	public String getRunTime(String movie_name);
+
+	public void bookDelete(MemberVO vo);
 	
 }

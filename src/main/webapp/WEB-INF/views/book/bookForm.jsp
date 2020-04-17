@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
 
 .top {
-	height: 270px;
+	height: 230px;
 }
 
 .fc-unthemed td.fc-today {
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .bookForm {
 	height: 637px;
+	margin-top: 40px;
 }
 
 .firstBook {

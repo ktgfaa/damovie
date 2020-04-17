@@ -16,6 +16,7 @@
 	float: left;
 	border: 1px solid;
     border-color: white;
+    margin-left: 386px;
 }
 .bookForm {
 	height: 637px;
@@ -38,7 +39,7 @@ caption {
 .ResTable {
 	width: 900px;
     height: 310px;
-	
+    margin-left: 115px;	
 }
 
 .movieSel {

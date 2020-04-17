@@ -23,13 +23,13 @@ public class CustomerTheaterVO {
 	private String time10;
 	private Date putdate;
 	
-	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public String getCompany() {
 		return company;
 	}

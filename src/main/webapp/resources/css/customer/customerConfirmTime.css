@@ -9,14 +9,7 @@ body {
 	
 }
 
-.wrap {
-    width: 1400px;
-    height: 600px;
-    float: left;
-    margin-left: 374px;
-    margin-top: 50px;
-    background-color: #00000059;	
-}
+
 
 .logo {
 	color: red;

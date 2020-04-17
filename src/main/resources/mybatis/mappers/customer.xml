@@ -163,11 +163,36 @@
 		]]>
 	</update>
 	
+	<update id="ConfirmTimeMod"  parameterType="customerTheaterVO">
+		<![CDATA[
+			update theater_time set 
+			movie_DATE=#{movie_date ,jdbcType=VARCHAR},
+			theater_num=#{theater_num ,jdbcType=VARCHAR},
+			time1=#{time1 ,jdbcType=VARCHAR},
+			time2=#{time2 ,jdbcType=VARCHAR},
+			time3=#{time3 ,jdbcType=VARCHAR},
+			time4=#{time4 ,jdbcType=VARCHAR},
+			time5=#{time5 ,jdbcType=VARCHAR},
+			time6=#{time6 ,jdbcType=VARCHAR},
+			time7=#{time7 ,jdbcType=VARCHAR},
+			time8=#{time8, jdbcType=VARCHAR},
+			time9=#{time9, jdbcType=VARCHAR},
+			time10=#{time10, jdbcType=VARCHAR},
+			putdate=sysdate
+			where company=#{company} AND theater_name=#{theater_name}
+		]]>
+	</update>
+	
 	<delete id="movieDelete">
 		<![CDATA[
 			delete from movie_company where movie_name=#{movie_name}
 		]]>
 	</delete>
-
+	
+	<delete id="ConfirmTimeDel" parameterType="customerTheaterVO">
+		<![CDATA[
+			delete from theater_time where movie_date=#{movie_date ,jdbcType=VARCHAR} AND theater_num=#{theater_num ,jdbcType=VARCHAR} AND theater_name=#{theater_name ,jdbcType=VARCHAR}
+		]]>
+	</delete>
 	</mapper>
 	

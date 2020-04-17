@@ -99,4 +99,12 @@ public class CustomerDAO {
 	public void movieUpdate(CustomerMovieVO vo) {
 		sqlSession.update("mapper.customer.movieUpdate",vo);
 	}
+	
+	public int ConfirmTimeMod(CustomerTheaterVO vo) {
+		return sqlSession.update("mapper.customer.ConfirmTimeMod",vo);
+	}
+	public int ConfirmTimeDel(CustomerTheaterVO vo) {
+		
+		return sqlSession.delete("mapper.customer.ConfirmTimeDel",vo);
+	}
 }

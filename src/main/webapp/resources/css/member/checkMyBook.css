@@ -43,11 +43,9 @@
 .left_box{
     width: 455px;
     height: 400px;
-    margin-left: 29px;
-    padding-right: 35px;
+    margin-left: 88px;
     border-right: 2px dotted white;
     margin-top: 37px;
-    text-align: center;
 }
 .left_box li:nth-child(1){
 	font-size: 45px;

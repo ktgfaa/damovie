@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="${contextPath }/resources/css/member/checkMyBook.css?ver=1" rel="stylesheet" type="text/css">
+<link href="${contextPath }/resources/css/member/checkMyBook.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -54,7 +54,7 @@ $(function(){
 							<li>${order.company}  ${order.theater_name}</li>
 							<li>${order.movie_name}</li><!-- 영화 제목은 중앙배열 ㄱㄱ -->
 							<li>${order.time}</li><!-- 끝나는시간은 영화 정보 페이지에서 running타임 빼와서 쓰기 -->
-							<li>${order.theater_num}관 ${rowCol}</li>
+							<li>${order.theater_num} ${order.seatrow}${order.seatcol}</li>
 						</ul>
 					</div>
 				

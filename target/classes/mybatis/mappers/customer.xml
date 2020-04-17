@@ -10,7 +10,26 @@
 		<result property="theater_num" column="theater_num"></result>
 		<result property="movie_name" column="movie_name"></result>
 	</resultMap>
-
+	
+	<resultMap id="customerTheaterResult" type="customerTheaterVO">
+		<result property="id" column="id"></result>
+		<result property="company" column="company"></result>
+		<result property="theater_name" column="theater_name"></result>
+		<result property="theater_num" column="theater_num"></result>
+		<result property="movie_date" column="movie_date"></result>
+		<result property="time1" column="time1"></result>
+		<result property="time2" column="time2"></result>
+		<result property="time3" column="time3"></result>
+		<result property="time4" column="time4"></result>
+		<result property="time5" column="time5"></result>
+		<result property="time6" column="time6"></result>
+		<result property="time7" column="time7"></result>
+		<result property="time8" column="time8"></result>
+		<result property="time9" column="time9"></result>
+		<result property="time10" column="time10"></result>
+		<result property="putdate" column="putdate"></result>
+	</resultMap>
+	
 
 	<insert id="insertCustomerMovie" parameterType="customerMovieVO">
 		<![CDATA[
@@ -94,6 +113,7 @@
 		]]>
 	</select>
 	
+
 	<select id="selectTheaterNum_notTime" resultType="String" parameterType="java.util.Map">
 		<![CDATA[
 			SELECT theater_num 
@@ -111,6 +131,12 @@
 		]]>
 	</select>
 	
+
+
+	<select id="selectTheaterList" resultMap="customerTheaterResult" parameterType="String">
+		SELECT * from theater_time where theater_name=#{theaterName}
+	</select>
+
 		<select id="movieList" resultType="String">
 		<![CDATA[
 			SELECT movie_name AS movie_name
@@ -185,9 +211,35 @@
 		]]>
 	</update>
 	
+	<update id="ConfirmTimeMod"  parameterType="customerTheaterVO">
+		<![CDATA[
+			update theater_time set 
+			movie_DATE=#{movie_date ,jdbcType=VARCHAR},
+			theater_num=#{theater_num ,jdbcType=VARCHAR},
+			time1=#{time1 ,jdbcType=VARCHAR},
+			time2=#{time2 ,jdbcType=VARCHAR},
+			time3=#{time3 ,jdbcType=VARCHAR},
+			time4=#{time4 ,jdbcType=VARCHAR},
+			time5=#{time5 ,jdbcType=VARCHAR},
+			time6=#{time6 ,jdbcType=VARCHAR},
+			time7=#{time7 ,jdbcType=VARCHAR},
+			time8=#{time8, jdbcType=VARCHAR},
+			time9=#{time9, jdbcType=VARCHAR},
+			time10=#{time10, jdbcType=VARCHAR},
+			putdate=sysdate
+			where company=#{company} AND theater_name=#{theater_name}
+		]]>
+	</update>
+	
 	<delete id="movieDelete">
 		<![CDATA[
 			delete from movie_company where movie_name=#{movie_name}
+		]]>
+	</delete>
+	
+	<delete id="ConfirmTimeDel" parameterType="customerTheaterVO">
+		<![CDATA[
+			delete from theater_time where movie_date=#{movie_date ,jdbcType=VARCHAR} AND theater_num=#{theater_num ,jdbcType=VARCHAR} AND theater_name=#{theater_name ,jdbcType=VARCHAR}
 		]]>
 	</delete>
 	</mapper>

@@ -12,7 +12,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.movie.damovie.customer.vo.CustomerMovieVO;
-import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
 
@@ -118,6 +117,7 @@ public class CustomerDAO {
 
 		return TheaterNum;
 	}
+
 	
 	public List<String> selectTheaterNum_notTime(String company,String theater_name) throws DataAccessException {
 		Map<String,String> theaterNum_nottime = new HashMap<String,String>();
@@ -128,6 +128,14 @@ public class CustomerDAO {
 
 
 		return TheaterNum;
+
+	}
+	
+	public List<CustomerTheaterVO> selectTheaterList(String theaterName) throws DataAccessException {
+		List<CustomerTheaterVO> theaterList = sqlSession.selectList("mapper.customer.selectTheaterList", theaterName);
+		
+		return theaterList;
+
 	}
 	public List<CustomerMovieVO> listALL(String id, int start, int end, String searchOption, String keyword) {
 		//검색옵션, 키워드 맵에 저장
@@ -148,6 +156,7 @@ public class CustomerDAO {
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		return sqlSession.selectOne("mapper.customer.countArticle", map);
+
 	}
 
 	public void movieDelete(CustomerMovieVO vo) {
@@ -162,6 +171,15 @@ public class CustomerDAO {
 		sqlSession.update("mapper.customer.movieUpdate",vo);
 	}
 	
+
+	public int ConfirmTimeMod(CustomerTheaterVO vo) {
+		return sqlSession.update("mapper.customer.ConfirmTimeMod",vo);
+	}
+	public int ConfirmTimeDel(CustomerTheaterVO vo) {
+		
+		return sqlSession.delete("mapper.customer.ConfirmTimeDel",vo);
+	}
+
 	// 좌석 업데이트
 	public void seatUpdate(String seat_state,String company,String theater_name,String theater_num,String seatrow,String seatcol) {
 		Map<String,String> updateSeatInfo = new HashMap<String,String>();
@@ -175,4 +193,5 @@ public class CustomerDAO {
 		
 		sqlSession.update("mapper.customer.seatUpdate",updateSeatInfo);
 	}
+
 }

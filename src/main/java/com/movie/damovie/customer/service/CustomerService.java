@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.movie.damovie.customer.dao.CustomerDAO;
 import com.movie.damovie.customer.vo.CustomerMovieVO;
+import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
+import com.movie.damovie.member.vo.MemberVO;
 
 
 @Service("customerService")

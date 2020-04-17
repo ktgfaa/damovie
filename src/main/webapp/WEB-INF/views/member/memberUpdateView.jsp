@@ -86,9 +86,6 @@ function sendIt(tag) {
 	}catch(e){
 		return false;
 	}
-
-	document.input.submit();
-}
 </script>
 
 <meta charset="UTF-8">
@@ -98,7 +95,7 @@ function sendIt(tag) {
 	<div id="main_Form">
 		<div class="main_box">
 			<div class="info_box">
-				<form id="input" name="input" method="post" action="${contextPath }/member/memberUpdate.do" onsubmit="return sendIt(this);">
+				<form id="input" name="input" method="post" action="${contextPath }/member/memberUpdate.do" onsubmit="return sendIt();">
 				<table class="info_table">
 					<tr>
 						<td>아이디</td>

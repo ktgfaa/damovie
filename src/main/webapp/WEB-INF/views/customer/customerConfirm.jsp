@@ -86,7 +86,7 @@ body {
 		});
 		
 		$(".theater_box").click(function(){
-			location.href="#";
+			location.href="${contextPath}/customer/customerConfirmTime.do";
 		});
 		
 		$(".seat_box").click(function(){

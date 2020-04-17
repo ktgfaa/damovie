@@ -1,3 +1,4 @@
+
 package com.movie.damovie.customer.controller;
 
 import java.text.SimpleDateFormat;
@@ -48,6 +49,8 @@ public class CustomerController {
 	
 	private List<String> Alphabet = new ArrayList<String>(Arrays.asList(
 			"A", "B", "C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"));
+	
+	int count =0;
 	
 	@RequestMapping(value = "/customer/customer.do" , method = RequestMethod.GET)
 	private ModelAndView customerMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -436,6 +439,111 @@ public class CustomerController {
 			customerService.movieUpdate(vo);
 			return "redirect:/customer/check_customerMovie.do";
 		}
+
+	
+		@RequestMapping(value="/customer/customerConfirmTime.do", method = {RequestMethod.GET , RequestMethod.POST})
+		private ModelAndView customerConfirmTime(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			HttpSession session = request.getSession();
+			String viewName = (String) request.getAttribute("viewName");
+			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			
+			List<String> datatime = new ArrayList<String>();
+			  
+			 for(int i =1; i < 8;i++ ) {
+				Calendar cal2 = new GregorianCalendar();
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd"); 
+				cal2.add(Calendar.DATE, i);
+				datatime.add(sdf1.format(cal2.getTime()));
+			 }
+			/* ------------ 접근 처리 ------------ */
+			try {
+			if(memberVO.getUser_level().equals("customer")) {
+				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
+				
+				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+					if (company == null || company == "") {
+						mav.addObject("company","no");
+					}else {
+						mav.addObject("company", company);
+						
+						if(count ==0) {
+							List<String> theater = customerDAO.selectTheaterName_sub(memberVO.getId());
+							List<CustomerTheaterVO> theaterList = customerDAO.selectTheaterList(theater.get(0));
+							
+							mav.addObject("theater_name", theater.get(0));
+							mav.addObject("theaterList",theaterList);
+							mav.addObject("theaterNameList", theater);
+							count++;
+						} 
+
+						
+						
+				}
+				
+				mav.addObject("datatime", datatime);
+				mav.addObject("theater_num", theater_num);
+				
+				mav.setViewName(viewName);
+				} else if(memberVO.getUser_level().equals("admin")) {
+					mav = new ModelAndView("redirect:/admin.do");
+				} else {
+				mav = new ModelAndView("redirect:/main.do");
+				} } catch(NullPointerException e) {
+				mav = new ModelAndView("redirect:/main.do");
+			}
+			
+
+			return mav;
+		}
+		
+		@RequestMapping(value="/customer/customerConfirmTimeMod.do", method = {RequestMethod.GET , RequestMethod.POST})
+		private String customerConfirmTimeMod(@ModelAttribute("CustomerTheaterVO") CustomerTheaterVO customerTheaterVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			HttpSession session = request.getSession();
+			
+			int result = customerDAO.ConfirmTimeMod(customerTheaterVO);
+			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			List<String> theater = customerDAO.selectTheaterName_sub(memberVO.getId());
+			List<CustomerTheaterVO> theaterList = customerDAO.selectTheaterList(customerTheaterVO.getTheater_name());
+			session.setAttribute("theater_name", customerTheaterVO.getTheater_name());
+			session.setAttribute("theaterList",theaterList);
+			session.setAttribute("theaterNameList", theater);
+			
+			return "redirect:/customer/customerConfirmTime.do";
+		}
+		
+		@RequestMapping(value="/customer/customerConfirmTimeDel.do", method = {RequestMethod.GET , RequestMethod.POST})
+		private String customerConfirmTimeDel(@ModelAttribute("CustomerTheaterVO") CustomerTheaterVO customerTheaterVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("실행");
+			HttpSession session = request.getSession();
+			
+			int result = customerDAO.ConfirmTimeDel(customerTheaterVO);
+			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			List<String> theater = customerDAO.selectTheaterName_sub(memberVO.getId());
+			List<CustomerTheaterVO> theaterList = customerDAO.selectTheaterList(customerTheaterVO.getTheater_name());
+			session.setAttribute("theater_name", customerTheaterVO.getTheater_name());
+			session.setAttribute("theaterList",theaterList);
+			session.setAttribute("theaterNameList", theater);
+			
+			return "redirect:/customer/customerConfirmTime.do";
+		}
+		
+		@RequestMapping(value="/customer/customerConfirmTimeChange.do", method = {RequestMethod.GET , RequestMethod.POST})
+		private String customerConfirmTimeChange(@RequestParam("theater_name") String theaterName, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			HttpSession session = request.getSession();
+			MemberVO memberVO = (MemberVO)session.getAttribute("member");
+			List<String> theater = customerDAO.selectTheaterName_sub(memberVO.getId());
+			List<CustomerTheaterVO> theaterList = customerDAO.selectTheaterList(theaterName);
+			session.setAttribute("theater_name", theaterName);
+			session.setAttribute("theaterList",theaterList);
+			session.setAttribute("theaterNameList", theater);
+
+			return "redirect:/customer/customerConfirmTime.do";
+		}
+
+
+
 		
 	@RequestMapping(value = "/customer/check_customerSeat.do" , method = RequestMethod.GET)
 	private ModelAndView Check_customerSeat(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -546,3 +654,4 @@ public class CustomerController {
 		return "redirect:/customer/check_customerSeat.do";
 	}
 }
+

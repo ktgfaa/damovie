@@ -1,0 +1,32 @@
+body {
+	font-family: "Nanum Pen Script", cursive;
+	font-size : 23px;
+}
+
+.mainDiv {
+	width: 100%;
+    height: 667px;
+	
+}
+
+
+
+.logo {
+	color: red;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.checkComp {
+	margin-bottom: 37px;
+    height: 50px;
+}
+
+.list {
+	height: 100%;
+    margin: 0 25px 0 25px;
+}
+.timeList {
+	width: 100%;
+    color:white;
+}
+

@@ -1,6 +1,8 @@
 package com.movie.damovie.member.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;    
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.movie.damovie.book.order.VO.OrderVO;
@@ -290,11 +292,10 @@ public class MemberController extends MultiActionController {
 	private String checkMyBook(HttpSession session, HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html; charset=utf-8");
-		
-		String id = (String)session.getAttribute("id");
+
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
 		OrderVO orderVO = (OrderVO)session.getAttribute("order");
-	
+
 		/* ------------ 접근 처리 ------------ */
 		try {
 			if(memberVO == null) {
@@ -303,12 +304,41 @@ public class MemberController extends MultiActionController {
 		} catch(NullPointerException e) {
 			return "redirect:/main.do";
 		}
+
 		if(orderVO == null) {
 			out.println("<script language='javascript'>");
 			out.println("alert('예매 내역이 없습니다.');history.go(-1);");
 			out.println("</script>");
 			out.flush(); 
 		}
+
+		String col = orderVO.getSeatcol();
+		String[] colArr = col.split(",");
+		List<String> colList = new ArrayList<String>();
+		for(int i=0; i<colArr.length; i++) {
+			colList.add(colArr[i]);
+		}
+
+		String row = orderVO.getSeatrow();
+		String[] rowArr = row.split("");
+		List<String> rowList = new ArrayList<String>();
+		for(int i=0; i<rowArr.length; i++) {
+			rowList.add(rowArr[i]);
+		}
+
+		String rowCol = "";
+		//row col 합치기
+		for(int i=0; i<rowList.size(); i++) {
+			if(i == 0) {
+			rowCol += rowList.get(i);
+			rowCol += colList.get(i);
+			}else {
+				rowCol += ", ";
+				rowCol += rowList.get(i);
+				rowCol += colList.get(i);
+			}
+		}
+		session.setAttribute("rowCol", rowCol);
 		return "checkMyBook";
 	}
 	

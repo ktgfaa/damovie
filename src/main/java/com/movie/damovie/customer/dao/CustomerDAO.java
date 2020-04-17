@@ -1,5 +1,7 @@
 package com.movie.damovie.customer.dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +29,24 @@ public class CustomerDAO {
 	}
 	
 	public int addMovie(CustomerMovieVO customerMovieVO) {
-		int movieResult = sqlSession.insert("mapper.customer.insertMovie", customerMovieVO);
+		Map<String,String> theater_num_distinct = new HashMap<String,String>();
+		theater_num_distinct.put("company", customerMovieVO.getCompany());
+		theater_num_distinct.put("theater_name", customerMovieVO.getTheater_name());
+		
+		int movieResult = 0;
+		String result = "";
+		List<String> distinct = sqlSession.selectList("mapper.customer.selectTheaterNum_Already", theater_num_distinct);
+		for(int i =0; i< distinct.size();i++) {
+			if(distinct.get(i) != null && distinct.get(i).equals(customerMovieVO.getTheater_num())) {
+					sqlSession.update("mapper.customer.movieUpdate",customerMovieVO);
+					result = "update";
+					} 
+		}
+		 if(!result.equals("update")) {
+			movieResult = sqlSession.insert("mapper.customer.insertMovie", customerMovieVO);
+		}
+
+		
 		return movieResult;
 	}
 	
@@ -96,6 +115,17 @@ public class CustomerDAO {
 	
 	public List<String> selectTheaterNum_sub(String id) throws DataAccessException {
 		List<String> TheaterNum = sqlSession.selectList("mapper.customer.selectTheaterNum_sub", id);
+
+		return TheaterNum;
+	}
+	
+	public List<String> selectTheaterNum_notTime(String company,String theater_name) throws DataAccessException {
+		Map<String,String> theaterNum_nottime = new HashMap<String,String>();
+		theaterNum_nottime.put("company", company);
+		theaterNum_nottime.put("theater_name", theater_name);
+
+		List<String> TheaterNum = sqlSession.selectList("mapper.customer.selectTheaterNum_notTime",theaterNum_nottime);
+
 
 		return TheaterNum;
 	}

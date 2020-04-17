@@ -69,11 +69,10 @@
 							</select>
 				          </td>
 				        </tr>
-				        <tr>
-				          <td colspan="2" style="border:none;text-align: center;"><button id="movieSave">저장하기</button></td>
-				        </tr>
 			        </tbody>
 				</table>
+				<p class="distinct_info">동일한 영화관을 저장하면 영화 정보만 수정됩니다!!</p>
+				<button id="movieSave">저장하기</button>
 				<input type="hidden" name="id" id="userid" value="${member.getId() }"/>
 			</div>
 		</div>

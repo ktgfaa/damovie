@@ -44,7 +44,12 @@
 							<td style="width: 150px;">극장 이름</td>
 							<td><select name="theater_name" class="theater_namecheck">
 							<c:forEach var="theater" items="${theater_name }">
+								<c:if test="${theater_name_selected eq theater }">
+									<option value="${theater }" selected="selected" >${theater }</option>
+								</c:if>
+								<c:if test="${theater_name_selected ne theater }">
 									<option value="${theater }" >${theater }</option>
+								</c:if>
 							</c:forEach>
 							</select></td>
 						</tr>
@@ -52,7 +57,12 @@
 							<td style="width: 150px;">영화관 번호</td>
 							<td><select name="theater_num" class="theater_numcheck">
 									<c:forEach var="theaterNum" items="${theater_num }">
-										<option value="${theaterNum }">${theaterNum }</option>
+										<c:if test="${theater_name_selected eq '이미 시간이 업데이트된 영화관은 관리페이지에서 수정해주세요' }">
+											<option value="${theater_name_selected }" >${theater_name_selected }</option>
+										</c:if>
+										<c:if test="${theater_name_selected ne '이미 시간이 업데이트된 영화관은 관리페이지에서 수정해주세요' }">
+											<option value="${theaterNum }">${theaterNum }</option>
+										</c:if>
 									</c:forEach>
 							</select></td>
 						</tr>
@@ -97,6 +107,29 @@
 		</div>
 	</div>
 	<script>
+	
+		$('.theater_namecheck').change(function(){
+			 const company = $('.companycheck option:checked').val();
+			 const theater_name = $('.theater_namecheck option:checked').val();
+			 
+	  			$.ajax({
+		 			url: "${contextPath}/customer/customerTimeValue.do",
+		 			type: "post",
+		 			dataType:"text",
+		 			data : {
+		 					company : company,
+		 					theater_name : theater_name
+		 			    },  
+		 			success: function(data){     
+		 			location.href="/damovie/customer/customerTime.do";
+		 			},complete: function(data){
+		 			},error: function (request, status, error) {
+		 			   alert("다시 시도해주세요!");
+		 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		 			  
+		 			}
+		 		}); 
+		});
 
 		$('#theaterSave').click(function() {
 
@@ -115,11 +148,6 @@
 		 const time9 = $('#time9').val();
 		 const time10 = $('#time10').val();
 		 const id = $('#userid').val();
-		 
-		 console.log(company);
-		 console.log(theater_name);
-		 console.log(theater_num);
-		 console.log(movie_date);
 		 
 		
 		 if(company != null || company != "" ||

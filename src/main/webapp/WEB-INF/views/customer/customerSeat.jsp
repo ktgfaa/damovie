@@ -71,8 +71,8 @@
 						<caption>좌석 최대 값 선택</caption>
 						<tbody>
 							<tr>
-								<td style="width: 150px;">열 최대값</td>
 								<td style="width: 150px;">행 최대값</td>
+								<td style="width: 150px;">열 최대값</td>
 								<td style="width: 150px;" rowspan="2"><button id="call_SEAT">불러오기</button></td>
 								<td style="width:150px;" rowspan="2"><button id="save_SEAT">저장하기</button></td>
 

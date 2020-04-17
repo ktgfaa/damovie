@@ -68,7 +68,7 @@ input , .theater_numcheck {
 	height: 250px;
 }
 
-.infoTable > tbody > tr > td > button {
+#movieSave {
 	    width: 150px;
     height: 50px;
     border-radius: 10px 10px 10px 10px;
@@ -76,11 +76,19 @@ input , .theater_numcheck {
     color: white;
     	font-family: "Nanum Pen Script", cursive;
     	font-size : 23px;
+    	margin-top: 42px;
 }
 
-.infoTable > tbody > tr > td > button:hover {
+#movieSave:hover {
 	background-color: #00f9ed2b;
 	cursor : pointer;
+}
+
+.distinct_info {
+	color: white;
+    margin-top: 437px;
+    font-size: 27px;
+}
 }
 
 .selectMovie {

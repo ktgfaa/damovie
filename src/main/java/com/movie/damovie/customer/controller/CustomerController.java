@@ -31,6 +31,7 @@ import com.movie.damovie.customer.vo.CustomerSeatUpdateVO;
 import com.movie.damovie.customer.vo.CustomerSeatVO;
 import com.movie.damovie.customer.vo.CustomerSeatValueVO;
 import com.movie.damovie.customer.vo.CustomerTheaterVO;
+import com.movie.damovie.customer.vo.CustomerTimeValueVO;
 import com.movie.damovie.member.vo.MemberVO;
 
 @Controller("customerController")
@@ -201,7 +202,8 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customer/customerTime.do" , method = RequestMethod.GET)
-	private ModelAndView customerTime(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private ModelAndView customerTime(
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
@@ -216,15 +218,25 @@ public class CustomerController {
 			cal2.add(Calendar.DATE, i);
 			datatime.add(sdf1.format(cal2.getTime()));
 		 }
-
+		 
+		 CustomerTimeValueVO vo = (CustomerTimeValueVO)session.getAttribute("customerTimeValue");
+		 
+		 List<String> theater_num = new ArrayList<String>();
+		 try {
+			if(vo.getCompany() != null && vo.getTheater_name() != null) {
+				theater_num = customerDAO.selectTheaterNum_notTime(vo.getCompany(), vo.getTheater_name());
+				mav.addObject("theater_name_selected", vo.getTheater_name());
+			} } catch(NullPointerException e) {
+				mav.addObject("theater_name_selected", "이미 시간이 업데이트된 영화관은 관리페이지에서 수정해주세요");
+			}
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
 		if(memberVO.getUser_level().equals("customer")) {
 			try {
+					
 					String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 					List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
-					List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
 					if(company != null) {
 						mav.addObject("company",company);
 						mav.addObject("theater_name", theater_name);
@@ -312,6 +324,17 @@ public class CustomerController {
 		session.setAttribute("theater_name_Update", customerSeatValueVO.getTheater_name());
 		session.setAttribute("theater_num_Update", customerSeatValueVO.getTheater_num());
 		
+		
+		return mav;
+	}
+	
+	@RequestMapping(value ="/customer/customerTimeValue.do", method = RequestMethod.POST)
+	private ModelAndView customerTimeValue(
+			@ModelAttribute("customerTimeValue") CustomerTimeValueVO vo,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView("redirect:/customer/customerTime.do");
+		HttpSession session = request.getSession();
+		session.setAttribute("customerTimeValue", vo);
 		
 		return mav;
 	}

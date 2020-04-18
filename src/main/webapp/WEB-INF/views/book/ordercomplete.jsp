@@ -14,18 +14,17 @@
 
 .bmImage {
 	float: left;
-	border: 1px solid;
+    width: 256px;
+    height: 338px;
+    border: 1px solid;
     border-color: white;
-    margin-left: 386px;
+    border-right: none;
 }
 .bookForm {
 	height: 637px;
 }
 .firstBook {
-	margin-left: 15%;
-    width: 1130px;
-    height: 59%;
-    position: absolute;
+	text-align: center;
     padding: 6%;
     padding-top: 4%;
 }
@@ -37,9 +36,7 @@ caption {
     font-size: 20px;
 }
 .ResTable {
-	width: 900px;
-    height: 310px;
-    margin-left: 115px;	
+	height: 312px;
 }
 
 .movieSel {
@@ -62,14 +59,14 @@ caption {
 .ResComBtnUl {
     margin: 0;
     padding: 0;
-    margin-left: 420px;
+    margin-left: 715px;
     margin-top: 45px;
 }
 
 strong {
 	    color: white;
     font-size: 50px;
-    margin-left: 305px;
+    margin-left: 140px;
 }
 
 .ResComBtnUl > li {

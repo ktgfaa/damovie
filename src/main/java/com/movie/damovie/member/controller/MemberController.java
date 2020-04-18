@@ -56,16 +56,17 @@ public class MemberController extends MultiActionController {
 		String action = "action";
 
 		String userid = req.getParameter("id");
-
+		HttpSession session = req.getSession();
+		session.removeAttribute("idcheckresult");
 		count = memberService.idcheck(userid);
 
 		if (count == 1) {
-			mav.addObject("idcheckresult", false);
-			mav.addObject("action", action);
-		} else {
-			mav.addObject("idcheckresult", true);
+			System.out.println("실패");
+			session.setAttribute("idcheckresult", "false");
+		} else if(count == 0) {
+			System.out.println("성공");
+			session.setAttribute("idcheckresult", "true");
 			mav.addObject("userid", userid);
-			mav.addObject("action", action);
 		}
 
 		mav.setViewName("redirect:/member/memberForm.do");
@@ -94,21 +95,33 @@ public class MemberController extends MultiActionController {
 			@RequestParam(value = "action", required = false) String action, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println("action : " + action);
-
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		HttpSession session = request.getSession();
+		String idresult = (String)session.getAttribute("idcheckresult");
+		session.removeAttribute("idcheckresult");
 		if (action == null) {
-			String viewName = (String) request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-
-			mav.setViewName(viewName);
-			return mav;
+			if( idresult ==null) {
+				mav.setViewName(viewName);
+				
+				return mav;
+			} else {
+				mav.addObject("idresult",idresult);
+				mav.setViewName(viewName);
+				return mav;
+			}
 		} else {
-			String viewName = (String) request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-			mav.addObject("userid", userid);
-			mav.addObject("idcheckresult", idcheckresult);
 
-			mav.setViewName(viewName);
-			return mav;
+			if( idresult == null) {
+				System.out.println("userid : " + userid);
+				mav.addObject("userid", userid);
+				mav.setViewName(viewName);
+				return mav;
+			} else {
+				mav.addObject("idresult",idresult);
+				mav.setViewName(viewName);
+				return mav;
+			}
 		}
 	}
 	

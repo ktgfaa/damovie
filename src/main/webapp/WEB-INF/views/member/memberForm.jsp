@@ -9,6 +9,29 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:if test="${idresult != null }">
+	<c:if test="${idresult eq false }">
+		<script>
+			window.onload=function() {
+				console.log("${userid != null}");
+				console.log("${idcheckresult}");
+				alert('중복된 아이디 입니다.');
+			}
+		</script>
+	</c:if>
+	<c:if test="${idresult eq true }">
+		<script>
+			window.onload=function() {
+				console.log("${userid != null}");
+				console.log("${idcheckresult}");
+				alert('사용 가능한 아이디 입니다.');
+			}
+		</script>
+	</c:if>
+</c:if>
+<link
+	href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean"
+	rel="stylesheet">
 <meta charset="UTF-8">
 <title>회원 가입 창</title>
 <style>
@@ -50,34 +73,12 @@
 	<form class="memberForm" name="member_form" id="member_form" method="post"
 		action="${contextPath }/member/addMember.do" onsubmit="return sendIt();">
 		<h1 class="text_center">회원 가입 </h1>
-		<table class="memberBox" align="center">
-			<c:if test="${empty idcheckresult}">
+		<table class="memberBox" style="text-align:center;">
 			<tr>
 				<td width="200"><p align="right">아이디</p></td>
 				<td width="400"><input type="text" name="id" id="textid" /></td>
 				<td width="100"><input type="button" id="idcheck" onclick="idCheck()"  value="중복 확인" /></td>
 			</tr>
-			</c:if>
- 			<c:if test="${!empty idcheckresult && idcheckresult eq false}">
-				<script type="text/javascript">
-					alert("중복된 아이디 입니다");
-				</script>
-				<tr>
-					<td width="200"><p align="right">아이디</p></td>
-					<td width="400"><input type="text" name="id" id="textid"  /></td>
-					<td width="100"><input type="button" id="idcheck" onclick="idCheck()"  value="중복 확인" /></td>
-				</tr>
-			</c:if>
-			<c:if test="${!empty idcheckresult && idcheckresult eq true }">
-						<script type="text/javascript">
-							alert('사용 가능한 아이디 입니다');
-						</script>
-					<tr>
-						<td width="200"><p align="right">아이디</p></td>
-						<td width="400"><input type="text" name="id" id="textid" value="${userid }" /></td>
-						<td width="100"><input type="button" id="idcheck" onclick="idCheck()"  value="중복 확인" /></td>
-					</tr>
-			</c:if>
 			<tr>
 				<td width="200"><p align="right">비밀번호</p></td>
 				<td width="400" ><input type="password" name="pwd" id="pwd" /></td>
@@ -85,7 +86,7 @@
 			<tr>
 				<td width="200"><p align="right">비밀번호 확인</p></td>
 				<td width="400"><input type="password" name="pwdcheck" id="pwdc" /></td>
-				<td width="250"><a id="pwdcheck">비밀번호가 일치하지 않습니다</p></td>
+				<td width="250"><p id="pwdcheck">비밀번호가 일치하지 않습니다</p></td>
 			</tr>
 			<tr>
 				<td width="200"><p align="right">이름</p></td>
@@ -130,13 +131,9 @@ $( document ).ready(function() {
 	    	pwdcheck.css('color','red');
 	    }
 	})
-			$("#idcheck").click(function() {
-	    const idcheck = $("#idcheck");
-	    const textid = $("#textid");
-		if(textid.val() == "") {
-			alert('아이디를 입력해주세요');
-		}
-	})
+	
+
+	
 })
 
 function sendIt() {
@@ -188,8 +185,14 @@ function sendIt() {
 		function idCheck(){
 
 			var id = $("#textid").val(); 
-
-			location.href="idcheck.do?id="+id;
+			
+			if(id == '' || id == null) {
+		    	alert('아이디를 입력후 다시 시도해주세요');
+		    	console.log("1 : ${idcheckresult}");
+			} else {
+				location.href="idcheck.do?id="+id;
+			}
 		}
+		
 	</script>
 </html>

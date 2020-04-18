@@ -199,7 +199,7 @@ li {
 
 	/* 하단 footer */
 .footer {
-	position:fixed;
+	position:absolute;
 	left:0;
 	bottom:0; 
 	width:100%;
@@ -248,17 +248,13 @@ li {
 <script>
 	$( document ).ready( function() {
 		 $("#line-wrapper").click(function(){
-			/*  if($( '.mainForm').is("visible")==false){
- 				$( '.mainForm' ).fadeIn(1000);
-      	 	} 
-			 if($( '.mainForm').is("visible")==true){
-	 			$( '.mainForm' ).fadeOut(1000);
-	      	 } */ 
 			 if($( '.mainForm').css('visibility') == "hidden"){
   				$( '.mainForm' ).css('visibility','visible');
+  				$('#content').css('display','none');
       	 	}
 			 else {
   				$( '.mainForm' ).css('visibility','hidden');
+  				$('#content').css('display','');
       	 	} 
      	 } );
 		$('#line-wrapper').click(function(){

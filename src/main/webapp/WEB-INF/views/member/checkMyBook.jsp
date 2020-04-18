@@ -50,6 +50,7 @@ $(function() {
 						<ul>
 							<li>${order.company}  ${order.theater_name}</li>
 							<li>${order.movie_name}</li>
+							<li>${order.movie_date}</li>
 							<li>${order.time} ~ ${endTime }</li>
 							<li>${order.theater_num}관 ${rowCol}</li>
 						</ul>

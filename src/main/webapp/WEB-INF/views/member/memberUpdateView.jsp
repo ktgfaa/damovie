@@ -6,9 +6,6 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %>
-<!-- MemberVO 파일 임포트하기 -->
-<%@ page import="com.movie.damovie.member.vo.MemberVO" %>
-<%@ page import="com.movie.damovie.member.dao.MemberDAO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,6 +83,7 @@ function sendIt(tag) {
 	}catch(e){
 		return false;
 	}
+}
 </script>
 
 <meta charset="UTF-8">

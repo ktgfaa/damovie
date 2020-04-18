@@ -234,7 +234,7 @@
 			time9=#{time9, jdbcType=VARCHAR},
 			time10=#{time10, jdbcType=VARCHAR},
 			putdate=sysdate
-			where company=#{company} AND theater_name=#{theater_name}
+			where company=#{company} AND theater_name=#{theater_name} AND theater_num=#{theater_num ,jdbcType=VARCHAR}
 		]]>
 	</update>
 	

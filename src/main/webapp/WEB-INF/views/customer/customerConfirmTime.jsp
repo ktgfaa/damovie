@@ -225,6 +225,8 @@ function fn_del() {
 #theaterNum {
 	width: 45px;
     height: 25px;
+    text-align: center;
+    
 }
 .time {
 	border: none;
@@ -278,11 +280,9 @@ function fn_del() {
 								<option value="${datatime }">${datatime }</option>
 								</c:forEach>
 								</select></td>
-							<td style="width: 100px; border:1px solid white;"><select name="theaterNum" id="theaterNum"><option value="${theaterList.theater_num }" selected=selected>${theaterList.theater_num }</option>
-								<c:forEach var="theaterNum" items="${theater_num }">
-								<option value="${theaterNum }">${theaterNum }</option>
-								</c:forEach>
-								</select></td>
+							<td style="width: 100px; border:1px solid white;"><input type="text" name="theaterNum" id="theaterNum" readonly value="${theaterList.theater_num }" >
+								
+</td>
 							<td style="width: 100px; border:1px solid white;"><input type="text" class="time" name="time1" id="time1" value="${theaterList.time1 }"></td>
 							<td style="width: 100px; border:1px solid white;"><input type="text" class="time" name="time2" id="time2" value="${theaterList.time2 }"></td>
 							<td style="width: 100px; border:1px solid white;"><input type="text" class="time" name="time3" id="time3" value="${theaterList.time3 }"></td>

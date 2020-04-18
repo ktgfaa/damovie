@@ -240,7 +240,7 @@
 	
 	<delete id="movieDelete">
 		<![CDATA[
-			delete from movie_company where movie_name=#{movie_name}
+			delete from movie_company where movie_name=#{movie_name} and theater_name=#{theater_name} and theater_num=#{theater_num}
 		]]>
 	</delete>
 	

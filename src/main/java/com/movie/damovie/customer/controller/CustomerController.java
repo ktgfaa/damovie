@@ -432,8 +432,12 @@ public class CustomerController {
 	
 	@RequestMapping(value="/customer/movieDelete.do", method=RequestMethod.POST)
 	public String memberDelete(CustomerMovieVO vo,
-							@RequestParam("del_movie") String movie)throws Exception{
+							@RequestParam("del_movie") String movie,
+							@RequestParam("theater_name") String theater_name,
+							@RequestParam("theater_num") String theater_num)throws Exception{
 			vo.setMovie_name(movie);
+			vo.setTheater_name(theater_name);
+			vo.setTheater_num(theater_num);
 			customerService.movieDelete(vo);
 			return "redirect:/customer/check_customerMovie.do";
 	}
@@ -442,8 +446,7 @@ public class CustomerController {
 		public String memberLevel(CustomerMovieVO vo,
 								@RequestParam("movie_name") String movie_name,
 								@RequestParam("theater_name") String theater_name,
-								@RequestParam("theater_num") String theater_num
-								)throws Exception{
+								@RequestParam("theater_num") String theater_num)throws Exception{
 			vo.setMovie_name(movie_name);
 			vo.setTheater_name(theater_name);
 			vo.setTheater_num(theater_num);

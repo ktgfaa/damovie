@@ -60,14 +60,14 @@ body {
     width: 146px;
 }
 .theater_box{
-	margin: 0px 105px 0 130px;
+	margin: 0px 105px 0 115px;
 }
 .theater_box p{
     width: 172px;
-    margin-left: 26px;
+    margin-left: 45px;
 }
 .seat_box p{
-	margin-left: 64px;
+	margin-left: 70px;
 }
 .seat_box .fas{
 	margin-left:45px;

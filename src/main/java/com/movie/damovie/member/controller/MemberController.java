@@ -291,11 +291,11 @@ public class MemberController extends MultiActionController {
 	}
 	
 	@RequestMapping(value="/member/memberUpdate.do",method= RequestMethod.POST)
-	public String memberUpdate(MemberVO vo, HttpSession session,RedirectAttributes rAttr)throws Exception{
+	public String memberUpdate(MemberVO vo, HttpSession session,RedirectAttributes rAttr, HttpServletResponse response)throws Exception{
 		
 		memberService.memberUpdate(vo);
 		session.removeAttribute("member");
-		session.setAttribute("member", memberVO);
+		session.invalidate();
 		
 		//마이페이지로 돌아가기
 		return "redirect:/mypage.do";

@@ -43,10 +43,19 @@ function theaterCh(){
 }
 
 function fn_mod() {
-	if($('#time1').val()=="" && $('#time1').val()==null && $('#time2').val()=="" && $('#time2').val()==null && $('#time3').val()=="" && $('#time3').val()==null && $('#time4').val()=="" && $('#time4').val()==null && $('#time5').val()=="" && $('#time5').val()==null && $('#time6').val()=="" && $('#time6').val()==null && $('#time7').val()=="" && $('#time7').val()==null && $('#time8').val()=="" && $('#time8').val()==null && $('#time9').val()=="" && $('#time9').val()==null && $('#time10').val()=="" && $('#time10').val()==null ){
-		alert("시간을 입력해 주세요");
-		return;
-	}
+	var movie_date = $(event.target).parent().parent().children('td').children('#movieDate').val();
+	var theater_num = $(event.target).parent().parent().children('td').children('#theaterNum').val();
+	var time_1 = $(event.target).parent().parent().children('td').children('#time1').val();
+	var time_2 = $(event.target).parent().parent().children('td').children('#time2').val();
+	var time_3 = $(event.target).parent().parent().children('td').children('#time3').val();
+	var time_4 = $(event.target).parent().parent().children('td').children('#time4').val();
+	var time_5 = $(event.target).parent().parent().children('td').children('#time5').val();
+	var time_6 = $(event.target).parent().parent().children('td').children('#time6').val();
+	var time_7 = $(event.target).parent().parent().children('td').children('#time7').val();
+	var time_8 = $(event.target).parent().parent().children('td').children('#time8').val();
+	var time_9 = $(event.target).parent().parent().children('td').children('#time9').val();
+	var time_10 = $(event.target).parent().parent().children('td').children('#time10').val();
+
 	
 	var form= document.createElement("form");
 	form.setAttribute("method", "post");
@@ -68,73 +77,73 @@ function fn_mod() {
 	movieDate.setAttribute("type", "hidden");
 	movieDate.setAttribute("id", "movie_date");
 	movieDate.setAttribute("name", "movie_date");
-	movieDate.setAttribute("value", $('#movieDate').val());
+	movieDate.setAttribute("value", movie_date);
 	
 	var theaterNum = document.createElement("input");
 	theaterNum.setAttribute("type","hidden");
 	theaterNum.setAttribute("id","theater_num");
 	theaterNum.setAttribute("name","theater_num");
-	theaterNum.setAttribute("value",$('#theaterNum').val());
+	theaterNum.setAttribute("value",theater_num);
 	
 	var time1 = document.createElement("input");
 	time1.setAttribute("type","hidden");
 	time1.setAttribute("id","time1");
 	time1.setAttribute("name","time1");
-	time1.setAttribute("value",$('#time1').val());
+	time1.setAttribute("value",time_1);
 	
 	var time2 = document.createElement("input");
 	time2.setAttribute("type","hidden");
 	time2.setAttribute("id","time2");
 	time2.setAttribute("name","time2");
-	time2.setAttribute("value",$('#time2').val());
+	time2.setAttribute("value",time_2);
 	
 	var time3 = document.createElement("input");
 	time3.setAttribute("type","hidden");
 	time3.setAttribute("id","time3");
 	time3.setAttribute("name","time3");
-	time3.setAttribute("value",$('#time3').val());
+	time3.setAttribute("value",time_3);
 	
 	var time4 = document.createElement("input");
 	time4.setAttribute("type","hidden");
 	time4.setAttribute("id","time4");
 	time4.setAttribute("name","time4");
-	time4.setAttribute("value",$('#time4').val());
+	time4.setAttribute("value",time_4);
 	
 	var time5 = document.createElement("input");
 	time5.setAttribute("type","hidden");
 	time5.setAttribute("id","time5");
 	time5.setAttribute("name","time5");
-	time5.setAttribute("value",$('#time5').val());
+	time5.setAttribute("value",time_5);
 	
 	var time6 = document.createElement("input");
 	time6.setAttribute("type","hidden");
 	time6.setAttribute("id","time6");
 	time6.setAttribute("name","time6");
-	time6.setAttribute("value",$('#time6').val());
+	time6.setAttribute("value",time_6);
 	
 	var time7 = document.createElement("input");
 	time7.setAttribute("type","hidden");
 	time7.setAttribute("id","time7");
 	time7.setAttribute("name","time7");
-	time7.setAttribute("value",$('#time7').val());
+	time7.setAttribute("value",time_7);
 	
 	var time8 = document.createElement("input");
 	time8.setAttribute("type","hidden");
 	time8.setAttribute("id","time8");
 	time8.setAttribute("name","time8");
-	time8.setAttribute("value",$('#time8').val());
+	time8.setAttribute("value",time_8);
 	
 	var time9 = document.createElement("input");
 	time9.setAttribute("type","hidden");
 	time9.setAttribute("id","time9");
 	time9.setAttribute("name","time9");
-	time9.setAttribute("value",$('#time9').val());
+	time9.setAttribute("value",time_9);
 	
 	var time10 = document.createElement("input");
 	time10.setAttribute("type","hidden");
 	time10.setAttribute("id","time10");
 	time10.setAttribute("name","time10");
-	time10.setAttribute("value",$('#time10').val());
+	time10.setAttribute("value",time_10);
 	
 	form.appendChild(company);
 	form.appendChild(movieDate);
@@ -153,7 +162,8 @@ function fn_mod() {
 	document.body.appendChild(form);
 	form.submit();
 }
-function fn_del() {
+function fn_del(movie_date, theater_num) {
+
 	var form= document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action","customerConfirmTimeDel.do");
@@ -168,13 +178,13 @@ function fn_del() {
 	movieDate.setAttribute("type", "hidden");
 	movieDate.setAttribute("id", "movie_date");
 	movieDate.setAttribute("name", "movie_date");
-	movieDate.setAttribute("value", $('#movieDate').val());
+	movieDate.setAttribute("value", movie_date);
 	
 	var theaterNum = document.createElement("input");
 	theaterNum.setAttribute("type","hidden");
 	theaterNum.setAttribute("id","theater_num");
 	theaterNum.setAttribute("name","theater_num");
-	theaterNum.setAttribute("value",$('#theaterNum').val());
+	theaterNum.setAttribute("value",theater_num);
 	
 	form.appendChild(movieDate);
 	form.appendChild(theaterName);
@@ -294,7 +304,7 @@ function fn_del() {
 							<td style="width: 100px; border:1px solid white;"><input type="text" class="time" name="time9" id="time9" value="${theaterList.time9 }"></td>
 							<td style="width: 100px; border:1px solid white;"><input type="text" class="time" name="time10" id="time10" value="${theaterList.time10 }"></td>
 							<td style="width: 70px; border:1px solid white;"><input type="button" class="modBtn" onClick="fn_mod()" value="수정" /></td>
-							<td style="width: 70px; border:1px solid white;"><input type="button" class="delBtn" onClick="fn_del()" value="삭제" /></td>
+							<td style="width: 70px; border:1px solid white;"><input type="button" class="delBtn" onClick="fn_del('${theaterList.movie_date }','${theaterList.theater_num }')" value="삭제" /></td>
 						</tr>
 						</c:forEach>
 					

@@ -221,8 +221,7 @@
 	<update id="ConfirmTimeMod"  parameterType="customerTheaterVO">
 		<![CDATA[
 			update theater_time set 
-			movie_DATE=#{movie_date ,jdbcType=VARCHAR},
-			theater_num=#{theater_num ,jdbcType=VARCHAR},
+			movie_DATE=#{movie_date },
 			time1=#{time1 ,jdbcType=VARCHAR},
 			time2=#{time2 ,jdbcType=VARCHAR},
 			time3=#{time3 ,jdbcType=VARCHAR},
@@ -234,7 +233,7 @@
 			time9=#{time9, jdbcType=VARCHAR},
 			time10=#{time10, jdbcType=VARCHAR},
 			putdate=sysdate
-			where company=#{company} AND theater_name=#{theater_name} AND theater_num=#{theater_num ,jdbcType=VARCHAR}
+			where company=#{company} AND theater_name=#{theater_name} AND theater_num=#{theater_num }
 		]]>
 	</update>
 	

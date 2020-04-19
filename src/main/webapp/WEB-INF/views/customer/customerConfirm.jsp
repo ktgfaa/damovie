@@ -110,7 +110,7 @@ body {
 			
 				<div class="theater_box">
 					<span style="color: white" class="theater" ><i class="fas fa-building fa-6x" aria-hidden="true">&nbsp;</i></span>
-					<p>상영관 확인</p>
+					<p>시간 확인</p>
 				</div>
 
 				<div class="seat_box">

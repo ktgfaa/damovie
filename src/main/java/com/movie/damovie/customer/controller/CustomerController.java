@@ -295,12 +295,15 @@ public class CustomerController {
 		if(memberVO.getUser_level().equals("customer")) {
 			mav.addObject("member",memberVO);
 			try {
+				CustomerTimeValueVO vo = (CustomerTimeValueVO)session.getAttribute("customerTimeValue");
 				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 				List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
-				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+				
 						if(company != null) {
 							mav.addObject("company",company);
 							mav.addObject("theater_name", theater_name);
+							List<String> theater_num = customerDAO.selectTheaterNum_seat(vo.getCompany(), vo.getTheater_name());
+							mav.addObject("selecttheater_name", vo.getTheater_name());
 							mav.addObject("theater_num", theater_num);
 							mav.addObject("Alphabet", Alphabet);
 						} else {
@@ -308,9 +311,7 @@ public class CustomerController {
 						}
 				
 		} catch (NullPointerException e) {
-					mav.addObject("company","no");
-					mav.addObject("theater_name", "no");
-					mav.addObject("theater_num", "no");
+					mav.addObject("theater_num", "null");
 				}
 			mav.setViewName(viewName);
 			
@@ -348,6 +349,7 @@ public class CustomerController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/customer/customerTime.do");
 		HttpSession session = request.getSession();
+		session.removeAttribute("customerTimeValue");
 		session.setAttribute("customerTimeValue", vo);
 		
 		return mav;

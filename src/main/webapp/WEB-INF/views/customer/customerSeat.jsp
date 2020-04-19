@@ -14,6 +14,7 @@
 		<script>
 			window.onload=function() {
 				alert("먼저 영화부터 등록후 선택해주세요!!!");
+				alert("${company}");
 				location.href="customer.do";
 			}
 		</script>
@@ -44,16 +45,25 @@
 											<option value="${company }" selected="selected" id="company">${company }</option>
 									</select></td>
 								<td><select name="theater_name" class="theater_namecheck">
-									<c:forEach var="theater" items="${theater_name }">
-										<c:if test="${theater_name_Update eq theater }">
-											<option value="${theater }"  selected="selected">${theater }</option>
+								<option selected="selected" disabled="disabled" >극장 선택</option>
+									<c:forEach  var="theater" items="${theater_name }">
+										<c:if test="${theater_name_Update eq theater}">
+											<option value="${theater }"  selected="selected" id="${theater }">${theater }</option>
 										</c:if>
-										<c:if test="${theater_name_Update ne theater }">
-											<option value="${theater }" >${theater }</option>
+										<c:if test="${theater_name_Update ne theater}">
+											<option value="${theater }" id="${theater }" >${theater }</option>
+										</c:if>
+										<c:if test="${selecttheater_name eq theater  }">
+											<script>
+												var theater = ${theater};
+												$(theater).attr("selected","selected");
+											</script>
 										</c:if>
 									</c:forEach>
+									
 								</select></td>
 								<td><select name="theater_num" class="theater_numcheck">
+										<option  selected="selected" disabled="disabled" >상영관 선택</option>
 										<c:forEach var="theaterNum" items="${theater_num }">
 											<c:if test="${theater_num_Update eq theaterNum }">
 												<option value="${theaterNum }" selected="selected">${theaterNum }</option>
@@ -61,7 +71,8 @@
 											<c:if test="${theater_num_Update ne theaterNum }">
 												<option value="${theaterNum }">${theaterNum }</option>
 											</c:if>
-											
+											<c:if test="${theaterNum eq 'null' }">
+											</c:if>
 										</c:forEach>
 								</select></td>
 							</tr>
@@ -132,6 +143,30 @@
 		</div>
 	</div>
 	<script>
+	
+ 		// 극장 선택시 잇는 상영관만 표시하기
+		$('.theater_namecheck').change(function(){
+			 const company = $('.companycheck option:checked').val();
+			 const theater_name = $('.theater_namecheck option:checked').val();
+			
+  			$.ajax({
+	 			url: "${contextPath}/customer/customerTimeValue.do",
+	 			type: "post",
+	 			dataType:"text",
+	 			data : {
+	 					company : company,
+	 					theater_name : theater_name
+	 			    },  
+	 			success: function(data){     
+	 			location.href="/damovie/customer/customerSeat.do";
+	 			},complete: function(data){
+	 			},error: function (request, status, error) {
+	 			   alert("다시 시도해주세요!");
+	 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	 			  
+	 			}
+	 		}); 
+		}); 
  		// 불러오기 클릭시 좌석 배치 구현
 		$("#call_SEAT").click(function(){
 			const seatRow = $(".seatRow_check option:checked").val();

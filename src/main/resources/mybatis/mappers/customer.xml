@@ -113,6 +113,12 @@
 		]]>
 	</select>
 	
+	<select id="selectTheaterNum_seat" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select theater_num from movie_company where company=#{company} and theater_name=#{theater_name}
+		]]>
+	</select>
+	
 
 	<select id="selectTheaterNum_notTime" resultType="String" parameterType="java.util.Map">
 		<![CDATA[
@@ -123,6 +129,7 @@
 			FROM theater_time where company=#{company} and theater_name=#{theater_name} 
 		]]>
 	</select>
+	
 	
 	<select id="selectTheaterNum_Already" resultType="String" parameterType="java.util.Map">
 		<![CDATA[

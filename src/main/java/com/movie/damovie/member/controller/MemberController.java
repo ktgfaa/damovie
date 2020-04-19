@@ -103,22 +103,22 @@ public class MemberController extends MultiActionController {
 		if (action == null) {
 			if( idresult ==null) {
 				mav.setViewName(viewName);
-				
 				return mav;
 			} else {
 				mav.addObject("idresult",idresult);
+				System.out.println("userid : " + userid);
+				mav.addObject("userid", userid);
 				mav.setViewName(viewName);
 				return mav;
 			}
 		} else {
 
 			if( idresult == null) {
-				System.out.println("userid : " + userid);
-				mav.addObject("userid", userid);
 				mav.setViewName(viewName);
 				return mav;
 			} else {
 				mav.addObject("idresult",idresult);
+				mav.addObject("userid", userid);
 				mav.setViewName(viewName);
 				return mav;
 			}

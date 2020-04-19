@@ -76,7 +76,15 @@
 		<table class="memberBox" style="text-align:center;">
 			<tr>
 				<td width="200"><p align="right">아이디</p></td>
-				<td width="400"><input type="text" name="id" id="textid" /></td>
+				<c:if test="${idresult eq true }">
+					<td width="400"><input type="text" name="id" id="textid" value="${userid }" /></td>
+				</c:if>
+				<c:if test="${idresult eq false }">
+					<td width="400"><input type="text" name="id" id="textid" /></td>
+				</c:if>
+				<c:if test="${idresult == null || idresult == '' }">
+					<td width="400"><input type="text" name="id" id="textid" /></td>
+				</c:if>
 				<td width="100"><input type="button" id="idcheck" onclick="idCheck()"  value="중복 확인" /></td>
 			</tr>
 			<tr>

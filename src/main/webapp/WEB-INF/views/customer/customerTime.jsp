@@ -43,7 +43,8 @@
 						<tr>
 							<td style="width: 150px;">극장 이름</td>
 							<td><select name="theater_name" class="theater_namecheck">
-							<c:forEach var="theater" items="${theater_name }">
+								<option  selected="selected" disabled="disabled" >극장 선택</option>
+							<c:forEach var="theater" items="${theater_name }">	
 								<c:if test="${theater_name_selected eq theater }">
 									<option value="${theater }" selected="selected" >${theater }</option>
 								</c:if>

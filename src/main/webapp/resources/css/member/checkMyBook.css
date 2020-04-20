@@ -43,16 +43,21 @@
 .left_box{
     width: 455px;
     height: 400px;
-    margin-left: 88px;
+    margin-left: 15px;
+    padding-right: 55px;
     border-right: 2px dotted white;
     margin-top: 37px;
+    text-align: center;
 }
 .left_box li:nth-child(1){
 	font-size: 45px;
 }
-.left_box li:nth-child(2), li:nth-child(3), li:nth-child(4){
+.left_box li:nth-child(2), li:nth-child(3), li:nth-child(4), li:nth-child(5){
 	font-size: 45px;
-	padding-top: 47px;
+	padding-top: 37px;
+}
+.left_box li:nth-child(4){
+	padding-top: 5px;
 }
 .right_box{
 	width:330px;

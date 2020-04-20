@@ -103,7 +103,7 @@ function list(page){
 }
 
 
-	function del_movie(movie_name) {
+	function del_movie(movie_name,t_name,t_num) {
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "${contextPath }/customer/movieDelete.do");
@@ -113,7 +113,19 @@ function list(page){
 		input.setAttribute("name", "del_movie");
 		input.setAttribute("value", movie_name);
 
+		var theater_name = document.createElement("input");
+		theater_name.setAttribute("type","hidden");
+		theater_name.setAttribute("name","theater_name");
+		theater_name.setAttribute("value",t_name);
+		
+		var theater_num = document.createElement("input");
+		theater_num.setAttribute("type","hidden");
+		theater_num.setAttribute("name","theater_num");
+		theater_num.setAttribute("value",t_num);
+		
 		form.appendChild(input);
+		form.appendChild(theater_name);
+		form.appendChild(theater_num);
 		document.body.appendChild(form);
 		form.submit();
 	}
@@ -182,7 +194,7 @@ function list(page){
 					</select>
 				</td>
 				<td>${movie.theater_num }관</td>
- 				<td><input type="button" id="del_btn" value="삭제" onClick="del_movie('${movie.movie_name}')"></td>
+ 				<td><input type="button" id="del_btn" value="삭제" onClick="del_movie('${movie.movie_name}','${movie.theater_name}','${movie.theater_num}')"></td>
 			</tr>
 		</c:forEach>
 		<tr>

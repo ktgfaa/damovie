@@ -18,14 +18,10 @@
 .top {
 	height: 270px;
 }
-.bookForm {
-	height: 637px;
-}
 
 .firstBook {
 	margin-left: 10.5%;
 	width: 1524px;
-	height: 101%;
 	border: 1px solid;
 	border-color: white;
 	position: absolute;
@@ -34,7 +30,7 @@
 .movieSel {
 	width: 250px;
 	border-right: 1px solid;
-	height: 640px;
+	height: 100%;
 	margin: 0;
 	position: absolute;
 	border-color: white;
@@ -42,20 +38,18 @@
 
 .seatSel {
 	width: 1272px;
-    height: 643px;
+    height: 100%;
     float: left;
     margin-left: 252px;
 }
 
 .movieRes_div {
 	width: 95%;
-    height: 96%;
     padding: 7px;
 }
 
 .seatRes_div {
 	width: 93%;
-    height: 86%;
     padding-top: 4%;
     padding-left: 3%;
     padding-right: 4%;
@@ -64,8 +58,10 @@
 }
 
 .seatBtn_div > ul {
-	margin : 0;
-	padding: 0;
+	margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .movieRes_div>div>ul {
@@ -75,7 +71,7 @@
 }
 
 .movieRes_div>div>ul>li {
-	margin-top: 13px;
+	margin-top: 12px;
 }
 
 .bmImage {
@@ -83,12 +79,6 @@
 	height: 257px;
 }
 
-#movieName {
-	font-size: 20px;
-	border: none;
-	background-color: #00000000;
-	color: white;
-}
 
 .movieName {
 	float : left;
@@ -100,12 +90,12 @@
 }
 
 .inputFont {
-	font-size: 14px;
-	border: none;
-	background-color: #00000000;
-	color: white;
-	padding-top: 6px;
-    padding-left: 10px;
+	font-size: 18px;
+    border: none;
+    background-color: #00000000;
+    color: white;
+    padding: 0;
+    padding-left: 7px;
 }
 
 #reset {
@@ -142,7 +132,6 @@
 }
 
 .seatButton_li {
-	float : left;
 	margin : 0px;
 	margin-right: 20px;
 }
@@ -168,13 +157,11 @@ li:nth-child(4) , li:nth-child(6) {
 }
 
 .seatBtn_div {
-	height: 78%;
-    padding-left: 45px;
+    width: 1235px;
 }
 
 .seatState_div {
-	padding-left: 45px;
-	margin-top: 20px;
+	margin-top: 70px;
 	height: 50px;
 }
 
@@ -183,8 +170,7 @@ li:nth-child(4) , li:nth-child(6) {
 	padding : 0;
 	width: 1000px;
 	height: 50px;
-    margin-left: 140px;
-    float: left;
+    margin-left: 120px;
 }
 
 .seatState_div > ul > li {
@@ -259,7 +245,7 @@ li:nth-child(4) , li:nth-child(6) {
 						<ul>
 							<li style="margin-top:0px;"><img class="bmImage"src="${order.getBmimage() }"  /></li>
 							<li><input type="hidden" id="id" name="id" value="${order.getId() }" name="id" /></li>
-							<li><p class="movieName">영화 : </p><input type="button" id="movieName" name="movieName" value="${order.getMovie_name() }" /></li>
+							<li><p class="movieName">영화 : </p><input type="button" id="movieName" class="inputFont" name="movieName" value="${order.getMovie_name() }" /></li>
 							<li><p class="movieName">회사 : </p><input type="button" id="company" class="inputFont" name="movieName" value="${order.getCompany() }" /></li>
 							<li><p class="movieName">극장 : </p><input type="button" id="theater" class="inputFont" name="movieName" value="${order.getTheater_name() }"  /></li>
 							<li><p class="movieName">영화관 : </p><input type="button" id="theater_num" class="inputFont" name="movieName" value="${order.getTheater_num() }"  /></li>
@@ -284,22 +270,19 @@ li:nth-child(4) , li:nth-child(6) {
 					<!-- ------------------------ Seat button -------------------------- -->
 					<c:set var="count" value="-1"></c:set>
 					<c:set var="firstwidthNum" value="47"></c:set>
-					<c:set var="b" value="${(MaxSeatNum - 1) + firstwidthNum }"></c:set>
 					<c:set var="firstmarginNum" value="41"></c:set>
-					<c:set var="c" value="${firstmarginNum - ((MaxSeatNum - 1) * 2)}"></c:set>
-					<div class="seatBtn_div" style="width:${MaxSeatNum * b}px;margin-left:${c}%">
+					<div class="seatBtn_div">
 						<ul id="seat_ul" >
 							<c:forEach var="j" begin="1" end="${seatRow_distinct.size() }">
+								<li class="seatButton_li">
 								<c:forEach var="i" begin="1" end="${MaxSeatNum }">
 										<c:set var="count" value="${count + 1}"></c:set> 
-										<li class="seatButton_li">
 												<c:if test="${seat_info.get(count).get('seatState') eq 'yes'}">
 														<button id="${seatBtnid.get(count) }" class="Seatbtn" style="background-color: #2861a8;border: 1px solid;border-color: white;color: white;" onclick="seatSel()">${i }</button>
 												</c:if>
 												<c:if test="${seat_info.get(count).get('seatState') eq 'no' }">
 														<button id="${seatBtnid.get(count) }" class="Seatbtn" style="background-color: #70113f;border: 1px solid;border-color: white;color: white;" disabled="disabled" onclick="seatSel()">X</button>
 												</c:if>
-										</li>
 								</c:forEach>
 							</c:forEach>
 						</ul>

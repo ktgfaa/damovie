@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <c:set var="contextPath" value="${pageContext.request.contextPath }"></c:set>
  <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
 
 .outer {
 	width : 1332px;
-	padding-left: 15%;
+	padding-left: 17%;
     padding-top : 3%;
     color : white ;
     height: 2150px;
@@ -21,7 +23,7 @@
 .outer_2 {
 	width: 1280px;
     height: 1280px;
-    background-color: rgb(0,0,0,5);
+    background-color: hsla(0, 0%, 0%, 0.50);
     margin-left:4%;
 }
 
@@ -76,6 +78,23 @@ em{			/* A */
 }
 .logo_m{
 	margin: 0 40px;
+}
+.footer2 {
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 1920px;
+    ont-size: 27px;
+    color: white;
+    font-family: "Nanum Pen Script", cursive;
+    font-size: 26px;
+    text-align: center;
+    background-color: #0000006e;
+}
+.footer2 > img {
+	position: absolute;
+    left: 365px;
+    height: 166px;
 }
 </style>
 <meta charset="UTF-8">
@@ -263,11 +282,20 @@ em{			/* A */
 					
 				</tbody>	
 			</table>
-					<div class="logo">
-			<div><a href="http://www.cgv.co.kr/"><img src="http://img.cgv.co.kr/R2014/images/title/h1_cgv.png" width="120px;"></a></div>
-			<div class="logo_m"><a href="https://megabox.co.kr/"><img src="https://img.megabox.co.kr/static/pc/images/common/ci/logo.png" width="140px;"></a></div>
-			<div><a href="https://www.lottecinema.co.kr/"><img src="/damovie/resources/images/lotte_logo.png" width="200px;" height="70px;"></a></div>
-		</div>
+			
+			<div class="footer2">
+				<img src="${contextPath }/resources/images/damovilogo3.png"/>
+				<div style="margin-left: 400px;">
+					<p>본 콘텐츠의 저작권은 저작권자 또는 제공처에 있으며, 이를 무단 이용하는 경우 저작권법 등에 따라 법적
+						책임을 질 수 있습니다.</p>
+					<p>
+						<span>사업자등록번호 : 555-5555555</span> 
+						<span>통신판매업 신고번호 : 서울종로 제 2020 - 555호</span><br> 
+						<span>대표이사 : 케이지   사업자등록정보 확인</span> 
+						<span>주소 : 서울시 종로구 종로3가 단성사</span> 
+						<span>대표전화 : 5555-5555</span>
+				</div>
+			</div>
 		</div>
 
 </body>

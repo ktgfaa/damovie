@@ -113,6 +113,12 @@
 		]]>
 	</select>
 	
+	<select id="selectTheaterNum_seat" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			select theater_num from movie_company where company=#{company} and theater_name=#{theater_name}
+		]]>
+	</select>
+	
 
 	<select id="selectTheaterNum_notTime" resultType="String" parameterType="java.util.Map">
 		<![CDATA[
@@ -124,10 +130,18 @@
 		]]>
 	</select>
 	
+	
 	<select id="selectTheaterNum_Already" resultType="String" parameterType="java.util.Map">
 		<![CDATA[
 			  SELECT theater_num 
 			  FROM movie_company where company=#{company} and theater_name=#{theater_name}
+		]]>
+	</select>
+	
+	<select id="selectTheaterSeat_Already" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+			  SELECT DISTINCT theater_num 
+			  FROM theater_seat where company=#{company} and theater_name=#{theater_name}
 		]]>
 	</select>
 	
@@ -214,8 +228,7 @@
 	<update id="ConfirmTimeMod"  parameterType="customerTheaterVO">
 		<![CDATA[
 			update theater_time set 
-			movie_DATE=#{movie_date ,jdbcType=VARCHAR},
-			theater_num=#{theater_num ,jdbcType=VARCHAR},
+			movie_DATE=#{movie_date },
 			time1=#{time1 ,jdbcType=VARCHAR},
 			time2=#{time2 ,jdbcType=VARCHAR},
 			time3=#{time3 ,jdbcType=VARCHAR},
@@ -227,13 +240,19 @@
 			time9=#{time9, jdbcType=VARCHAR},
 			time10=#{time10, jdbcType=VARCHAR},
 			putdate=sysdate
-			where company=#{company} AND theater_name=#{theater_name}
+			where company=#{company} AND theater_name=#{theater_name} AND theater_num=#{theater_num }
 		]]>
 	</update>
 	
 	<delete id="movieDelete">
 		<![CDATA[
-			delete from movie_company where movie_name=#{movie_name}
+			delete from movie_company where movie_name=#{movie_name} and theater_name=#{theater_name} and theater_num=#{theater_num}
+		]]>
+	</delete>
+	
+	<delete id="seatDelete" parameterType="java.util.Map">
+		<![CDATA[
+			delete from theater_seat where company=#{company} and theater_name=#{theater_name} and theater_num=#{theater_num}
 		]]>
 	</delete>
 	

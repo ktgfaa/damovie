@@ -1,4 +1,3 @@
-
 package com.movie.damovie.customer.controller;
 
 import java.text.SimpleDateFormat;
@@ -87,7 +86,10 @@ public class CustomerController {
 		
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		
+		session.removeAttribute("seatRow_confirm");
+		session.removeAttribute("seatRowSize");
+		session.removeAttribute("seatCol_confirm");
+		session.removeAttribute("seat_state_confirm");
 		
 		/* ------------ 접근 처리 ------------ */
 		try {
@@ -183,6 +185,14 @@ public class CustomerController {
 		int num = 0;
 		int num2 = 0;
 		ModelAndView mav = new ModelAndView("redirect:/customer/customer.do");
+		
+		List<String> distinct = customerDAO.theater_Seat_distinct(customerSeatVO.getCompany(), customerSeatVO.getTheater_name());
+		
+		for(int k =0; k< distinct.size();k++) {
+			if(distinct.get(k) != null && distinct.get(k).equals(customerSeatVO.getTheater_num())) {
+						customerDAO.seatDelete(customerSeatVO.getCompany(), customerSeatVO.getTheater_name(), customerSeatVO.getTheater_num());
+					} 
+			}
 		
 		for(int i=0;i<customerSeatVO.getSeatrow().size();i++) {
 			for(int j=1;j<Integer.parseInt(customerSeatVO.getSeatcol())+1;j++) {
@@ -284,12 +294,15 @@ public class CustomerController {
 		if(memberVO.getUser_level().equals("customer")) {
 			mav.addObject("member",memberVO);
 			try {
+				CustomerTimeValueVO vo = (CustomerTimeValueVO)session.getAttribute("customerTimeValue");
 				String company = customerDAO.selectCompanyName_sub(memberVO.getId());
 				List<String> theater_name = customerDAO.selectTheaterName_sub(memberVO.getId());
-				List<String> theater_num = customerDAO.selectTheaterNum_sub(memberVO.getId());
+				
 						if(company != null) {
 							mav.addObject("company",company);
 							mav.addObject("theater_name", theater_name);
+							List<String> theater_num = customerDAO.selectTheaterNum_seat(vo.getCompany(), vo.getTheater_name());
+							mav.addObject("selecttheater_name", vo.getTheater_name());
 							mav.addObject("theater_num", theater_num);
 							mav.addObject("Alphabet", Alphabet);
 						} else {
@@ -297,9 +310,7 @@ public class CustomerController {
 						}
 				
 		} catch (NullPointerException e) {
-					mav.addObject("company","no");
-					mav.addObject("theater_name", "no");
-					mav.addObject("theater_num", "no");
+					mav.addObject("theater_num", "null");
 				}
 			mav.setViewName(viewName);
 			
@@ -337,6 +348,7 @@ public class CustomerController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/customer/customerTime.do");
 		HttpSession session = request.getSession();
+		session.removeAttribute("customerTimeValue");
 		session.setAttribute("customerTimeValue", vo);
 		
 		return mav;
@@ -421,8 +433,12 @@ public class CustomerController {
 	
 	@RequestMapping(value="/customer/movieDelete.do", method=RequestMethod.POST)
 	public String memberDelete(CustomerMovieVO vo,
-							@RequestParam("del_movie") String movie)throws Exception{
+							@RequestParam("del_movie") String movie,
+							@RequestParam("theater_name") String theater_name,
+							@RequestParam("theater_num") String theater_num)throws Exception{
 			vo.setMovie_name(movie);
+			vo.setTheater_name(theater_name);
+			vo.setTheater_num(theater_num);
 			customerService.movieDelete(vo);
 			return "redirect:/customer/check_customerMovie.do";
 	}
@@ -431,8 +447,7 @@ public class CustomerController {
 		public String memberLevel(CustomerMovieVO vo,
 								@RequestParam("movie_name") String movie_name,
 								@RequestParam("theater_name") String theater_name,
-								@RequestParam("theater_num") String theater_num
-								)throws Exception{
+								@RequestParam("theater_num") String theater_num)throws Exception{
 			vo.setMovie_name(movie_name);
 			vo.setTheater_name(theater_name);
 			vo.setTheater_num(theater_num);
@@ -651,7 +666,7 @@ public class CustomerController {
 		session.setAttribute("seat_state_confirm", "no");
 		
 		
-		return "redirect:/customer/check_customerSeat.do";
+		return "redirect:/customer/customerConfirm.do";
 	}
 }
 

@@ -24,8 +24,6 @@ public class MemberDAOImpl implements MemberDAO {
 		this.sqlSession = sqlSession;
 	}
 
-
-
 	@Override
 	public int insertMember(MemberVO memberVO) throws DataAccessException {
 		int result = sqlSession.insert("mapper.member.insertMember", memberVO);
@@ -38,8 +36,6 @@ public class MemberDAOImpl implements MemberDAO {
 		return vo;
 	}
 
-
-
 	@Override
 	public int idcheck(String userid) {
 		int count = 0;
@@ -47,16 +43,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return count;
 	}
 
-
-
 	@Override
 	public String idsearch(String useremail) {
 		String email = null;
 		email = sqlSession.selectOne("mapper.member.idsearch", useremail);
 		return email;
 	}
-
-
 
 	@Override
 	public String pwdsearch(String useremail, String userid) {
@@ -120,14 +112,19 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("mapper.member.levelUpdate",vo);
 	}
 
-
-
 	@Override
 	public OrderVO order(OrderVO order) {
 		OrderVO vo = sqlSession.selectOne("mapper.member.order", order);
 		return vo;
 	}
 
+	@Override
+	public String getRunTime(String movie_name) {
+		return sqlSession.selectOne("mapper.member.getRunTime",movie_name);
+	}
 
-
+	@Override
+	public void bookDelete(MemberVO vo) {
+		sqlSession.delete("mapper.member.bookDelete",vo);		
+	}
 }

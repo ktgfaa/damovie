@@ -181,7 +181,7 @@ $("#save_SEAT").click(function(){
 		seat_state.push($('.seatCol_BTN').eq( i ).attr("id"));
 	}
 	
-
+	console.log("변경하기");
 	
 	// list를 ajax로 보내기 위해 필요한 셋팅
  	jQuery.ajaxSettings.traditional = true; 
@@ -200,7 +200,7 @@ $("#save_SEAT").click(function(){
 			    },  
 			success: function(data){     
 				alert("변경 성공");
-			location.href="/damovie/customer/check_customerSeat.do";
+			location.href="/damovie/customer/customerConfirm.do";
 			},complete: function(data){
 			},error: function (request, status, error) {
 			   alert("다시 시도해주세요!");

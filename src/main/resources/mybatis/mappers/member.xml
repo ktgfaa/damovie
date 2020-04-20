@@ -38,11 +38,6 @@
 		]]>
 	</select>
 
-
-
-
-
-
 	<select id="selectMemberByPwd" resultMap="memResult"
 		parameterType="String">
 		<![CDATA[
@@ -211,16 +206,22 @@
 		) WHERE RN BETWEEN #{start} AND#{end}
 	</sql>
 	
-		<select id="order" resultType="orderVO"
-
+	<select id="order" resultType="orderVO"
 		parameterType="orderVO">
-
 		<![CDATA[
-
 			select * from book where id = #{id}
-
 		]]>
-
+	</select>
+	
+	<select id="getRunTime" resultType="String">
+		<![CDATA[
+			select RUNTIME from MOVIE_INFO where MOVIE_NAME = #{MOVIE_NAME}
+		]]>
 	</select>
 
+	<delete id="bookDelete">
+		<![CDATA[
+			delete from book where id=#{id}
+		]]>
+	</delete>
 </mapper>

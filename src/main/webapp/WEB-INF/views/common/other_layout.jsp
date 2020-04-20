@@ -19,7 +19,7 @@
 		height: 100%;
 	}
 	
-		#content {
+	#content {
     position: relative;
     margin: 0;
     height : 100%;

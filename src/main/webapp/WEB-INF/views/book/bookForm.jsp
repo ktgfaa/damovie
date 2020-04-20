@@ -375,9 +375,11 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="theaterList">
 					<ul class="List_ul">
 						<li><h1 style="color: white; margin: 0px; margin-bottom: 20px;">4 극장 선택</h1></li>
-
+							
 							<c:forEach var="Theater" items="${theaterList }">
-								<li><button id="theater" onclick="clickTheaterEvent()" style="color: #ff9191;" class="btnhover">${Theater }</button></li>
+								<c:if test="${theaterList != null }">
+									<li><button id="theater" onclick="clickTheaterEvent()" style="color: #ff9191;" class="btnhover">${Theater }</button></li>
+								</c:if>
 							</c:forEach>
 
 					</ul>

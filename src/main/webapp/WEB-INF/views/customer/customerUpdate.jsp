@@ -12,7 +12,8 @@ String session_id=(String)session.getAttribute("id");
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/v4-shims.css">
 <script src="https://kit.fontawesome.com/61cd314508.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap&subset=korean" rel="stylesheet">
 <style type="text/css">
@@ -59,14 +60,14 @@ body {
     width: 146px;
 }
 .theater_box{
-	margin: 0px 105px 0 130px;
+	margin: 0px 105px 0 115px;
 }
 .theater_box p{
     width: 172px;
-    margin-left: -6px;
+    margin-left: 28px;
 }
 .seat_box p{
-	margin-left: 26px;
+	margin-left: 50px;
 }
 .seat_box .fas{
 	margin-left:45px;
@@ -109,7 +110,7 @@ body {
 			
 				<div class="theater_box">
 					<span style="color: white" class="theater" ><i class="fas fa-building fa-6x" aria-hidden="true">&nbsp;</i></span>
-					<p>상영관 업데이트</p>
+					<p>시간 업데이트</p>
 				</div>
 
 				<div class="seat_box">

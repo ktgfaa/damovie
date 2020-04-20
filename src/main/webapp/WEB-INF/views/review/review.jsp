@@ -667,6 +667,7 @@ $(document).ready(function(){
 			<h6 style="margin-left:39px; color:white;"><span>총 리뷰 개수 : </span>${fn:length(reviewList)}</h6>
 			<ul>
 				<c:forEach var="review" items="${map.list}">
+				<c:if test="${review.movie_name == movieInfo.getMovie_name() }">
 				<li>
 				<div class="writer">
 					<span class="id_info">${review.user_id }</span>
@@ -677,7 +678,7 @@ $(document).ready(function(){
 				<div class="review_content">
 					<span>${review.des }</span>
 					<input type="button" id="modBtn" onClick="lastMod('${movieInfo.getImage_name() }', '${review.movie_name }', '${review.user_id }')" value="수정하기">
-					<input type="button" id="cancel" onClick="cancel('${review.des}','${review.score }')" value="취소">
+					<input type="button" id="cancel" onClick="cancel('${review.des}','${rereview.score }')" value="취소">
 				</div>
 				<c:if test="${member.id == review.user_id }">
 				<div class="review_option">
@@ -686,6 +687,7 @@ $(document).ready(function(){
 				</div>
 				</c:if>
 				</li>
+				</c:if>
 				</c:forEach>
 				<div style="text-align:center; width:1160px;">
 					<table style="width:100%; text-align:center">

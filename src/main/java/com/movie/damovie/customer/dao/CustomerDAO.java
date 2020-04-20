@@ -141,6 +141,18 @@ public class CustomerDAO {
 
 	}
 	
+	public List<String> selectTheaterNum_seat(String company,String theater_name) throws DataAccessException {
+		Map<String,String> theaterNum_nottime = new HashMap<String,String>();
+		theaterNum_nottime.put("company", company);
+		theaterNum_nottime.put("theater_name", theater_name);
+
+		List<String> TheaterNum = sqlSession.selectList("mapper.customer.selectTheaterNum_seat",theaterNum_nottime);
+
+
+		return TheaterNum;
+
+	}
+	
 	public List<CustomerTheaterVO> selectTheaterList(String theaterName) throws DataAccessException {
 		List<CustomerTheaterVO> theaterList = sqlSession.selectList("mapper.customer.selectTheaterList", theaterName);
 		

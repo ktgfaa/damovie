@@ -3,8 +3,8 @@
 - 서브관리자로 각 회사의 영화관 정보를 저장해서 예매 정보를 출력합니다.
 - 출력한 예매정보를 토대로 예매를 진행합니다.
 
->>> ![image](https://user-images.githubusercontent.com/57380730/91267230-e543b680-e7ad-11ea-9897-8be3a38e9be1.png)
->>> ![image](https://user-images.githubusercontent.com/57380730/91267270-f8ef1d00-e7ad-11ea-92e4-ee06ac905dbc.png)
+> ![image](https://user-images.githubusercontent.com/57380730/91267230-e543b680-e7ad-11ea-9897-8be3a38e9be1.png)
+> ![image](https://user-images.githubusercontent.com/57380730/91267270-f8ef1d00-e7ad-11ea-92e4-ee06ac905dbc.png)
 
 ## 테스트 환경
 >  <pre><code>Eclipse IDE + Tomcat 9V + Java 1.6V + Maven 4.0V</code></pre>
@@ -35,4 +35,4 @@
  
  6. 실행
  
- 8. 접속(http://localhost:8080/damovie/main.do,메인페이지) 
+ 8. 메인페이지 접속(http://localhost:8080/damovie/main.do) 

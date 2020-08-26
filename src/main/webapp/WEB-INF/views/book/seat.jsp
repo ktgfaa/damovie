@@ -392,6 +392,7 @@ li:nth-child(4) , li:nth-child(6) {
  			}
  		}  else {
  			
+ 			// 예매하는 좌석 행,열을 ','로 구분해서 List에 저장
  	 		var seatList = new Array();
  	 		var seatPart = "";
  	 		for(var i =0; i<seat.length;i++){
@@ -405,6 +406,7 @@ li:nth-child(4) , li:nth-child(6) {
  	 			}
  	 		}
  	 		
+ 	 		// 구분한 좌석 번호를 하나씩 리스트에 저장
  	 		var seatRowList = new Array();
  	 		var seatColList = new Array();
  	 		for(var j = 0; j < seatList.length; j++){
@@ -417,14 +419,15 @@ li:nth-child(4) , li:nth-child(6) {
  	 			}
  	 		}
  			
+ 	 		// DB에 넣기위해 예약된 Row 와 Col을 따로 저장
  	 		var seatrow = "";
  	 		var seatcol = "";
- 	 		
  	 		for(var k =0 ; k < seatRowList.length;k++){
  	 			seatrow += seatRowList[k];
  	 			seatcol += seatColList[k] + ',';
  	 		}
- 	 		const lastperson = Number(adult) + Number(student);
+ 	 		
+ 	 	const lastperson = Number(adult) + Number(student);
  		if(seatRowList.length != lastperson){
  			alert("인원을 모두 선택후 예약해주세요");
  		} else {
@@ -447,14 +450,11 @@ li:nth-child(4) , li:nth-child(6) {
  			      movie_date : moive_date,
  			      student : student
  			    },  
- 			success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
-				console.log('성공');
+ 			success: function(data){ 
+				console.log('예매완료');
  				location.href="/damovie/order/ordercomplete.do"; 
- 			},complete: function(data){
  			},error: function (request, status, error) {
- 			   alert("전부 선택해야 다음페이지로 넘어갈수있습니다.");
- 			  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
- 			  
+ 			   alert("예매실패...");
  			}
  		});
  		}

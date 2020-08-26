@@ -13,6 +13,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   		<typeAlias type="com.movie.damovie.customer.vo.CustomerSeatVO" alias="customerSeatVO"/>
   		<typeAlias alias="reviewVO" type="com.movie.damovie.review.reviewForm.vo.ReviewVO"/>
   		<typeAlias alias="writeVO" type="com.movie.damovie.review.reviewForm.vo.WriteVO"/>
-  		<typeAlias type="com.movie.damovie.customer.vo.CustomerSeatValueVO" alias="customerSeatValueVI"/> 
+  		<typeAlias type="com.movie.damovie.customer.vo.CustomerSeatValueVO" alias="customerSeatValueVO"/> 
 	</typeAliases>
 </configuration>

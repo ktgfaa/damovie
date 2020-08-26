@@ -107,16 +107,13 @@ $('#movie').change(function(){
  				  company : company,
  			      theater_name : theater_name,
  			      theater_num : theater_num,
- 			     movie_name : movie_name
+ 			      movie_name : movie_name
  			    },  
- 			success: function(data){       //성공시 data라는 변수에 리턴값이 매칭됨 오브젝트형으로 리턴시 개별 파싱해야됨
+ 			success: function(data){  
 				alert("저장 성공!");
 				location.href="${contextPath}/customer/customer.do";
- 			},complete: function(data){
  			},error: function (request, status, error) {
  			   alert("전부 선택해야 다음페이지로 넘어갈수있습니다.");
- 			  console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
- 			  
  			}
  		});
 	} else {
